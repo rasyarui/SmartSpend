@@ -143,7 +143,8 @@ class Dashboard extends Component
     }
 
     public function saveNewCategory()
-    {
+    {   
+
         $this->validate([
             'category' => 'required|string|max:255'
         ]);
@@ -200,6 +201,8 @@ class Dashboard extends Component
 
     public function saveTransaction()
     {
+        sleep(5);
+
         $this->validate();
 
         Transaction::create([
@@ -213,6 +216,7 @@ class Dashboard extends Component
 
         // session()->flash('message', 'Transaksi berhasil disimpan.');
         $this->dispatch('moneyUpdated');
+        
         $this->closeModal();
 
         // $this->closeModal();

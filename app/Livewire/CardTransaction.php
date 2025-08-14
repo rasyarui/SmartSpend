@@ -36,8 +36,6 @@ class CardTransaction extends Component
 
     public function render()
     {
-
-        sleep(2);
         $transactions = Transaction::with('category')
             ->forUser(Auth::id())
             ->orderBy('transaction_date', 'desc')

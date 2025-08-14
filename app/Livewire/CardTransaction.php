@@ -33,9 +33,9 @@ class CardTransaction extends Component
 
     protected $listeners = ['moneyUpdated' => 'loadFinancialData', 'filterByDate' => 'applyDateFilter'];
 
-
     public function render()
     {
+        
         $transactions = Transaction::with('category')
             ->forUser(Auth::id())
             ->orderBy('transaction_date', 'desc')
@@ -48,9 +48,9 @@ class CardTransaction extends Component
     }
 
     #[On('moneyUpdated')]
-
     public function mount()
     {
+        sleep(2);
         $this->startDate = Carbon::now()->startOfMonth()->toDateString();
         $this->endDate = Carbon::now()->endOfMonth()->toDateString();
         $this->loadFinancialData();

@@ -410,11 +410,7 @@
 
             <!-- Summary section -->
             <section class="px-6 py-8 max-w-7xl mx-auto w-full flex flex-col gap-6">
-
-                    <livewire:card-transaction/>
-                
-              
-
+                    <livewire:card-transaction />
             </section>
         </main>
     </div>

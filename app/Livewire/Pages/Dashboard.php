@@ -201,7 +201,7 @@ class Dashboard extends Component
 
     public function saveTransaction()
     {
-        sleep(5);
+        // sleep(5);
 
         $this->validate();
 
@@ -216,7 +216,7 @@ class Dashboard extends Component
 
         // session()->flash('message', 'Transaksi berhasil disimpan.');
         $this->dispatch('moneyUpdated');
-        
+
         $this->closeModal();
 
         // $this->closeModal();

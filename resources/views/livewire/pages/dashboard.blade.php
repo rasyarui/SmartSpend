@@ -1,5 +1,6 @@
 <div>
     <div class="flex">
+        {{-- Modal --}}
         <div id="crud-modal" wire:click.self="closeModal" tabindex="-1" x-data="{ show: @entangle('showModal') }" x-show="show" x-cloak
             x-transition:enter="ease-out duration-300" x-transition:enter-start="opacity-0"
             x-transition:enter-end="opacity-100" x-transition:leave="ease-in duration-200"
@@ -152,14 +153,15 @@
 
 
 
-                            <div class="col-span-1 sm:col-span-1">
+                            <div class="col-span-1 sm:col-span-1" wire:ignore.self>
                                 <label for="category"
                                     class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Transaction
                                     Date</label>
                                 <div class="relative max-w-sm">
-                                    <input id="datepicker-actions" datepicker datepicker-format="yyyy/mm/dd"
-                                        type="text" wire:model="transaction_date" {{-- value="{{ \Carbon\Carbon::parse(date('Y-m-d'))->translatedFormat('l, d M Y') }}" --}}
-                                        class="bg-transparent border outline-none border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-black focus:border-black block w-full ps-10 p-2.5 dark:bg-gray-700 dark:border-gray-500 hover:bg-gray-200 dark:hover:bg-gray-600 dark:placeholder-white dark:text-white dark:focus:ring-white dark:focus:border-white dark:focus:ring-1"
+                                    <input id="datepicker-actions" datepicker datepicker-format="yyyy-mm-dd"
+                                        type="text" x-on:change="$wire.set('transaction_date', $el.value)"
+                                        autocomplete="off" {{-- value="{{ \Carbon\Carbon::parse(date('Y-m-d'))->translatedFormat('l, d M Y') }}" --}}
+                                        class="bg-transparent border outline-none border-gra    y-300 text-gray-900 text-sm rounded-lg focus:ring-black focus:border-black block w-full ps-10 p-2.5 dark:bg-gray-700 dark:border-gray-500 hover:bg-gray-200 dark:hover:bg-gray-600 dark:placeholder-white dark:text-white dark:focus:ring-white dark:focus:border-white dark:focus:ring-1"
                                         placeholder="Select date">
                                     @error('transaction_date')
                                         <span class="text-red-500 text-sm">{{ $message }}</span>
@@ -268,6 +270,7 @@
                 </div>
             </div>
         </div>
+        {{-- End Modal --}}
 
 
         <div class="flex h-screen">
@@ -385,7 +388,8 @@
                     <h2 class="text-3xl font-extrabold mb-2">
                         Hai, {{ auth()->user()->name }} <span aria-label="raised hands" role="img">🙌</span>
                     </h2>
-                    <p class="text-gray-500 mb-6 max-w-xl">Lacak keuanganmu dengan mudah sekarang! Kelola pemasukan
+                    <p class="text-gray-500 dark:text-gray-400 mb-6 max-w-xl">Lacak keuanganmu dengan mudah sekarang!
+                        Kelola pemasukan
                         &
                         pengeluaran tanpa stres. Yuk, mulai lebih rapi hari ini!</p>
                     <div class="flex gap-4 flex-wrap">
@@ -400,19 +404,235 @@
                     </div>
                 </div>
                 <aside
-                    class="dark:bg-gray-800 bg-[#f4f4f5]  shadow-xl rounded-md p-4 text-gray-500 max-w-md italic select-none">
+                    class="dark:bg-[#27272a] bg-[#f4f4f5] shadow-xl rounded-md p-4 text-gray-500 dark:text-gray-400 max-w-md italic select-none">
                     <p><span aria-label="light bulb" role="img">💡</span> “It’s not how much money you make,
                         but how
                         much money you keep.”</p>
-                    <footer class="text-gray-500 mt-2 text-right font-semibold">– Robert Kiyosaki</footer>
+                    <footer class="text-gray-500 dark:text-gray-400 mt-2 text-right font-light">– Robert Kiyosaki
+                    </footer>
                 </aside>
             </section>
 
             <!-- Summary section -->
             <section class="px-6 py-8 max-w-7xl mx-auto w-full flex flex-col gap-6">
-                    <livewire:card-transaction />
+                <livewire:card-transaction />
             </section>
-        </main>
+
+            {{-- Table --}}
+            <div class="w-full">
+                <!-- Card Header -->
+                <div class="px-6 py-2 space-y-4">
+                    <div class="flex flex-col items-start">
+                        <div class="mb-5">
+                            <h2 class="text-3xl font-extrabold text-black dark:text-white">Tabel Transaksi</h2>
+                            <p class="text-[15px] text-gray-500 dark:text-gray-400">Daftar semua transaksi keuangan</p>
+                        </div>
+
+
+                        <div class="flex flex-row w-full justify-between mb-2">
+                            <div class="flex flex-row gap-3">
+                                <button id="export-btn"
+                                    class="flex cursor-pointer items-center gap-1 px-3 border border-gray-200 dark:border-gray-700 rounded-md bg-white dark:bg-gray-950 text-gray-950 font-semibold dark:text-white text-sm hover:bg-gray-50 dark:hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors duration-200"
+                                    title="Export data ke Excel">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18"
+                                        viewBox="0 0 24 24">
+                                        <path fill="#fff"
+                                            d="M5 11q-.825 0-1.412-.587T3 9V5q0-.825.588-1.412T5 3h4q.825 0 1.413.588T11 5v4q0 .825-.587 1.413T9 11zm0 10q-.825 0-1.412-.587T3 19v-4q0-.825.588-1.412T5 13h4q.825 0 1.413.588T11 15v4q0 .825-.587 1.413T9 21zm10-10q-.825 0-1.412-.587T13 9V5q0-.825.588-1.412T15 3h4q.825 0 1.413.588T21 5v4q0 .825-.587 1.413T19 11zm0 10q-.825 0-1.412-.587T13 19v-4q0-.825.588-1.412T15 13h4q.825 0 1.413.588T21 15v4q0 .825-.587 1.413T19 21z" />
+                                    </svg>
+                                    Kategory
+                                </button>
+                                <button id="export-btn"
+                                    class="flex cursor-pointer items-center gap-1 px-3 border border-gray-200 dark:border-gray-700 rounded-md bg-white dark:bg-gray-950 text-gray-950 font-semibold dark:text-white text-sm hover:bg-gray-50 dark:hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors duration-200"
+                                    title="Export data ke Excel">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18"
+                                        viewBox="0 0 24 24">
+                                        <path fill="#fff"
+                                            d="M5 11q-.825 0-1.412-.587T3 9V5q0-.825.588-1.412T5 3h4q.825 0 1.413.588T11 5v4q0 .825-.587 1.413T9 11zm0 10q-.825 0-1.412-.587T3 19v-4q0-.825.588-1.412T5 13h4q.825 0 1.413.588T11 15v4q0 .825-.587 1.413T9 21zm10-10q-.825 0-1.412-.587T13 9V5q0-.825.588-1.412T15 3h4q.825 0 1.413.588T21 5v4q0 .825-.587 1.413T19 11zm0 10q-.825 0-1.412-.587T13 19v-4q0-.825.588-1.412T15 13h4q.825 0 1.413.588T21 15v4q0 .825-.587 1.413T19 21z" />
+                                    </svg>
+                                    Tipe
+                                </button>
+                            </div>
+
+                            <!-- Filter Dropdown -->
+                            <div class="flex flex-row gap-3">
+                                <div class="relative ">
+                                    <select id="filter-select"
+                                        class="w-40 cursor-pointer px-3 py-2 border border-gray-200 dark:border-gray-700 rounded-md bg-white dark:bg-gray-950 text-gray-950 font-semibold dark:text-white text-sm hover:bg-gray-50 dark:hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500 appearance-none pr-8">
+                                        <option value="all">Semua Transaksi</option>
+                                        <option value="income">Pemasukan</option>
+                                        <option value="expense">Pengeluaran</option>
+                                        <option value="today">Hari Ini</option>
+                                    </select>
+                                    <div class="absolute inset-y-0 right-0 flex items-center px-2 pointer-events-none">
+                                        <svg class="h-4 w-4 text-gray-950 dark:text-white" fill="none"
+                                            stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z" />
+                                        </svg>
+                                    </div>
+                                </div>
+
+                                <!-- Export Button -->
+                                <button id="export-btn"
+                                    class="flex cursor-pointer items-center gap-2 px-4 py-2 border border-gray-200 dark:border-gray-700 rounded-md bg-white dark:bg-gray-950 text-gray-950 font-semibold dark:text-white text-sm hover:bg-gray-50 dark:hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors duration-200"
+                                    title="Export data ke Excel">
+                                    <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                                    </svg>
+                                    Export Excel
+                                </button>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card Content -->
+                <div class="px-6 pb-6">
+                    <!-- Table Container with horizontal scroll -->
+                    <div class="border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden">
+                        <div class="overflow-x-auto table-container">
+                            <table class="w-full min-w-full">
+                                <thead>
+                                    <tr
+                                        class="bg-gray-50 dark:bg-gray-950 border-b border-gray-200 dark:border-gray-700">
+                                        <th
+                                            class="px-4 py-3 text-left text-sm font-medium text-gray-900 dark:text-gray-400">
+                                            Kategori</th>
+                                        <th
+                                            class="px-4 py-3 text-left text-sm font-medium text-gray-900 dark:text-gray-400">
+                                            Deskripsi</th>
+                                        <th
+                                            class="px-4 py-3 text-left text-sm font-medium text-gray-900 dark:text-gray-400">
+                                            Tanggal</th>
+                                        <th
+                                            class="px-4 py-3 text-left text-sm font-medium text-gray-900 dark:text-gray-400">
+                                            Tipe</th>
+                                        <th
+                                            class="px-4 py-3 text-right text-sm font-medium text-gray-900 dark:text-gray-400">
+                                            Jumlah</th>
+                                        <th
+                                            class="px-4 py-3 text-center text-sm font-medium text-gray-900 dark:text-gray-400 w-[70px]">
+                                            Aksi</th>
+                                    </tr>
+                                </thead>
+                                <tbody
+                                    id="transaction-tbody"class="divide-y divide-gray-200 dark:divide-gray-700 bg-white dark:bg-gray-950">
+                                    @forelse ($transactions as $dataTransaction)
+                                        <tr class="table-row border-b border-gray-200 dark:border-gray-700">
+                                            <td class="px-3 py-3">
+                                                <span
+                                                    class="font-medium text-gray-500  dark:text-gray-400">{{ $dataTransaction->category->category }}</span>
+                                            </td>
+                                            <td class="px-3 py-3">
+                                                <span
+                                                    class="text-gray-500 dark:text-gray-400">{{ $dataTransaction->description }}</span>
+                                            </td>
+                                            <td class="px-3 py-3 text-gray-900 dark:text-white">
+                                                {{-- {{ $dataTransaction->transaction_date }} --}}
+                                                <span class="text-gray-500 dark:text-gray-400">
+                                                    {{ \Carbon\Carbon::parse($dataTransaction->transaction_date)->translatedFormat('d M Y') }}
+                                                </span>
+                                            </td>
+                                            <td class="px-3 py-3">
+                                                <div
+                                                    class="w-full px-2 py-0.5 text-center text-md rounded-md {{ $dataTransaction->type == 'income' ? 'bg-[#DCFCE7] dark:bg-[#14532D] hover:bg-green-600 dark:text-[#BBF7D0] text-[#166534]' : 'bg-[#FEE2E2] dark:bg-[#7F1D1D] hover:bg-red-600 text-[#991B1B] dark:text-[#FCA5A5]' }}">
+                                                    <span class=" ">{{ $dataTransaction->type }}</span>
+                                                </div>
+                                            </td>
+                                            <td class="px-3 py-3 text-right font-medium">
+                                                <span
+                                                    class="{{ $dataTransaction->type == 'income' ? ' text-green-500' : 'text-red-500' }}">
+                                                    @if ($dataTransaction->type == 'income')
+                                                        +Rp {{ number_format($dataTransaction->amount) }},00
+                                                    @else
+                                                        -Rp {{ number_format($dataTransaction->amount) }},00
+                                                    @endif
+
+                                                </span>
+                                            </td>
+                                            <td class="px-4 py-3 text-center">
+                                                <button onclick="deleteTransaction(${transaction.id})"
+                                                    class="h-8 w-8 p-0 text-red-600 hover:text-red-800 dark:text-red-400 dark:hover:text-red-300 hover:bg-red-50 dark:hover:bg-red-900/20 rounded transition-colors duration-200"
+                                                    title="Hapus transaksi">
+                                                    <svg class="h-4 w-4 mx-auto" fill="none" stroke="currentColor"
+                                                        viewBox="0 0 24 24">
+                                                        <path stroke-linecap="round" stroke-linejoin="round"
+                                                            stroke-width="2"
+                                                            d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                                                    </svg>
+                                                    <span class="sr-only">Delete</span>
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    @empty
+                                        <tr>
+                                            <td colspan="6" class="text-center py-5 text-md">
+                                                No results.
+                                            </td>
+                                        </tr>
+                                    @endforelse
+                                </tbody>
+
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- Pagination -->
+                    <div
+                        class="flex flex-col sm:flex-row justify-between items-center gap-4 pt-4 border-t border-gray-200 dark:border-gray-700 mt-4">
+                        <div id="pagination-info" class="text-sm text-gray-500 dark:text-gray-400">
+                            <!-- Pagination info will be populated by JavaScript -->
+                        </div>
+
+                        <div class="flex items-center gap-2">
+                            <button id="prev-btn"
+                                class="flex items-center gap-2 px-3 py-2 text-sm border border-gray-200 dark:border-gray-700 rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-white hover:bg-gray-50 dark:hover:bg-gray-700 disabled:opacity-50 disabled:cursor-not-allowed focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors duration-200"
+                                title="Halaman sebelumnya">
+                                <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M15 19l-7-7 7-7" />
+                                </svg>
+                                Previous
+                            </button>
+
+                            <span id="page-indicator"
+                                class="px-3 py-2 text-sm bg-gray-100 dark:bg-gray-700 text-gray-900 dark:text-white rounded-md font-medium">
+                                <!-- Page indicator will be populated by JavaScript -->
+                            </span>
+
+                            <button id="next-btn"
+                                class="flex items-center gap-2 px-3 py-2 text-sm border border-gray-200 dark:border-gray-700 rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-white hover:bg-gray-50 dark:hover:bg-gray-700 disabled:opacity-50 disabled:cursor-not-allowed focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors duration-200"
+                                title="Halaman selanjutnya">
+                                Next
+                                <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M9 5l7 7-7 7" />
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
     </div>
 
+
+    <script>
+        document.addEventListener('livewire:initialized', () => {
+            const datepickerEl = document.getElementById('datepicker-actions');
+
+            datepickerEl.addEventListener('changeDate', (event) => {
+                const selectedDate = event.detail.date;
+
+                // Format tanggal menjadi string "YYYY-MM-DD"
+                const formattedDate = new Date(selectedDate.getTime() - (selectedDate.getTimezoneOffset() *
+                        60000))
+                    .toISOString()
+                    .split('T')[0];
+
+                @this.set('transaction_date', formattedDate);
+            });
+        });
+    </script>
 </div>

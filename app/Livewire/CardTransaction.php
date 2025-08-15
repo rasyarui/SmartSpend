@@ -50,7 +50,6 @@ class CardTransaction extends Component
     #[On('moneyUpdated')]
     public function mount()
     {
-        sleep(2);
         $this->startDate = Carbon::now()->startOfMonth()->toDateString();
         $this->endDate = Carbon::now()->endOfMonth()->toDateString();
         $this->loadFinancialData();

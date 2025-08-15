@@ -39,6 +39,7 @@ class Dashboard extends Component
             ->orderBy('transaction_date', 'desc')
             ->orderBy('created_at', 'desc')
             ->paginate(10);
+            
 
         return view('livewire.pages.dashboard', [
             'transactions' => $transactions,
@@ -67,7 +68,7 @@ class Dashboard extends Component
     protected $rules = [
         'description' => 'nullable|string',
         'amount' => 'required|numeric|min:0',
-        'transaction_date' => 'required|date_format:Y/m/d',
+        'transaction_date' => 'required|date_format:Y-m-d',
         'category_id' => 'required|exists:categories,id',
         'category' => 'nullable|string|max:255'
     ];
@@ -88,7 +89,7 @@ class Dashboard extends Component
     {
         $this->description = '';
         $this->amount = '';
-        $this->transaction_date = now()->format('Y/m/d');
+        $this->transaction_date = now()->format('Y-m-d');
         $this->category_id = '';
         $this->category = "";
     }
@@ -204,6 +205,7 @@ class Dashboard extends Component
         // sleep(5);
 
         $this->validate();
+        
 
         Transaction::create([
             'user_id' => Auth::id(), // Menambahkan user_id

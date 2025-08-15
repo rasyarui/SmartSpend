@@ -46,7 +46,6 @@
                                 <span wire:loading wire:target="register">Memproses...</span></button>
                             <p class="text-sm leading-relaxed text-grey-900">Already have account? <a href="/login"
                                     class="font-bold text-grey-700">Login</a></p>
-
                         </form>
                     </div>
                 </div>

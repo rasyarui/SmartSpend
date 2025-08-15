@@ -227,9 +227,9 @@
         <div class="flex items-center justify-between mb-[15px]">
 
             <div class="flex flex-col gap-2">
-                <h3 class="text-2xl font-extrabold text-white">Ringkasan</h3>
+                <h3 class="text-2xl font-extrabold text-black dark:text-white">Ringkasan</h3>
                 <button type="button" @click="toggleAllDataAuto()"
-                    class="border border-gray-700 dark:text-[#fafafa] cursor-pointer text-black rounded px-3 py-1 dark:hover:bg-gray-700 hover:bg-gray-200 transition whitespace-nowrap flex items-center gap-2">
+                    class="border border-gray-300 dark:border-gray-600 dark:text-[#fafafa] cursor-pointer text-black rounded px-3 py-1 dark:hover:bg-gray-700 hover:bg-gray-200 transition  whitespace-nowrap flex items-center gap-2">
                     <!-- Show Icon (Simple) -->
                     <svg x-show="!(showBalance && showIncome && showExpense)" class="w-4 h-4" fill="none"
                         stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5">
@@ -250,7 +250,7 @@
 
             <div class="flex items-center gap-3 flex-wrap relative" x-data="{ open: false }">
                 <button type="button" @click="open = !open"
-                    class="flex items-center gap-2 border border-gray-700 dark:text-[#fafafa] text-black rounded px-4 py-1 dark:hover:bg-gray-700 hover:bg-gray-200 transition whitespace-nowrap">
+                    class="flex items-center gap-2 border border-gray-300 dark:border-gray-600 dark:text-[#fafafa] text-black rounded px-4 py-1 dark:hover:bg-gray-700 hover:bg-gray-200 transition-colors duration-200 cursor-pointer whitespace-nowrap">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
                         stroke="currentColor" aria-hidden="true">
                         <title>Filter icon</title>
@@ -290,63 +290,8 @@
 
 
 
-        <div wire:loading wire:target="moneyUpdated">
-            <div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
-                <div class="mx-auto w-full max-w-sm rounded-md bg-gray-900 p-3">
-                    <div class="flex animate-pulse space-x-4">
-                        <div class="size-10 rounded-sm bg-gray-500"></div>
-                        <div class="flex-1 space-y-6 py-1">
-                            <div class="h-2 rounded bg-gray-500"></div>
-                            <div class="space-y-3">
-                                <div class="grid grid-cols-3 gap-4">
-                                    <div class="col-span-2 h-2 rounded bg-gray-500"></div>
-                                    <div class="col-span-1 h-2 rounded bg-gray-500"></div>
-                                </div>
-                                <div class="h-2 rounded bg-gray-500"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-
-
-                <div class="mx-auto w-full max-w-sm rounded-md bg-gray-900 p-3">
-                    <div class="flex animate-pulse space-x-4">
-                        <div class="size-10 rounded-sm bg-gray-500"></div>
-                        <div class="flex-1 space-y-6 py-1">
-                            <div class="h-2 rounded bg-gray-500"></div>
-                            <div class="space-y-3">
-                                <div class="grid grid-cols-3 gap-4">
-                                    <div class="col-span-2 h-2 rounded bg-gray-500"></div>
-                                    <div class="col-span-1 h-2 rounded bg-gray-500"></div>
-                                </div>
-                                <div class="h-2 rounded bg-gray-500"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-
-
-                <div class="mx-auto w-full max-w-sm rounded-md bg-gray-900 p-3">
-                    <div class="flex animate-pulse space-x-4">
-                        <div class="size-10 rounded-sm bg-gray-500"></div>
-                        <div class="flex-1 space-y-6 py-1">
-                            <div class="h-2 rounded bg-gray-500"></div>
-                            <div class="space-y-3">
-                                <div class="grid grid-cols-3 gap-4">
-                                    <div class="col-span-2 h-2 rounded bg-gray-500"></div>
-                                    <div class="col-span-1 h-2 rounded bg-gray-500"></div>
-                                </div>
-                                <div class="h-2 rounded bg-gray-500"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
         <!-- Wrapper dengan Alpine.js untuk animasi -->
-        <div wire:loading.remove wire:target="moneyUpdated">
+
             <div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
                 <article
                     class="dark:bg-gray-900 bg-white shadow-2xl rounded-lg p-5 flex items-center justify-between gap-4 card-hover transition-all duration-300">
@@ -515,7 +460,7 @@
                     </button>
                 </article>
             </div>
-        </div>
+
 
 
     </div>

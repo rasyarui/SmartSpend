@@ -227,7 +227,7 @@
         <div class="flex items-center justify-between mb-[15px]">
 
             <div class="flex flex-col gap-2">
-                <h3 class="text-2xl font-extrabold text-black dark:text-white">Ringkasan</h3>
+                <h3 class="text-3xl font-extrabold text-black dark:text-white">Ringkasan</h3>
                 <button type="button" @click="toggleAllDataAuto()"
                     class="border border-gray-300 dark:border-gray-600 dark:text-[#fafafa] cursor-pointer text-black rounded px-3 py-1 dark:hover:bg-gray-700 hover:bg-gray-200 transition  whitespace-nowrap flex items-center gap-2">
                     <!-- Show Icon (Simple) -->

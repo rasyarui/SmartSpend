@@ -9,10 +9,13 @@ use App\Models\Categories;
 use App\Models\Transaction;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Livewire\WithPagination;
+
 
 
 class Dashboard extends Component
 {
+    use WithPagination;
     public $showModal = false;
     public $showCategoryModal = false;
     public $showCategoryDropdown = false;
@@ -29,17 +32,29 @@ class Dashboard extends Component
     public $categoryName = '';
     public $categorySearch = '';
 
+    public $transaction_type = null;
 
+    public $filter_types = [];
+
+    public $sortField = 'transaction_date'; // Default field untuk pengurutan
+    public $sortDirection = 'desc'; // Default direction
+    public $hiddenColumns = [];
 
     public function render()
     {
 
-        $transactions = Transaction::with('category')
+        $transactionsQuery = Transaction::with('category')
             ->forUser(Auth::id())
             ->orderBy('transaction_date', 'desc')
-            ->orderBy('created_at', 'desc')
-            ->paginate(10);
-            
+            ->orderBy('created_at', 'desc');
+
+
+        // Tambahkan filter kondisional
+        if (!empty($this->filter_types)) {
+            $transactionsQuery->whereIn('type', $this->filter_types);
+        }
+        $transactions = $transactionsQuery->paginate(5);
+
 
         return view('livewire.pages.dashboard', [
             'transactions' => $transactions,
@@ -50,6 +65,25 @@ class Dashboard extends Component
         ]);
     }
 
+      public function sortBy($field)
+    {
+        if ($this->sortField === $field) {
+            $this->sortDirection = $this->sortDirection === 'asc' ? 'desc' : 'asc';
+        } else {
+            $this->sortDirection = 'asc';
+        }
+
+        $this->sortField = $field;
+    }
+
+     public function toggleColumn($column)
+    {
+        if (in_array($column, $this->hiddenColumns)) {
+            $this->hiddenColumns = array_diff($this->hiddenColumns, [$column]);
+        } else {
+            $this->hiddenColumns[] = $column;
+        }
+    }
 
     public function getStatsProperty()
     {
@@ -144,7 +178,7 @@ class Dashboard extends Component
     }
 
     public function saveNewCategory()
-    {   
+    {
 
         $this->validate([
             'category' => 'required|string|max:255'
@@ -205,7 +239,7 @@ class Dashboard extends Component
         // sleep(5);
 
         $this->validate();
-        
+
 
         Transaction::create([
             'user_id' => Auth::id(), // Menambahkan user_id

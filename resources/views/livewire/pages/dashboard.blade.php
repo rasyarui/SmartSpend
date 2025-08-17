@@ -435,22 +435,43 @@
                                     class="flex cursor-pointer items-center gap-1 px-3 border border-gray-200 dark:border-gray-700 rounded-md bg-white dark:bg-gray-950 text-gray-950 font-semibold dark:text-white text-sm hover:bg-gray-50 dark:hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors duration-200"
                                     title="Export data ke Excel">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18"
-                                        viewBox="0 0 24 24">
-                                        <path fill="#fff"
+                                        class="fill-gray-950 dark:fill-white" viewBox="0 0 24 24">
+                                        <path fill=""
                                             d="M5 11q-.825 0-1.412-.587T3 9V5q0-.825.588-1.412T5 3h4q.825 0 1.413.588T11 5v4q0 .825-.587 1.413T9 11zm0 10q-.825 0-1.412-.587T3 19v-4q0-.825.588-1.412T5 13h4q.825 0 1.413.588T11 15v4q0 .825-.587 1.413T9 21zm10-10q-.825 0-1.412-.587T13 9V5q0-.825.588-1.412T15 3h4q.825 0 1.413.588T21 5v4q0 .825-.587 1.413T19 11zm0 10q-.825 0-1.412-.587T13 19v-4q0-.825.588-1.412T15 13h4q.825 0 1.413.588T21 15v4q0 .825-.587 1.413T19 21z" />
                                     </svg>
                                     Kategory
                                 </button>
-                                <button id="export-btn"
+                                <button id="type-button" data-dropdown-toggle="dropdownSearchType"
                                     class="flex cursor-pointer items-center gap-1 px-3 border border-gray-200 dark:border-gray-700 rounded-md bg-white dark:bg-gray-950 text-gray-950 font-semibold dark:text-white text-sm hover:bg-gray-50 dark:hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors duration-200"
                                     title="Export data ke Excel">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18"
-                                        viewBox="0 0 24 24">
-                                        <path fill="#fff"
+                                        class="fill-gray-950 dark:fill-white" viewBox="0 0 24 24">
+                                        <path fill=""
                                             d="M5 11q-.825 0-1.412-.587T3 9V5q0-.825.588-1.412T5 3h4q.825 0 1.413.588T11 5v4q0 .825-.587 1.413T9 11zm0 10q-.825 0-1.412-.587T3 19v-4q0-.825.588-1.412T5 13h4q.825 0 1.413.588T11 15v4q0 .825-.587 1.413T9 21zm10-10q-.825 0-1.412-.587T13 9V5q0-.825.588-1.412T15 3h4q.825 0 1.413.588T21 5v4q0 .825-.587 1.413T19 11zm0 10q-.825 0-1.412-.587T13 19v-4q0-.825.588-1.412T15 13h4q.825 0 1.413.588T21 15v4q0 .825-.587 1.413T19 21z" />
                                     </svg>
                                     Tipe
                                 </button>
+                                <div id="dropdownSearchType" role="menu"
+                                    class="origin-top-right hidden absolute right-0 mt-2 w-50 rounded-md shadow-lg bg-white dark:bg-gray-950 border border-gray-300 dark:border-gray-600">
+                                    <div class="flex flex-col gap-2 items-center p-2 rounded-sm">
+                                        <button
+                                            class="flex flex-row ho ver:bg-gray-100 dark:hover:bg-gray-600 py-1 px-3 rounded-md items-center cursor-pointer">
+                                            <input id="checkbox-item-1" type="checkbox"
+                                                wire:model.live="filter_types" value="income"
+                                                class="w-4 h-4 text-blue-600 bg-white border-gray-300 rounded-sm focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-950 dark:border-gray-500  ">
+                                            <label for="checkbox-item-1"
+                                                class="w-full ms-2 text-sm font-medium text-gray-900 rounded-sm dark:text-gray-300 cursor-pointer">Penghasilan</label>
+                                        </button>
+                                        <button
+                                            class="flex flex-row hover:bg-gray-100 dark:hover:bg-gray-600 p-1 rounded-md items-center cursor-pointer">
+                                            <input id="checkbox-item-2" type="checkbox"
+                                                wire:model.live="filter_types" value="expense"
+                                                class="w-4 h-4 text-blue-600 bg-white border-gray-300 rounded-sm focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-950 dark:border-gray-500 ">
+                                            <label for="checkbox-item-2"
+                                                class="w-full ms-2 text-sm font-medium text-gray-900 rounded-sm dark:text-gray-300 cursor-pointer">Pengeluaran</label>
+                                        </button>
+                                    </div>
+                                </div>
                             </div>
 
                             <!-- Filter Dropdown -->
@@ -488,6 +509,8 @@
                     </div>
                 </div>
 
+
+
                 <!-- Card Content -->
                 <div class="px-6 pb-6">
                     <!-- Table Container with horizontal scroll -->
@@ -499,7 +522,8 @@
                                         class="bg-gray-50 dark:bg-gray-950 border-b border-gray-200 dark:border-gray-700">
                                         <th
                                             class="px-4 py-3 text-left text-sm font-medium text-gray-900 dark:text-gray-400">
-                                            Kategori</th>
+                                            Kategori
+                                        </th>
                                         <th
                                             class="px-4 py-3 text-left text-sm font-medium text-gray-900 dark:text-gray-400">
                                             Deskripsi</th>
@@ -522,8 +546,11 @@
                                     @forelse ($transactions as $dataTransaction)
                                         <tr class="table-row border-b border-gray-200 dark:border-gray-700">
                                             <td class="px-3 py-3">
-                                                <span
-                                                    class="font-medium text-gray-500  dark:text-gray-400">{{ $dataTransaction->category->category }}</span>
+                                                @unless (in_array('category_id', $hiddenColumns))
+                                                    <span
+                                                        class="font-medium text-gray-500  dark:text-gray-400">{{ $dataTransaction->category->category }}</span>
+                                                @endunless
+
                                             </td>
                                             <td class="px-3 py-3">
                                                 <span
@@ -580,59 +607,12 @@
                     </div>
 
                     <!-- Pagination -->
-                    <div
-                        class="flex flex-col sm:flex-row justify-between items-center gap-4 pt-4 border-t border-gray-200 dark:border-gray-700 mt-4">
-                        <div id="pagination-info" class="text-sm text-gray-500 dark:text-gray-400">
-                            <!-- Pagination info will be populated by JavaScript -->
-                        </div>
+                    <div class="flex-col sm:flex-row w-full pt-2 border-gray-200 dark:border-gray-700 mt-2">
+                        {{ $transactions->links(data: ['scrollTo' => false]) }}
 
-                        <div class="flex items-center gap-2">
-                            <button id="prev-btn"
-                                class="flex items-center gap-2 px-3 py-2 text-sm border border-gray-200 dark:border-gray-700 rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-white hover:bg-gray-50 dark:hover:bg-gray-700 disabled:opacity-50 disabled:cursor-not-allowed focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors duration-200"
-                                title="Halaman sebelumnya">
-                                <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M15 19l-7-7 7-7" />
-                                </svg>
-                                Previous
-                            </button>
-
-                            <span id="page-indicator"
-                                class="px-3 py-2 text-sm bg-gray-100 dark:bg-gray-700 text-gray-900 dark:text-white rounded-md font-medium">
-                                <!-- Page indicator will be populated by JavaScript -->
-                            </span>
-
-                            <button id="next-btn"
-                                class="flex items-center gap-2 px-3 py-2 text-sm border border-gray-200 dark:border-gray-700 rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-white hover:bg-gray-50 dark:hover:bg-gray-700 disabled:opacity-50 disabled:cursor-not-allowed focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors duration-200"
-                                title="Halaman selanjutnya">
-                                Next
-                                <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M9 5l7 7-7 7" />
-                                </svg>
-                            </button>
-                        </div>
                     </div>
+
                 </div>
             </div>
     </div>
-
-
-    <script>
-        document.addEventListener('livewire:initialized', () => {
-            const datepickerEl = document.getElementById('datepicker-actions');
-
-            datepickerEl.addEventListener('changeDate', (event) => {
-                const selectedDate = event.detail.date;
-
-                // Format tanggal menjadi string "YYYY-MM-DD"
-                const formattedDate = new Date(selectedDate.getTime() - (selectedDate.getTimezoneOffset() *
-                        60000))
-                    .toISOString()
-                    .split('T')[0];
-
-                @this.set('transaction_date', formattedDate);
-            });
-        });
-    </script>
 </div>

@@ -227,9 +227,9 @@
         <div class="flex items-center justify-between mb-[15px]">
 
             <div class="flex flex-col gap-2">
-                <h3 class="text-3xl font-extrabold text-black dark:text-white">Ringkasan</h3>
+                <h3 class="text-3xl font-extrabold text-black dark:text-white transition-colors duration-1000">Ringkasan</h3>
                 <button type="button" @click="toggleAllDataAuto()"
-                    class="border border-gray-300 dark:border-gray-600 dark:text-[#fafafa] cursor-pointer text-black rounded px-3 py-1 dark:hover:bg-gray-700 hover:bg-gray-200 transition  whitespace-nowrap flex items-center gap-2">
+                    class="border border-gray-300 dark:border-gray-600 dark:text-[#fafafa] cursor-pointer text-black rounded px-3 py-1 dark:hover:bg-gray-700 hover:bg-gray-200 transition-colors duration-1000  whitespace-nowrap flex items-center gap-2">
                     <!-- Show Icon (Simple) -->
                     <svg x-show="!(showBalance && showIncome && showExpense)" class="w-4 h-4" fill="none"
                         stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5">
@@ -250,7 +250,7 @@
 
             <div class="flex items-center gap-3 flex-wrap relative" x-data="{ open: false }">
                 <button type="button" @click="open = !open"
-                    class="flex items-center gap-2 border border-gray-300 dark:border-gray-600 dark:text-[#fafafa] text-black rounded px-4 py-1 dark:hover:bg-gray-700 hover:bg-gray-200 transition-colors duration-200 cursor-pointer whitespace-nowrap">
+                    class="flex items-center gap-2 border border-gray-300 dark:border-gray-600 dark:text-[#fafafa] text-black rounded px-4 py-1 dark:hover:bg-gray-700 hover:bg-gray-200 transition-colors duration-1000 cursor-pointer whitespace-nowrap">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
                         stroke="currentColor" aria-hidden="true">
                         <title>Filter icon</title>
@@ -271,12 +271,12 @@
                     class="absolute right-0 top-full mt-2 w-72 rounded-md shadow-lg bg-white dark:bg-gray-800 ring-1 ring-black ring-opacity-5 z-10 p-4">
 
 
-                    <div class="border-t border-gray-200 dark:border-gray-700 pt-4">
+                    <div class="border-t border-gray-200 dark:border-gray-700 pt-4 transition-colors duration-1000">
                         <label class="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-2">Custom
                             Range</label>
                         <div class="flex flex-col items-center space-x-2">
                             <input type="date" wire:model="startDate"
-                                class="form-input rounded-md shadow-sm w-full dark:bg-gray-700 dark:text-white">
+                                class="form-input rounded-md shadow-sm w-full dark:bg-gray-700 dark:text-white ">
                             <span>to</span>
                             <input type="date" wire:model="endDate"
                                 class="form-input rounded-md shadow-sm w-full dark:bg-gray-700 dark:text-white">
@@ -294,7 +294,7 @@
 
             <div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
                 <article
-                    class="dark:bg-gray-900 bg-white shadow-2xl rounded-lg p-5 flex items-center justify-between gap-4 card-hover transition-all duration-300">
+                    class="dark:bg-gray-900 bg-white shadow-2xl rounded-lg p-5 flex items-center justify-between gap-4 card-hover transition-color duration-1000">
                     <div class="flex items-center gap-3">
                         <div
                             class="p-3 bg-purple-900 rounded-lg transform transition-transform duration-200 hover:scale-110">
@@ -308,19 +308,19 @@
                         <div>
                             <p class="text-gray-500 text-sm">Balance</p>
                             <div class="relative">
-                                <p x-show="showBalance" class="dark:text-white text-xl font-bold animate-slide-up"
+                                <p x-show="showBalance" class="dark:text-white text-xl font-bold animate-slide-up transition-colors duration-1000"
                                     :class="{ 'number-glow': isAnimating.balance }">
                                     Rp <span x-text="formatNumber(animatedBalance)"
                                         :class="{ 'animate-pulse-gentle': isAnimating.balance }"
                                         class="text-purple-400"></span>
                                 </p>
-                                <p x-show="!showBalance" class="dark:text-white text-xl font-bold">*******</p>
+                                <p x-show="!showBalance" class="dark:text-white text-xl font-bold transition-colors duration-1000">*******</p>
                             </div>
                         </div>
                     </div>
 
                     <button type="button" aria-label="Toggle visibility balance" @click="toggleCard('balance')"
-                        class="text-gray-500 hover:text-purple-400 transition-all duration-300 cursor-pointer transform hover:scale-110 hover:rotate-12 btn-animate">
+                        class="text-gray-500 hover:text-purple-400 transition-color duration-1000 cursor-pointer transform hover:scale-110 hover:rotate-12 btn-animate">
                         <svg x-show="showBalance" x-transition:enter="transition ease-out duration-200 delay-100"
                             x-transition:enter-start="opacity-0 rotate-180"
                             x-transition:enter-end="opacity-100 rotate-0"
@@ -350,7 +350,7 @@
 
                 <!-- Income Card -->
                 <article
-                    class="dark:bg-gray-900 bg-white shadow-2xl rounded-lg p-5 flex items-center justify-between gap-4 card-hover transition-all duration-300">
+                    class="dark:bg-gray-900 bg-white shadow-2xl rounded-lg p-5 flex items-center justify-between gap-4 card-hover transition-colors duration-1000">
                     <div class="flex items-center gap-3">
                         <div
                             class="p-3 bg-emerald-900 rounded-lg transform transition-transform duration-200 hover:scale-110">
@@ -364,13 +364,13 @@
                         <div>
                             <p class="text-gray-500 text-sm">Income</p>
                             <div class="relative">
-                                <p x-show="showIncome" class="dark:text-white text-xl font-bold animate-slide-up"
+                                <p x-show="showIncome" class="dark:text-white text-xl font-bold animate-slide-up transition-colors duration-1000"
                                     :class="{ 'number-glow': isAnimating.income }">
                                     Rp <span x-text="formatNumber(animatedIncome)"
                                         :class="{ 'animate-pulse-gentle': isAnimating.income }"
                                         class="text-emerald-400"></span>
                                 </p>
-                                <p x-show="!showIncome" class="dark:text-white text-xl font-bold">*******</p>
+                                <p x-show="!showIncome" class="dark:text-white text-xl font-bold transition-colors duration-1000">*******</p>
                             </div>
                         </div>
                     </div>
@@ -406,7 +406,7 @@
 
                 <!-- Expense Card -->
                 <article
-                    class="dark:bg-gray-900 bg-white shadow-2xl rounded-lg p-5 flex items-center justify-between gap-4 card-hover transition-all duration-300">
+                    class="dark:bg-gray-900 bg-white shadow-2xl rounded-lg p-5 flex items-center justify-between gap-4 card-hover transition-colors duration-1000">
                     <div class="flex items-center gap-3">
                         <div
                             class="p-3 bg-red-900 rounded-lg transform transition-transform duration-200 hover:scale-110">
@@ -426,7 +426,7 @@
                                         :class="{ 'animate-pulse-gentle': isAnimating.expense }"
                                         class="text-red-400"></span>
                                 </p>
-                                <p x-show="!showExpense" class="dark:text-white text-xl font-bold">*******</p>
+                                <p x-show="!showExpense" class="dark:text-white text-xl font-bold transition-colors duration-1000">*******</p>
                             </div>
                         </div>
                     </div>

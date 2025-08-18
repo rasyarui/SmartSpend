@@ -6,9 +6,9 @@
             x-transition:enter-end="opacity-100" x-transition:leave="ease-in duration-200"
             x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0"
             class="fixed inset-0 z-50 overflow-y-auto overflow-x-hidden flex justify-center items-center w-full h-full md:inset-0 max-h-full bg-black/60">
-            <div class="relative p-4 w-full max-w-md max-h-full">
+            <div class="relative p-4 w-full max-w-md max-h-full z-90">
                 <!-- Modal content -->
-                <div class="relative bg-white rounded-lg shadow-sm dark:bg-gray-700">
+                <div class="relative bg-white rounded-lg shadow-sm dark:bg-gray-700 ">
                     <!-- Modal header -->
                     <div
                         class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600 border-gray-200">
@@ -378,21 +378,27 @@
         </div>
 
         <!-- Main Content -->
-        <main class="min-h-screen w-full">
+        <main class="min-h-screen w-full ">
+
+            <div id="background-slider" wire:ignore
+                class="fixed inset-0 -z-10 flex transition-transform duration-1000 ease-in-out">
+                <div id="slide-light" class="w-full h-full flex-shrink-0 bg-white"></div>
+                <div id="slide-dark" class="w-full h-full flex-shrink-0 bg-gray-950"></div>
+            </div>
             <!-- Header -->
             <livewire:navbar />
             <!-- Hero section -->
             <section
                 class="px-6 py-8 border-b border-gray-700 max-w-7xl mx-auto w-full flex flex-col md:flex-row md:items-center md:justify-between gap-6">
                 <div class="max-w-xl">
-                    <h2 class="text-3xl font-extrabold mb-2">
+                    <h2 class="text-3xl font-extrabold mb-2 transition-colors duration-1000">
                         Hai, {{ auth()->user()->name }} <span aria-label="raised hands" role="img">🙌</span>
                     </h2>
-                    <p class="text-gray-500 dark:text-gray-400 mb-6 max-w-xl">Lacak keuanganmu dengan mudah sekarang!
+                    <p class="text-gray-500 dark:text-gray-400 mb-6 max-w-xl transition-colors duration-1000">Lacak keuanganmu dengan mudah sekarang!
                         Kelola pemasukan
                         &
                         pengeluaran tanpa stres. Yuk, mulai lebih rapi hari ini!</p>
-                    <div class="flex gap-4 flex-wrap">
+                    <div class="flex gap-4 flex-wrap transition-colors duration-1000">
                         <button type="button" wire:click="openModal('income')"
                             class="bg-teal-800 hover:bg-teal-700 cursor-pointer transition text-white font-semibold px-5 py-2 rounded flex items-center gap-2 whitespace-nowrap">
                             Tambah Penghasilan <span aria-label="money with wings" role="img">🪙</span>
@@ -404,7 +410,7 @@
                     </div>
                 </div>
                 <aside
-                    class="dark:bg-[#27272a] bg-[#f4f4f5] shadow-xl rounded-md p-4 text-gray-500 dark:text-gray-400 max-w-md italic select-none">
+                    class="dark:bg-[#27272a] bg-[#f4f4f5] shadow-xl rounded-md p-4 text-gray-500 dark:text-gray-400 max-w-md italic select-none transition-colors duration-1000">
                     <p><span aria-label="light bulb" role="img">💡</span> “It’s not how much money you make,
                         but how
                         much money you keep.”</p>
@@ -421,31 +427,30 @@
             {{-- Table --}}
             <div class="w-full">
                 <!-- Card Header -->
-                <div class="px-6 py-2 space-y-4">
+                <div class="px-6 py-2 space-y-4 relative">
                     <div class="flex flex-col items-start">
                         <div class="mb-5">
-                            <h2 class="text-3xl font-extrabold text-black dark:text-white">Tabel Transaksi</h2>
-                            <p class="text-[15px] text-gray-500 dark:text-gray-400">Daftar semua transaksi keuangan</p>
+                            <h2 class="text-3xl font-extrabold text-black dark:text-white transition-colors duration-1000">Tabel Transaksi</h2>
+                            <p class="text-[15px] text-gray-500 dark:text-gray-400 transition-colors duration-1000">Daftar semua transaksi keuangan</p>
                         </div>
-
 
                         <div class="flex flex-row w-full justify-between mb-2">
                             <div class="flex flex-row gap-3">
-                                <button id="export-btn"
-                                    class="flex cursor-pointer items-center gap-1 px-3 border border-gray-200 dark:border-gray-700 rounded-md bg-white dark:bg-gray-950 text-gray-950 font-semibold dark:text-white text-sm hover:bg-gray-50 dark:hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors duration-200"
+                                <button id="kategori-btn"
+                                    class="flex cursor-pointer items-center gap-1 px-3 border border-gray-200 dark:border-gray-700 rounded-md bg-white dark:bg-gray-950 text-gray-950 font-semibold dark:text-white text-sm hover:bg-gray-50 dark:hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500  transition-colors duration-1000"
                                     title="Export data ke Excel">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18"
-                                        class="fill-gray-950 dark:fill-white" viewBox="0 0 24 24">
+                                        class="fill-gray-950 dark:fill-white transition-colors duration-1000" viewBox="0 0 24 24">
                                         <path fill=""
                                             d="M5 11q-.825 0-1.412-.587T3 9V5q0-.825.588-1.412T5 3h4q.825 0 1.413.588T11 5v4q0 .825-.587 1.413T9 11zm0 10q-.825 0-1.412-.587T3 19v-4q0-.825.588-1.412T5 13h4q.825 0 1.413.588T11 15v4q0 .825-.587 1.413T9 21zm10-10q-.825 0-1.412-.587T13 9V5q0-.825.588-1.412T15 3h4q.825 0 1.413.588T21 5v4q0 .825-.587 1.413T19 11zm0 10q-.825 0-1.412-.587T13 19v-4q0-.825.588-1.412T15 13h4q.825 0 1.413.588T21 15v4q0 .825-.587 1.413T19 21z" />
                                     </svg>
                                     Kategory
                                 </button>
                                 <button id="type-button" data-dropdown-toggle="dropdownSearchType"
-                                    class="flex cursor-pointer items-center gap-1 px-3 border border-gray-200 dark:border-gray-700 rounded-md bg-white dark:bg-gray-950 text-gray-950 font-semibold dark:text-white text-sm hover:bg-gray-50 dark:hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors duration-200"
+                                    class="flex cursor-pointer items-center gap-1 px-3 border border-gray-200 dark:border-gray-700 rounded-md bg-white dark:bg-gray-950 text-gray-950 font-semibold dark:text-white text-sm hover:bg-gray-50 dark:hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors duration-1000"
                                     title="Export data ke Excel">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18"
-                                        class="fill-gray-950 dark:fill-white" viewBox="0 0 24 24">
+                                        class="fill-gray-950 dark:fill-white transition-colors duration-1000" viewBox="0 0 24 24">
                                         <path fill=""
                                             d="M5 11q-.825 0-1.412-.587T3 9V5q0-.825.588-1.412T5 3h4q.825 0 1.413.588T11 5v4q0 .825-.587 1.413T9 11zm0 10q-.825 0-1.412-.587T3 19v-4q0-.825.588-1.412T5 13h4q.825 0 1.413.588T11 15v4q0 .825-.587 1.413T9 21zm10-10q-.825 0-1.412-.587T13 9V5q0-.825.588-1.412T15 3h4q.825 0 1.413.588T21 5v4q0 .825-.587 1.413T19 11zm0 10q-.825 0-1.412-.587T13 19v-4q0-.825.588-1.412T15 13h4q.825 0 1.413.588T21 15v4q0 .825-.587 1.413T19 21z" />
                                     </svg>
@@ -476,26 +481,9 @@
 
                             <!-- Filter Dropdown -->
                             <div class="flex flex-row gap-3">
-                                <div class="relative ">
-                                    <select id="filter-select"
-                                        class="w-40 cursor-pointer px-3 py-2 border border-gray-200 dark:border-gray-700 rounded-md bg-white dark:bg-gray-950 text-gray-950 font-semibold dark:text-white text-sm hover:bg-gray-50 dark:hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500 appearance-none pr-8">
-                                        <option value="all">Semua Transaksi</option>
-                                        <option value="income">Pemasukan</option>
-                                        <option value="expense">Pengeluaran</option>
-                                        <option value="today">Hari Ini</option>
-                                    </select>
-                                    <div class="absolute inset-y-0 right-0 flex items-center px-2 pointer-events-none">
-                                        <svg class="h-4 w-4 text-gray-950 dark:text-white" fill="none"
-                                            stroke="currentColor" viewBox="0 0 24 24">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z" />
-                                        </svg>
-                                    </div>
-                                </div>
-
                                 <!-- Export Button -->
                                 <button id="export-btn"
-                                    class="flex cursor-pointer items-center gap-2 px-4 py-2 border border-gray-200 dark:border-gray-700 rounded-md bg-white dark:bg-gray-950 text-gray-950 font-semibold dark:text-white text-sm hover:bg-gray-50 dark:hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors duration-200"
+                                    class="flex cursor-pointer items-center gap-2 px-4 py-2 border border-gray-200 dark:border-gray-700 rounded-md bg-white dark:bg-gray-950 text-gray-950 font-semibold dark:text-white text-sm hover:bg-gray-50 dark:hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors duration-1000"
                                     title="Export data ke Excel">
                                     <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -503,6 +491,61 @@
                                     </svg>
                                     Export Excel
                                 </button>
+                                <div class="relative">
+                                    <button data-dropdown-toggle="dropdownView"
+                                        class="items-cente flex cursor-pointer px-3 py-2 border gap-1 border-gray-200 dark:border-gray-700 rounded-md bg-white dark:bg-gray-950 text-gray-950 font-semibold dark:text-white text-sm hover:bg-gray-50 dark:hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500 appearance-none transition-colors duration-1000">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="19" height="17" class="fill-gray-950 dark:fill-white transition-colors duration-1000"
+                                            viewBox="0 0 24 24"> 
+                                            <path 
+                                                d="M12 18.88a1 1 0 0 1-.29.83a1 1 0 0 1-1.41 0l-4-4a1 1 0 0 1-.3-.84V9.75L1.21 3.62a1 1 0 0 1 .17-1.4A1 1 0 0 1 2 2h14a1 1 0 0 1 .62.22a1 1 0 0 1 .17 1.4L12 9.75zM4 4l4 5.06v5.52l2 2V9.05L14 4m-1 12l5 5l5-5Z" />
+                                        </svg>
+                                        View
+                                    </button>
+                                    <div id="dropdownView" role="menu"
+                                        class="origin-top-right hidden absolute mt-2 mr-[50px] w-[150px] rounded-md shadow-lg bg-white dark:bg-gray-950 border border-gray-300 dark:border-gray-600">
+                                        <div
+                                            class="font-bold text-[14px] border-b border-gray-300 p-2 dark:border-gray-600 w-full text-center">
+                                            Toggle Columns
+                                        </div>
+                                        <div class="flex flex-col gap-2 p-2 rounded-sm">
+                                            <button
+                                                class="flex flex-row hover:bg-gray-100 dark:hover:bg-gray-600 py-1 px-3 rounded-md items-center cursor-pointer">
+                                                <input id="checkbox-view-1" type="checkbox"
+                                                    class="w-4 h-4 text-blue-600 bg-white border-gray-300 rounded-sm focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-950 dark:border-gray-500  ">
+                                                <label for="checkbox-view-1"
+                                                    class="w-full ms-2 text-sm font-medium text-gray-900 rounded-sm dark:text-gray-300 cursor-pointer">Katrgori</label>
+                                            </button>
+                                            <button
+                                                class="flex flex-row hover:bg-gray-100 dark:hover:bg-gray-600 py-1 px-3 rounded-md items-center cursor-pointer">
+                                                <input id="checkbox-view-2" type="checkbox"
+                                                    class="w-4 h-4 text-blue-600 bg-white border-gray-300 rounded-sm focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-950 dark:border-gray-500 ">
+                                                <label for="checkbox-view-2"
+                                                    class="w-full ms-2 text-sm font-medium text-gray-900 rounded-sm dark:text-gray-300 cursor-pointer">Deskripsi</label>
+                                            </button>
+                                            <button
+                                                class="flex flex-row hover:bg-gray-100 dark:hover:bg-gray-600 py-1 px-3 rounded-md items-center cursor-pointer">
+                                                <input id="checkbox-view-3" type="checkbox"
+                                                    class="w-4 h-4 text-blue-600 bg-white border-gray-300 rounded-sm focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-950 dark:border-gray-500 ">
+                                                <label for="checkbox-view-3"
+                                                    class="w-full ms-2 text-sm font-medium text-gray-900 rounded-sm dark:text-gray-300 cursor-pointer">Tanggal</label>
+                                            </button>
+                                            <button
+                                                class="flex flex-row hover:bg-gray-100 dark:hover:bg-gray-600 py-1 px-3 rounded-md items-center cursor-pointer">
+                                                <input id="checkbox-view-4" type="checkbox"
+                                                    class="w-4 h-4 text-blue-600 bg-white border-gray-300 rounded-sm focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-950 dark:border-gray-500 ">
+                                                <label for="checkbox-view-4"
+                                                    class="w-full ms-2 text-sm font-medium text-gray-900 rounded-sm dark:text-gray-300 cursor-pointer">Tipe</label>
+                                            </button>
+                                            <button
+                                                class="flex flex-row hover:bg-gray-100 dark:hover:bg-gray-600 py-1 px-3 rounded-md items-center cursor-pointer">
+                                                <input id="checkbox-view-5" type="checkbox"
+                                                    class="w-4 h-4 text-blue-600 bg-white border-gray-300 rounded-sm focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-950 dark:border-gray-500 ">
+                                                <label for="checkbox-view-5"
+                                                    class="w-full ms-2 text-sm font-medium text-gray-900 rounded-sm dark:text-gray-300 cursor-pointer">Jumlah</label>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
 
                         </div>
@@ -614,5 +657,6 @@
 
                 </div>
             </div>
+        </main>
     </div>
 </div>

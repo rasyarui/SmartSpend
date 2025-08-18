@@ -1,6 +1,6 @@
 <div>
        <button aria-label="Alarm clock timer"
-                    class="flex items-center gap-1 dark:text-gray-300 text-black border border-gray-300 dark:border-gray-600 rounded-md px-3 py-1 text-sm dark:hover:bg-gray-700 hover:bg-gray-200 transition"
+                    class="flex items-center gap-1 dark:text-gray-300 text-black border border-gray-300 dark:border-gray-600 rounded-md px-3 py-1 text-sm dark:hover:bg-gray-700 hover:bg-gray-200 transition-colors duration-1000"
                     type="button">
                     <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 128 128">
                         <path fill="#82aec0"

@@ -9,10 +9,10 @@
                 </svg>
             </button>
             <div>
-                <p class="text-sm text-gray-500">
+                <p class="text-sm text-gray-500 transition-colors duration-1000">
                     {{ \Carbon\Carbon::parse(date('Y-m-d'))->translatedFormat('l, d M Y') }}
                 </p>
-                <h1 class="text-2xl font-bold dark:text-white text-black flex items-center gap-2">Selamat pagi <span
+                <h1 class="text-2xl font-bold dark:text-white text-black flex items-center gap-2 transition-colors duration-1000">Selamat pagi <span
                         aria-label="sun" role="img">🌞</span></h1>
             </div>
             <div class="flex items-center gap-4">
@@ -21,7 +21,7 @@
                     <div class="relative inline-block text-left">
                         <button id="mode-menu-button">
                             <div
-                                class="inline-flex justify-center w-full px-2 py-2 text-sm font-medium bg-white dark:bg-black border border-gray-300 dark:border-gray-600 cursor-pointer rounded-lg  ">
+                                class="inline-flex justify-center w-full px-2 py-2 text-sm font-medium bg-white dark:bg-black border border-gray-300 dark:border-gray-600 cursor-pointer rounded-lg  transition-colors duration-1100">
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" id="icon-light"
                                     width="18px">
                                     <path
@@ -43,7 +43,7 @@
                             </div>
                         </button>
                         <div id="mode-menu" role="menu"
-                            class="origin-top-right hidden absolute hidd right-0 mt-2 w-35 rounded-md shadow-lg bg-white dark:bg-gray-950 border border-gray-300 dark:border-gray-600">
+                            class="origin-top-right hidden absolute right-0 mt-2 w-35 rounded-md shadow-lg bg-white dark:bg-gray-950 border border-gray-300 dark:border-gray-600">
                             <div class="py-2 p-2" role="menu" aria-orientation="vertical"
                                 aria-labelledby="dropdown-button">
                                 <a class="flex rounded-md px-2 py-2 text-sm text-gray-700  dark:text-white hover:bg-gray-300 dark:hover:bg-gray-600 active:bg-blue-100 cursor-pointer"

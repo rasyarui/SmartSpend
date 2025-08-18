@@ -80,9 +80,10 @@
 
 </head>
 
-<body class="dark:bg-gray-950 bg-white dark:text-white text text-black font-sans">
+<body class="dark:text-white text text-black font-sans">
 
-
+  
+    
 
     <livewire:pages.dashboard />
     @livewireScripts
@@ -93,6 +94,7 @@
     <script src="https://cdn.jsdelivr.net/npm/@tailwindplus/elements@1" type="module"></script>
 
     <script src="/js/index.js"></script>
+    <script src="/js/darkMode.js"></script>
 
    
 </body>

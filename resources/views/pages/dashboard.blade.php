@@ -80,7 +80,7 @@
 
 </head>
 
-<body class="dark:text-white text text-black font-sans">
+<body class="dark:text-white text text-black font-sans ">
 
   
     

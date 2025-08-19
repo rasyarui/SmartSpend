@@ -308,13 +308,13 @@
                         <div>
                             <p class="text-gray-500 text-sm">Balance</p>
                             <div class="relative">
-                                <p x-show="showBalance" class="dark:text-white text-xl font-bold animate-slide-up transition-colors duration-1000"
+                                <p x-show="showBalance" class="dark:text-white text-xl font-bold animate-slide-up transition-all duration-1000"
                                     :class="{ 'number-glow': isAnimating.balance }">
                                     Rp <span x-text="formatNumber(animatedBalance)"
                                         :class="{ 'animate-pulse-gentle': isAnimating.balance }"
                                         class="text-purple-400"></span>
                                 </p>
-                                <p x-show="!showBalance" class="dark:text-white text-xl font-bold transition-colors duration-1000">*******</p>
+                                <p x-show="!showBalance" class="dark:text-white text-xl font-bold transition-all duration-1000">*******</p>
                             </div>
                         </div>
                     </div>
@@ -350,7 +350,7 @@
 
                 <!-- Income Card -->
                 <article
-                    class="dark:bg-gray-900 bg-white shadow-2xl rounded-lg p-5 flex items-center justify-between gap-4 card-hover transition-colors duration-1000">
+                    class="dark:bg-gray-900 bg-white shadow-2xl rounded-lg p-5 flex items-center justify-between gap-4 card-hover transition-color duration-1000">
                     <div class="flex items-center gap-3">
                         <div
                             class="p-3 bg-emerald-900 rounded-lg transform transition-transform duration-200 hover:scale-110">
@@ -364,13 +364,13 @@
                         <div>
                             <p class="text-gray-500 text-sm">Income</p>
                             <div class="relative">
-                                <p x-show="showIncome" class="dark:text-white text-xl font-bold animate-slide-up transition-colors duration-1000"
+                                <p x-show="showIncome" class="dark:text-white text-xl font-bold animate-slide-up transition-all duration-1000"
                                     :class="{ 'number-glow': isAnimating.income }">
                                     Rp <span x-text="formatNumber(animatedIncome)"
                                         :class="{ 'animate-pulse-gentle': isAnimating.income }"
                                         class="text-emerald-400"></span>
                                 </p>
-                                <p x-show="!showIncome" class="dark:text-white text-xl font-bold transition-colors duration-1000">*******</p>
+                                <p x-show="!showIncome" class="dark:text-white text-xl font-bold transition-all duration-1000">*******</p>
                             </div>
                         </div>
                     </div>
@@ -406,7 +406,7 @@
 
                 <!-- Expense Card -->
                 <article
-                    class="dark:bg-gray-900 bg-white shadow-2xl rounded-lg p-5 flex items-center justify-between gap-4 card-hover transition-colors duration-1000">
+                    class="dark:bg-gray-900 bg-white shadow-2xl rounded-lg p-5 flex items-center justify-between gap-4 card-hover transition-all duration-1000">
                     <div class="flex items-center gap-3">
                         <div
                             class="p-3 bg-red-900 rounded-lg transform transition-transform duration-200 hover:scale-110">
@@ -426,7 +426,7 @@
                                         :class="{ 'animate-pulse-gentle': isAnimating.expense }"
                                         class="text-red-400"></span>
                                 </p>
-                                <p x-show="!showExpense" class="dark:text-white text-xl font-bold transition-colors duration-1000">*******</p>
+                                <p x-show="!showExpense" class="dark:text-white text-xl font-bold transition-all duration-1000">*******</p>
                             </div>
                         </div>
                     </div>

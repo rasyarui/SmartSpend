@@ -1,5 +1,12 @@
 <div>
-    <div class="flex">
+    <div class="flex h-screen">
+         <button id="menu-btn" aria-label="Toggle sidebar" aria-expanded="false" aria-controls="sidebar"
+                class="focus:outline-none fixed rounded-md  top-4 left-4 bg-gray-950 border-gray-300 focus:ring-2 focus:ring-green-500 p-2  md:hidden">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+                    stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
+                </svg>
+            </button>
         {{-- Modal --}}
         <div id="crud-modal" wire:click.self="closeModal" tabindex="-1" x-data="{ show: @entangle('showModal') }" x-show="show" x-cloak
             x-transition:enter="ease-out duration-300" x-transition:enter-start="opacity-0"
@@ -271,117 +278,88 @@
             </div>
         </div>
         {{-- End Modal --}}
-
-
-        <div class="flex h-screen">
-            <!-- Sidebar -->
+        <!-- Sidebar -->
+        <div>
             <aside
-                class="sidebar fixed inset-y-0 left-0 z-2 w-64 overflow-y-auto bg-white text-black p-6 transition-transform duration-300 transform -translate-x-full md:translate-x-0 md:static md:flex-shrink-0"
-                aria-label="Sidebar navigation">
-                <div class="flex items-center mb-4 mt-[20px] space-x-3">
-
-                    <a href="#"
-                        class="flex items-center rounded-md px-2 py-[4px] text-black font-semibold hover:bg-slate-600 focus:outline-none focus:ring-2 focus:ring-green-500 md:hidden absolute right-[10px] top-[10px]"
-                        aria-current="page">
-                        <p class="fa-solid">x</p>
-                    </a>
-
-                    <!-- Icon Container -->
-                    <div class=" rounded-lg shrink-0">
-                        <img src="/img/SmartSpend.png" alt="" width="80px">
+                class="sidebar w-64 bg-white shadow-lg border-r border-gray-200 transition-transform duration-300 transform -translate-x-full  md:translate-x-0 md:fixed md:flex-shrink-0 flex flex-col fixed h-full z-30 ease-in-out">
+                <!-- Header -->
+                <div class="p-6 border-b border-gray-200">
+                    <div class="flex items-center gap-3">
+                        <div
+                            class="w-10 h-10 bg-gradient-to-br from-purple-500 to-blue-500 rounded-lg flex items-center justify-center text-white">
+                            <i class="fas fa-brain text-lg"></i>
+                        </div>
+                        <div>
+                            <h1 class="text-xl font-bold text-gray-900">FinanceAI</h1>
+                            <p class="text-xs text-gray-500 flex items-center gap-1">
+                                <i class="fas fa-sparkles"></i>
+                                Web3 Finance
+                            </p>
+                        </div>
                     </div>
-
-                    <span class="flex flex-col">
-                        <h1 class="text-3xl font-extrabold text-[#261c66] leading-tight max-w-[10rem]">
-                            Smart
-                        </h1>
-                        <h1 class="text-3xl font-extrabold text-[#4054bb] leading-tight max-w-[10rem] ">
-                            Spend
-                        </h1>
-                    </span>
-
                 </div>
 
-                <nav>
-                    <h2 class="uppercase text-slate-600 font-semibold mb-4 tracking-wide text-sm select-none">Menu
-                    </h2>
-                    <ul class="space-y-2">
-                        <li>
-                            <a href="#"
-                                class="flex items-center gap-3 rounded-md bg-slate-700 px-4 py-2 text-white font-semibold hover:bg-slate-600 focus:outline-none focus:ring-2 focus:ring-green-500"
-                                aria-current="page">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 flex-shrink-0" fill="none"
-                                    viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
-                                    <rect x="3" y="3" width="7" height="7" rx="1" ry="1" />
-                                    <rect x="14" y="3" width="7" height="7" rx="1"
-                                        ry="1" />
-                                    <rect x="14" y="14" width="7" height="7" rx="1"
-                                        ry="1" />
-                                    <rect x="3" y="14" width="7" height="7" rx="1"
-                                        ry="1" />
-                                </svg>
-                                Dashboard
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#"
-                                class="flex items-center gap-3 rounded-md px-4 py-2 hover:bg-slate-700 focus:outline-none focus:ring-2 focus:ring-green-500">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 flex-shrink-0 text-slate-400"
-                                    fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"
-                                    aria-hidden="true">
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="M4 12h16m-6-6l6 6-6 6" />
-                                </svg>
-                                Transaksi
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#"
-                                class="flex items-center gap-3 rounded-md px-4 py-2 hover:bg-slate-700 focus:outline-none focus:ring-2 focus:ring-green-500">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 flex-shrink-0 text-slate-400"
-                                    fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"
-                                    aria-hidden="true">
-                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                        d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V7M3 7l9 6 9-6" />
-                                </svg>
-                                Kelola
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#"
-                                class="flex items-center gap-3 rounded-md px-4 py-2 hover:bg-slate-700 focus:outline-none focus:ring-2 focus:ring-green-500">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 flex-shrink-0 text-slate-400"
-                                    fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"
-                                    aria-hidden="true">
-                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                        d="M16 11c1.38 0 2.5-1.12 2.5-2.5S17.38 6 16 6 13.5 7.12 13.5 8.5 14.62 11 16 11zM8 20h8M6 13c0-1 1-1 1-1s-1-1-1-1" />
-                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                        d="M4.5 11v2m9-8v2m-6 8v1m3-10v10m6-10v10" />
-                                </svg>
-                                Tabunganku
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#"
-                                class="flex items-center gap-3 rounded-md px-4 py-2 hover:bg-slate-700 focus:outline-none focus:ring-2 focus:ring-green-500">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 flex-shrink-0 text-slate-400"
-                                    fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"
-                                    aria-hidden="true">
-                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                        d="M12 8v4l3 3m6-9a9 9 0 11-18 0 9 9 0 0118 0z" />
-                                </svg>
-                                Riwayat
-                            </a>
-                        </li>
-                    </ul>
+                <!-- Navigation -->
+                <nav class="flex-1 px-4 py-6 space-y-3">
+                    <a href="#"
+                        class="flex items-center gap-3 px-3 py-2 rounded-lg bg-indigo-100 text-indigo-700 font-medium hover:bg-indigo-200 transition-all duration-300 ease-in-out hover:scale-105 shadow-md">
+                        <div class="w-6 h-6 bg-indigo-500 rounded-lg flex items-center justify-center text-white">
+                            <i class="fas fa-home"></i>
+                        </div>
+                        <span>Dashboard</span>
+                        <div class="ml-auto w-2 h-2 bg-indigo-500 rounded-full"></div>
+                    </a>
+
+                    <a href="#"
+                        class="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-gray-100 transition-all duration-300 ease-in-out hover:scale-105">
+                        <div class="w-6 h-6 bg-green-500 rounded-lg flex items-center justify-center text-white">
+                            <i class="fas fa-credit-card"></i>
+                        </div>
+                        <span class="text-gray-950 ">Transaksi</span>
+                    </a>
+
+                    <a href="#"
+                        class="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-gray-100 transition-all duration-300 ease-in-out hover:scale-105">
+                        <div class="w-6 h-6 bg-pink-500 rounded-lg flex items-center justify-center text-white">
+                            <i class="fas fa-piggy-bank"></i>
+                        </div>
+                        <span class="text-gray-950">Tabunganku</span>
+                    </a>
+
+                    <a href="#"
+                        class="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-gray-100 transition-all duration-300 ease-in-out hover:scale-105">
+                        <div class="w-6 h-6 bg-orange-500 rounded-lg flex items-center justify-center text-white">
+                            <i class="fas fa-cog"></i>
+                        </div>
+                        <span class="text-gray-950">Kelola</span>
+                    </a>
                 </nav>
+
+                <!-- Status Section -->
+                <div class="p-4 border-t border-gray-200">
+                    <div class="space-y-2">
+                        <div class="flex items-center gap-2 px-3 py-2 bg-gray-100 rounded-lg text-sm">
+                            <div class="w-2 h-2 bg-purple-500 rounded-full"></div>
+                            <span class="text-gray-700" id="theme-status">Dark Theme Active</span>
+                        </div>
+                        <div class="flex items-center gap-2 px-3 py-2 bg-green-50 rounded-lg text-sm">
+                            <div class="w-2 h-2 bg-green-500 rounded-full"></div>
+                            <div>
+                                <div class="font-medium text-green-800">AI Assistant</div>
+                                <div class="text-green-600 text-xs">Online & Ready</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </aside>
+
         </div>
 
         <!-- Main Content -->
-        <main class="min-h-screen w-full ">
+        <main class="min-h-screen w-full md:ml-64">
 
             <div id="background-slider" wire:ignore
-                class="fixed inset-0 -z-10 flex transition-transform duration-1000 ease-in-out">
+                class="fixed inset-0 -z-10 flex transition-transform duration-1100 ease-in-out">
                 <div id="slide-light" class="w-full h-full flex-shrink-0 bg-white"></div>
                 <div id="slide-dark" class="w-full h-full flex-shrink-0 bg-gray-950"></div>
             </div>
@@ -394,7 +372,8 @@
                     <h2 class="text-3xl font-extrabold mb-2 transition-colors duration-1000">
                         Hai, {{ auth()->user()->name }} <span aria-label="raised hands" role="img">🙌</span>
                     </h2>
-                    <p class="text-gray-500 dark:text-gray-400 mb-6 max-w-xl transition-colors duration-1000">Lacak keuanganmu dengan mudah sekarang!
+                    <p class="text-gray-500 dark:text-gray-400 mb-6 max-w-xl transition-colors duration-1000">Lacak
+                        keuanganmu dengan mudah sekarang!
                         Kelola pemasukan
                         &
                         pengeluaran tanpa stres. Yuk, mulai lebih rapi hari ini!</p>
@@ -430,8 +409,11 @@
                 <div class="px-6 py-2 space-y-4 relative">
                     <div class="flex flex-col items-start">
                         <div class="mb-5">
-                            <h2 class="text-3xl font-extrabold text-black dark:text-white transition-colors duration-1000">Tabel Transaksi</h2>
-                            <p class="text-[15px] text-gray-500 dark:text-gray-400 transition-colors duration-1000">Daftar semua transaksi keuangan</p>
+                            <h2
+                                class="text-3xl font-extrabold text-black dark:text-white transition-colors duration-1000">
+                                Tabel Transaksi</h2>
+                            <p class="text-[15px] text-gray-500 dark:text-gray-400 transition-colors duration-1000">
+                                Daftar semua transaksi keuangan</p>
                         </div>
 
                         <div class="flex flex-row w-full justify-between mb-2">
@@ -440,7 +422,8 @@
                                     class="flex cursor-pointer items-center gap-1 px-3 border border-gray-200 dark:border-gray-700 rounded-md bg-white dark:bg-gray-950 text-gray-950 font-semibold dark:text-white text-sm hover:bg-gray-50 dark:hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500  transition-colors duration-1000"
                                     title="Export data ke Excel">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18"
-                                        class="fill-gray-950 dark:fill-white transition-colors duration-1000" viewBox="0 0 24 24">
+                                        class="fill-gray-950 dark:fill-white transition-colors duration-1000"
+                                        viewBox="0 0 24 24">
                                         <path fill=""
                                             d="M5 11q-.825 0-1.412-.587T3 9V5q0-.825.588-1.412T5 3h4q.825 0 1.413.588T11 5v4q0 .825-.587 1.413T9 11zm0 10q-.825 0-1.412-.587T3 19v-4q0-.825.588-1.412T5 13h4q.825 0 1.413.588T11 15v4q0 .825-.587 1.413T9 21zm10-10q-.825 0-1.412-.587T13 9V5q0-.825.588-1.412T15 3h4q.825 0 1.413.588T21 5v4q0 .825-.587 1.413T19 11zm0 10q-.825 0-1.412-.587T13 19v-4q0-.825.588-1.412T15 13h4q.825 0 1.413.588T21 15v4q0 .825-.587 1.413T19 21z" />
                                     </svg>
@@ -450,7 +433,8 @@
                                     class="flex cursor-pointer items-center gap-1 px-3 border border-gray-200 dark:border-gray-700 rounded-md bg-white dark:bg-gray-950 text-gray-950 font-semibold dark:text-white text-sm hover:bg-gray-50 dark:hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors duration-1000"
                                     title="Export data ke Excel">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18"
-                                        class="fill-gray-950 dark:fill-white transition-colors duration-1000" viewBox="0 0 24 24">
+                                        class="fill-gray-950 dark:fill-white transition-colors duration-1000"
+                                        viewBox="0 0 24 24">
                                         <path fill=""
                                             d="M5 11q-.825 0-1.412-.587T3 9V5q0-.825.588-1.412T5 3h4q.825 0 1.413.588T11 5v4q0 .825-.587 1.413T9 11zm0 10q-.825 0-1.412-.587T3 19v-4q0-.825.588-1.412T5 13h4q.825 0 1.413.588T11 15v4q0 .825-.587 1.413T9 21zm10-10q-.825 0-1.412-.587T13 9V5q0-.825.588-1.412T15 3h4q.825 0 1.413.588T21 5v4q0 .825-.587 1.413T19 11zm0 10q-.825 0-1.412-.587T13 19v-4q0-.825.588-1.412T15 13h4q.825 0 1.413.588T21 15v4q0 .825-.587 1.413T19 21z" />
                                     </svg>
@@ -491,57 +475,155 @@
                                     </svg>
                                     Export Excel
                                 </button>
+
                                 <div class="relative">
-                                    <button data-dropdown-toggle="dropdownView"
+                                    <button id="dropdown-button" aria-expanded="true" aria-haspopup="true"
                                         class="items-cente flex cursor-pointer px-3 py-2 border gap-1 border-gray-200 dark:border-gray-700 rounded-md bg-white dark:bg-gray-950 text-gray-950 font-semibold dark:text-white text-sm hover:bg-gray-50 dark:hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500 appearance-none transition-colors duration-1000">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="19" height="17" class="fill-gray-950 dark:fill-white transition-colors duration-1000"
-                                            viewBox="0 0 24 24"> 
-                                            <path 
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="19" height="17"
+                                            class="fill-gray-950 dark:fill-white transition-colors duration-1000"
+                                            viewBox="0 0 24 24">
+                                            <path
                                                 d="M12 18.88a1 1 0 0 1-.29.83a1 1 0 0 1-1.41 0l-4-4a1 1 0 0 1-.3-.84V9.75L1.21 3.62a1 1 0 0 1 .17-1.4A1 1 0 0 1 2 2h14a1 1 0 0 1 .62.22a1 1 0 0 1 .17 1.4L12 9.75zM4 4l4 5.06v5.52l2 2V9.05L14 4m-1 12l5 5l5-5Z" />
                                         </svg>
                                         View
                                     </button>
-                                    <div id="dropdownView" role="menu"
-                                        class="origin-top-right hidden absolute mt-2 mr-[50px] w-[150px] rounded-md shadow-lg bg-white dark:bg-gray-950 border border-gray-300 dark:border-gray-600">
+                                    <div id="dropdown-menu"
+                                        class="origin-top-left hidden absolute mt-2 right-0 w-35 rounded-md shadow-lg bg-white dark:bg-gray-950 border border-gray-300 dark:border-gray-600">
                                         <div
                                             class="font-bold text-[14px] border-b border-gray-300 p-2 dark:border-gray-600 w-full text-center">
                                             Toggle Columns
                                         </div>
                                         <div class="flex flex-col gap-2 p-2 rounded-sm">
                                             <button
-                                                class="flex flex-row hover:bg-gray-100 dark:hover:bg-gray-600 py-1 px-3 rounded-md items-center cursor-pointer">
-                                                <input id="checkbox-view-1" type="checkbox"
-                                                    class="w-4 h-4 text-blue-600 bg-white border-gray-300 rounded-sm focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-950 dark:border-gray-500  ">
+                                                class="flex flex-row hover:bg-gray-100 dark:hover:bg-gray-600 py-1 px-3 rounded-md items-center cursor-pointer text-start gap-2">
+                                                <div for="checkbox-view-1" class="relative cursor-pointer">
+                                                    <input type="checkbox" id="checkbox-view-1"
+                                                        class="sr-only peer text-start"
+                                                        wire:click="toggleColumn('kategori')"
+                                                        {{ !in_array('kategori', $hiddenColumns) ? 'checked' : '' }} />
+                                                    <div
+                                                        class="h-4 w-4 px-2 rounded-sm transition-all duration-200 peer-checked:bg-transparent peer-checked:border-transparent">
+                                                    </div>
+
+                                                    <svg class="absolute inset-0 h-full w-full text-gray-950 dark:text-gray-200 opacity-0 transition-all duration-200 peer-checked:opacity-100 peer-checked:transform peer-checked:scale-110"
+                                                        fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                        <path stroke-linecap="round" stroke-linejoin="round"
+                                                            stroke-width="3" d="M5 13l4 4L19 7"></path>
+                                                    </svg>
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24"
+                                                        class="absolute inset-0 h-full w-full text-gray-950 dark:fill-gray-200 opacity-100 transition-all duration-200 peer-checked:opacity-0 peer-checked:transform peer-checked:scale-110"
+                                                        height="24" viewBox="0 0 24 24">
+                                                        <path
+                                                            d="M20 6.91L17.09 4L12 9.09L6.91 4L4 6.91L9.09 12L4 17.09L6.91 20L12 14.91L17.09 20L20 17.09L14.91 12z" />
+                                                    </svg>
+                                                </div>
                                                 <label for="checkbox-view-1"
-                                                    class="w-full ms-2 text-sm font-medium text-gray-900 rounded-sm dark:text-gray-300 cursor-pointer">Katrgori</label>
+                                                    class="cursor-pointer font-medium text-sm">Kategori</label>
+
                                             </button>
                                             <button
-                                                class="flex flex-row hover:bg-gray-100 dark:hover:bg-gray-600 py-1 px-3 rounded-md items-center cursor-pointer">
-                                                <input id="checkbox-view-2" type="checkbox"
-                                                    class="w-4 h-4 text-blue-600 bg-white border-gray-300 rounded-sm focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-950 dark:border-gray-500 ">
+                                                class="flex flex-row hover:bg-gray-100 dark:hover:bg-gray-600 py-1 px-3 rounded-md items-center cursor-pointer text-start gap-2">
+                                                <div for="checkbox-view-2" class="relative cursor-pointer">
+                                                    <input type="checkbox" id="checkbox-view-2"
+                                                        class="sr-only peer text-start"
+                                                        wire:click="toggleColumn('deskripsi')"
+                                                        {{ !in_array('deskripsi', $hiddenColumns) ? 'checked' : '' }} />
+                                                    <div
+                                                        class="h-4 w-4 px-2 rounded-sm transition-all duration-200 peer-checked:bg-transparent peer-checked:border-transparent">
+                                                    </div>
+
+                                                    <svg class="absolute inset-0 h-full w-full text-gray-950 dark:text-gray-200  opacity-0 transition-all duration-200 peer-checked:opacity-100 peer-checked:transform peer-checked:scale-110"
+                                                        fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                        <path stroke-linecap="round" stroke-linejoin="round"
+                                                            stroke-width="3" d="M5 13l4 4L19 7"></path>
+                                                    </svg>
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24"
+                                                        class="absolute inset-0 h-full w-full text-gray-950 dark:fill-gray-200  opacity-100 transition-all duration-200 peer-checked:opacity-0 peer-checked:transform peer-checked:scale-110"
+                                                        height="24" viewBox="0 0 24 24">
+                                                        <path
+                                                            d="M20 6.91L17.09 4L12 9.09L6.91 4L4 6.91L9.09 12L4 17.09L6.91 20L12 14.91L17.09 20L20 17.09L14.91 12z" />
+                                                    </svg>
+                                                </div>
                                                 <label for="checkbox-view-2"
-                                                    class="w-full ms-2 text-sm font-medium text-gray-900 rounded-sm dark:text-gray-300 cursor-pointer">Deskripsi</label>
+                                                    class="cursor-pointer font-medium text-sm">Deskripsi</label>
                                             </button>
                                             <button
-                                                class="flex flex-row hover:bg-gray-100 dark:hover:bg-gray-600 py-1 px-3 rounded-md items-center cursor-pointer">
-                                                <input id="checkbox-view-3" type="checkbox"
-                                                    class="w-4 h-4 text-blue-600 bg-white border-gray-300 rounded-sm focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-950 dark:border-gray-500 ">
+                                                class="flex flex-row hover:bg-gray-100 dark:hover:bg-gray-600 py-1 px-3 rounded-md items-center cursor-pointer text-start gap-2">
+                                                <div for="checkbox-view-3" class="relative cursor-pointer">
+                                                    <input type="checkbox" id="checkbox-view-3"
+                                                        class="sr-only peer text-start"
+                                                        wire:click="toggleColumn('tanggal')"
+                                                        {{ !in_array('tanggal', $hiddenColumns) ? 'checked' : '' }} />
+                                                    <div
+                                                        class="h-4 w-4 px-2 rounded-sm transition-all duration-200 peer-checked:bg-transparent peer-checked:border-transparent">
+                                                    </div>
+
+                                                    <svg class="absolute inset-0 h-full w-full text-gray-950 dark:text-gray-200  opacity-0 transition-all duration-200 peer-checked:opacity-100 peer-checked:transform peer-checked:scale-110"
+                                                        fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                        <path stroke-linecap="round" stroke-linejoin="round"
+                                                            stroke-width="3" d="M5 13l4 4L19 7"></path>
+                                                    </svg>
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24"
+                                                        class="absolute inset-0 h-full w-full text-gray-950 dark:fill-gray-200  opacity-100 transition-all duration-200 peer-checked:opacity-0 peer-checked:transform peer-checked:scale-110"
+                                                        height="24" viewBox="0 0 24 24">
+                                                        <path
+                                                            d="M20 6.91L17.09 4L12 9.09L6.91 4L4 6.91L9.09 12L4 17.09L6.91 20L12 14.91L17.09 20L20 17.09L14.91 12z" />
+                                                    </svg>
+                                                </div>
                                                 <label for="checkbox-view-3"
-                                                    class="w-full ms-2 text-sm font-medium text-gray-900 rounded-sm dark:text-gray-300 cursor-pointer">Tanggal</label>
+                                                    class="cursor-pointer font-medium text-sm">Tanggal</label>
                                             </button>
                                             <button
-                                                class="flex flex-row hover:bg-gray-100 dark:hover:bg-gray-600 py-1 px-3 rounded-md items-center cursor-pointer">
-                                                <input id="checkbox-view-4" type="checkbox"
-                                                    class="w-4 h-4 text-blue-600 bg-white border-gray-300 rounded-sm focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-950 dark:border-gray-500 ">
+                                                class="flex flex-row hover:bg-gray-100 dark:hover:bg-gray-600 py-1 px-3 rounded-md items-center cursor-pointer text-start gap-2">
+                                                <div for="checkbox-view-4" class="relative cursor-pointer">
+                                                    <input type="checkbox" id="checkbox-view-4"
+                                                        class="sr-only peer text-start"
+                                                        wire:click="toggleColumn('tipe')"
+                                                        {{ !in_array('tipe', $hiddenColumns) ? 'checked' : '' }} />
+                                                    <div
+                                                        class="h-4 w-4 px-2 rounded-sm transition-all duration-200 peer-checked:bg-transparent peer-checked:border-transparent">
+                                                    </div>
+
+                                                    <svg class="absolute inset-0 h-full w-full text-gray-950 dark:text-gray-200  opacity-0 transition-all duration-200 peer-checked:opacity-100 peer-checked:transform peer-checked:scale-110"
+                                                        fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                        <path stroke-linecap="round" stroke-linejoin="round"
+                                                            stroke-width="3" d="M5 13l4 4L19 7"></path>
+                                                    </svg>
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24"
+                                                        class="absolute inset-0 h-full w-full text-gray-950 dark:fill-gray-200  opacity-100 transition-all duration-200 peer-checked:opacity-0 peer-checked:transform peer-checked:scale-110"
+                                                        height="24" viewBox="0 0 24 24">
+                                                        <path
+                                                            d="M20 6.91L17.09 4L12 9.09L6.91 4L4 6.91L9.09 12L4 17.09L6.91 20L12 14.91L17.09 20L20 17.09L14.91 12z" />
+                                                    </svg>
+                                                </div>
                                                 <label for="checkbox-view-4"
-                                                    class="w-full ms-2 text-sm font-medium text-gray-900 rounded-sm dark:text-gray-300 cursor-pointer">Tipe</label>
+                                                    class="cursor-pointer font-medium text-sm">Tipe</label>
                                             </button>
                                             <button
-                                                class="flex flex-row hover:bg-gray-100 dark:hover:bg-gray-600 py-1 px-3 rounded-md items-center cursor-pointer">
-                                                <input id="checkbox-view-5" type="checkbox"
-                                                    class="w-4 h-4 text-blue-600 bg-white border-gray-300 rounded-sm focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-950 dark:border-gray-500 ">
+                                                class="flex flex-row hover:bg-gray-100 dark:hover:bg-gray-600 py-1 px-3 rounded-md items-center cursor-pointer text-start gap-2">
+                                                <div for="checkbox-view-5" class="relative cursor-pointer">
+                                                    <input type="checkbox" id="checkbox-view-5"
+                                                        class="sr-only peer text-start"
+                                                        wire:click="toggleColumn('jumlah')"
+                                                        {{ !in_array('jumlah', $hiddenColumns) ? 'checked' : '' }} />
+                                                    <div
+                                                        class="h-4 w-4 px-2 rounded-sm transition-all duration-200 peer-checked:bg-transparent peer-checked:border-transparent">
+                                                    </div>
+
+                                                    <svg class="absolute inset-0 h-full w-full text-gray-950 dark:text-gray-200  opacity-0 transition-all duration-200 peer-checked:opacity-100 peer-checked:transform peer-checked:scale-110"
+                                                        fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                        <path stroke-linecap="round" stroke-linejoin="round"
+                                                            stroke-width="3" d="M5 13l4 4L19 7"></path>
+                                                    </svg>
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24"
+                                                        class="absolute inset-0 h-full w-full text-gray-950 dark:fill-gray-200  opacity-100 transition-all duration-200 peer-checked:opacity-0 peer-checked:transform peer-checked:scale-110"
+                                                        height="24" viewBox="0 0 24 24">
+                                                        <path
+                                                            d="M20 6.91L17.09 4L12 9.09L6.91 4L4 6.91L9.09 12L4 17.09L6.91 20L12 14.91L17.09 20L20 17.09L14.91 12z" />
+                                                    </svg>
+                                                </div>
                                                 <label for="checkbox-view-5"
-                                                    class="w-full ms-2 text-sm font-medium text-gray-900 rounded-sm dark:text-gray-300 cursor-pointer">Jumlah</label>
+                                                    class="cursor-pointer font-medium text-sm">Jumlah</label>
                                             </button>
                                         </div>
                                     </div>
@@ -554,7 +636,7 @@
 
 
 
-                <!-- Card Content -->
+                <!-- Table Content -->
                 <div class="px-6 pb-6">
                     <!-- Table Container with horizontal scroll -->
                     <div class="border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden">
@@ -563,65 +645,87 @@
                                 <thead>
                                     <tr
                                         class="bg-gray-50 dark:bg-gray-950 border-b border-gray-200 dark:border-gray-700">
-                                        <th
-                                            class="px-4 py-3 text-left text-sm font-medium text-gray-900 dark:text-gray-400">
-                                            Kategori
-                                        </th>
-                                        <th
-                                            class="px-4 py-3 text-left text-sm font-medium text-gray-900 dark:text-gray-400">
-                                            Deskripsi</th>
-                                        <th
-                                            class="px-4 py-3 text-left text-sm font-medium text-gray-900 dark:text-gray-400">
-                                            Tanggal</th>
-                                        <th
-                                            class="px-4 py-3 text-left text-sm font-medium text-gray-900 dark:text-gray-400">
-                                            Tipe</th>
-                                        <th
-                                            class="px-4 py-3 text-right text-sm font-medium text-gray-900 dark:text-gray-400">
-                                            Jumlah</th>
+                                        @unless (in_array('kategori', $hiddenColumns))
+                                            <th
+                                                class="px-4 py-3 text-left text-sm font-medium text-gray-900 dark:text-gray-400">
+                                                Kategori </th>
+                                        @endunless
+                                        @unless (in_array('deskripsi', $hiddenColumns))
+                                            <th
+                                                class="px-4 py-3 text-left text-sm font-medium text-gray-900 dark:text-gray-400">
+                                                Deskripsi</th>
+                                        @endunless
+                                        @unless (in_array('tanggal', $hiddenColumns))
+                                            <th
+                                                class="px-4 py-3 text-left text-sm font-medium text-gray-900 dark:text-gray-400">
+                                                Tanggal</th>
+                                        @endunless
+                                        @unless (in_array('tipe', $hiddenColumns))
+                                            <th
+                                                class="px-4 py-3 text-left text-sm font-medium text-gray-900 dark:text-gray-400">
+                                                Tipe</th>
+                                        @endunless
+                                        @unless (in_array('jumlah', $hiddenColumns))
+                                            <th
+                                                class="px-4 py-3 text-right text-sm font-medium text-gray-900 dark:text-gray-400">
+                                                Jumlah</th>
+                                        @endunless
+
                                         <th
                                             class="px-4 py-3 text-center text-sm font-medium text-gray-900 dark:text-gray-400 w-[70px]">
                                             Aksi</th>
+
+
                                     </tr>
                                 </thead>
                                 <tbody
                                     id="transaction-tbody"class="divide-y divide-gray-200 dark:divide-gray-700 bg-white dark:bg-gray-950">
                                     @forelse ($transactions as $dataTransaction)
                                         <tr class="table-row border-b border-gray-200 dark:border-gray-700">
-                                            <td class="px-3 py-3">
-                                                @unless (in_array('category_id', $hiddenColumns))
+                                            @unless (in_array('kategori', $hiddenColumns))
+                                                <td class="px-3 py-3">
                                                     <span
                                                         class="font-medium text-gray-500  dark:text-gray-400">{{ $dataTransaction->category->category }}</span>
-                                                @endunless
 
-                                            </td>
-                                            <td class="px-3 py-3">
-                                                <span
-                                                    class="text-gray-500 dark:text-gray-400">{{ $dataTransaction->description }}</span>
-                                            </td>
-                                            <td class="px-3 py-3 text-gray-900 dark:text-white">
-                                                {{-- {{ $dataTransaction->transaction_date }} --}}
-                                                <span class="text-gray-500 dark:text-gray-400">
-                                                    {{ \Carbon\Carbon::parse($dataTransaction->transaction_date)->translatedFormat('d M Y') }}
-                                                </span>
-                                            </td>
-                                            <td class="px-3 py-3">
-                                                <div
-                                                    class="w-full px-2 py-0.5 text-center text-md rounded-md {{ $dataTransaction->type == 'income' ? 'bg-[#DCFCE7] dark:bg-[#14532D] hover:bg-green-600 dark:text-[#BBF7D0] text-[#166534]' : 'bg-[#FEE2E2] dark:bg-[#7F1D1D] hover:bg-red-600 text-[#991B1B] dark:text-[#FCA5A5]' }}">
-                                                    <span class=" ">{{ $dataTransaction->type }}</span>
-                                                </div>
-                                            </td>
-                                            <td class="px-3 py-3 text-right font-medium">
-                                                <span
-                                                    class="{{ $dataTransaction->type == 'income' ? ' text-green-500' : 'text-red-500' }}">
-                                                    @if ($dataTransaction->type == 'income')
-                                                        +Rp {{ number_format($dataTransaction->amount) }},00
-                                                    @else
-                                                        -Rp {{ number_format($dataTransaction->amount) }},00
-                                                    @endif
+                                                </td>
+                                            @endunless
+                                            @unless (in_array('deskripsi', $hiddenColumns))
+                                                <td class="px-3 py-3">
+                                                    <span
+                                                        class="text-gray-500 dark:text-gray-400">{{ $dataTransaction->description }}</span>
 
-                                                </span>
-                                            </td>
+                                                </td>
+                                            @endunless
+
+                                            @unless (in_array('tanggal', $hiddenColumns))
+                                                <td class="px-3 py-3 text-gray-900 dark:text-white">
+                                                    <span class="text-gray-500 dark:text-gray-400">
+                                                        {{ \Carbon\Carbon::parse($dataTransaction->transaction_date)->translatedFormat('d M Y') }}
+                                                    </span>
+
+                                                </td>
+                                            @endunless
+                                            @unless (in_array('tipe', $hiddenColumns))
+                                                <td class="px-3 py-3">
+                                                    <div
+                                                        class="w-full px-2 py-0.5 text-center text-md rounded-md {{ $dataTransaction->type == 'income' ? 'bg-[#DCFCE7] dark:bg-[#14532D] hover:bg-green-600 dark:text-[#BBF7D0] text-[#166534]' : 'bg-[#FEE2E2] dark:bg-[#7F1D1D] hover:bg-red-600 text-[#991B1B] dark:text-[#FCA5A5]' }}">
+                                                        <span class=" ">{{ $dataTransaction->type }}</span>
+                                                    </div>
+                                                </td>
+                                            @endunless
+                                            @unless (in_array('jumlah', $hiddenColumns))
+                                                <td class="px-3 py-3 text-right font-medium">
+                                                    <span
+                                                        class="{{ $dataTransaction->type == 'income' ? ' text-green-500' : 'text-red-500' }}">
+                                                        @if ($dataTransaction->type == 'income')
+                                                            +Rp {{ number_format($dataTransaction->amount) }},00
+                                                        @else
+                                                            -Rp {{ number_format($dataTransaction->amount) }},00
+                                                        @endif
+
+                                                    </span>
+                                                </td>
+                                            @endunless
                                             <td class="px-4 py-3 text-center">
                                                 <button onclick="deleteTransaction(${transaction.id})"
                                                     class="h-8 w-8 p-0 text-red-600 hover:text-red-800 dark:text-red-400 dark:hover:text-red-300 hover:bg-red-50 dark:hover:bg-red-900/20 rounded transition-colors duration-200"
@@ -657,6 +761,8 @@
 
                 </div>
             </div>
+
+
         </main>
     </div>
 </div>

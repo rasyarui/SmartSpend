@@ -65,7 +65,7 @@ class Dashboard extends Component
         ]);
     }
 
-      public function sortBy($field)
+    public function sortBy($field)
     {
         if ($this->sortField === $field) {
             $this->sortDirection = $this->sortDirection === 'asc' ? 'desc' : 'asc';
@@ -76,15 +76,16 @@ class Dashboard extends Component
         $this->sortField = $field;
     }
 
-     public function toggleColumn($column)
+    public function toggleColumn($column)
     {
         if (in_array($column, $this->hiddenColumns)) {
+            // Jika kolom sudah tersembunyi, hapus dari array untuk menampilkannya
             $this->hiddenColumns = array_diff($this->hiddenColumns, [$column]);
         } else {
+            // Jika belum tersembunyi, tambahkan ke array
             $this->hiddenColumns[] = $column;
         }
     }
-
     public function getStatsProperty()
     {
         $userId = Auth::id();

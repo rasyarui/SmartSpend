@@ -25,5 +25,73 @@
     height: 200px;
 
 } */
+ /* Sembunyikan checkbox bawaan */
+.custom-checkbox-container input {
+  /* Atur agar tidak terlihat tetapi masih bisa diakses secara fungsional */
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+/* Buat kotak visual */
+.custom-checkmark {
+  position: relative;
+  height: 25px;
+  width: 25px;
+  background-color: transparent;
+  border: 2px solid transparent;
+  border-radius: 5px;
+  display: inline-block;
+}
+
+/* Ketika checkbox di-hover */
+.custom-checkbox-container:hover input ~ .custom-checkmark {
+  background-color: transparent;
+}
+
+/* Ketika checkbox diceklis */
+.custom-checkbox-container input:checked ~ .custom-checkmark {
+  background-color: #2196F3;
+  border: 2px solid #2196F3;
+}
+
+/* Buat tanda ceklis */
+.custom-checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+/* Tampilkan tanda ceklis ketika checkbox diceklis */
+.custom-checkbox-container input:checked ~ .custom-checkmark:after {
+  display: block;
+  /* Atur posisi dan bentuk ceklis */
+  left: 9px;
+  top: 5px;
+  width: 5px;
+  height: 10px;
+  border: solid white;
+  border-width: 0 3px 3px 0;
+  transform: rotate(45deg);
+}
+
+/* Transisi untuk efek menghilang dan muncul */
+.custom-checkmark {
+  transition: all 0.2s ease-in-out;
+}
+
+/* Efek ketika diceklis: kotak menghilang dan hanya menyisakan ceklis */
+.custom-checkbox-container input:checked ~ .custom-checkmark {
+  background-color: transparent;
+  border-color: transparent;
+  transform: scale(1.2); /* Memperbesar sedikit tanda ceklis */
+}
+ 
+
+
+
+
 
 

@@ -2,75 +2,78 @@ document.addEventListener("DOMContentLoaded", () => {
     const html = document.documentElement;
     const modeMenuButton = document.getElementById("mode-menu-button");
     const modeMenu = document.getElementById("mode-menu");
-    const backgroundSlider = document.getElementById("background-slider");
+    const backgroundSlider = document.getElementById("background-slider"); // Ambil elemen background slider
 
+    // Dapatkan referensi ke setiap ikon SVG
     const iconLight = document.getElementById("icon-light");
     const iconDark = document.getElementById("icon-dark");
     const iconSystem = document.getElementById("icon-system");
 
+    // Fungsi untuk mendapatkan preferensi mode sistem (OS)
     const getSystemPreference = () => {
         return window.matchMedia("(prefers-color-scheme: dark)").matches
             ? "dark"
             : "light";
     };
 
+    // Fungsi untuk menyembunyikan semua ikon
     const hideAllIcons = () => {
         if (iconLight) iconLight.classList.add("hidden");
         if (iconDark) iconDark.classList.add("hidden");
         if (iconSystem) iconSystem.classList.add("hidden");
     };
 
-    // Fungsi utama yang menerapkan mode, animasi, dan menyimpan ke localStorage
+    // Fungsi untuk menerapkan mode ke elemen html dan localStorage
     const applyMode = (mode) => {
-        hideAllIcons();
+        hideAllIcons(); // Sembunyikan semua ikon terlebih dahulu
 
-        // Tentukan mode akhir
-        let finalMode = mode;
-        if (mode === "system") {
-            finalMode = getSystemPreference();
-            localStorage.removeItem("themeMode");
-        } else {
-            localStorage.setItem("themeMode", mode);
-        }
-
-        // Terapkan kelas CSS
-        if (finalMode === "dark") {
+        if (mode === "dark") {
             html.classList.add("dark");
+            localStorage.setItem("themeMode", "dark");
             if (iconDark) iconDark.classList.remove("hidden");
-            if (backgroundSlider) backgroundSlider.style.transform = `translateX(-100%)`;
-        } else {
+            backgroundSlider.style.transform = `translateX(-100%)`;
+            // Tampilkan ikon gelap
+        } else if (mode === "light") {
             html.classList.remove("dark");
-            if (iconLight) iconLight.classList.remove("hidden");
-            if (backgroundSlider) backgroundSlider.style.transform = `translateX(0)`;
+            localStorage.setItem("themeMode", "light");
+            if (iconLight) iconLight.classList.remove("hidden"); // Tampilkan ikon terang
+            backgroundSlider.style.transform = `translateX(0)`;
+        } else if (mode === "system") {
+            const systemPref = getSystemPreference();
+            if (systemPref === "dark") {
+                html.classList.add("dark");
+                if (iconDark) iconDark.classList.remove("hidden"); // Tampilkan ikon gelap (karena sistem gelap)
+                backgroundSlider.style.transform = `translateX(-100%)`;
+            } else {
+                html.classList.remove("dark");
+                if (iconLight) iconLight.classList.remove("hidden"); // Tampilkan ikon terang (karena sistem terang)
+                backgroundSlider.style.transform = `translateX(0)`;
+            }
+            localStorage.removeItem("themeMode"); // Hapus dari local storage jika system
+            // Opsional: Jika Anda ingin ikon 'system' selalu tampil sebagai ikon komputer, tidak peduli preferensi OS:
+            // if (iconSystem) iconSystem.classList.remove('hidden');
         }
     };
 
-    // PENTING: Inisialisasi mode saat halaman pertama dimuat
+    // Inisialisasi mode saat halaman dimuat
     const savedMode = localStorage.getItem("themeMode");
     if (savedMode) {
         applyMode(savedMode);
     } else {
-        applyMode("system");
+        applyMode("system"); // Default ke 'system' jika tidak ada preferensi tersimpan
     }
 
-    // PENTING: Livewire Hook untuk menerapkan kembali mode setelah DOM diperbarui
-    Livewire.hook('commit.succeeded', () => {
-        const currentMode = localStorage.getItem("themeMode");
-        if (currentMode) {
-            applyMode(currentMode);
-        } else {
-            applyMode("system");
-        }
-    });
+    // Event listener untuk preferensi sistem berubah (saat mode 'system' aktif)
+    window
+        .matchMedia("(prefers-color-scheme: dark)")
+        .addEventListener("change", (e) => {
+            if (localStorage.getItem("themeMode") === null) {
+                // Jika tidak ada mode tersimpan (artinya 'system' aktif)
+                applyMode("system"); // Panggil ulang applyMode untuk memperbarui ikon dan kelas
+            }
+        });
 
-    // Event listener untuk preferensi sistem berubah
-    window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", (e) => {
-        if (localStorage.getItem("themeMode") === null) {
-            applyMode("system");
-        }
-    });
-
-    // Toggle dropdown
+    // Toggle dropdown (pastikan elemen ditemukan sebelum menambahkan listener)
     if (modeMenuButton) {
         modeMenuButton.addEventListener("click", () => {
             modeMenu.classList.toggle("hidden");
@@ -79,7 +82,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Sembunyikan dropdown ketika klik di luar
     document.addEventListener("click", (event) => {
-        if (modeMenuButton && modeMenu && !modeMenuButton.contains(event.target) && !modeMenu.contains(event.target)) {
+        if (
+            modeMenuButton &&
+            modeMenu &&
+            !modeMenuButton.contains(event.target) &&
+            !modeMenu.contains(event.target)
+        ) {
             modeMenu.classList.add("hidden");
         }
     });
@@ -95,3 +103,37 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
 });
+
+// Dapatkan elemen yang akan menampilkan status tema
+const themeStatusElement = document.getElementById("theme-status");
+
+// Fungsi untuk memperbarui teks status tema
+const updateThemeStatus = () => {
+    // Cek apakah elemen html memiliki kelas 'dark'
+    const isDarkMode = document.documentElement.classList.contains("dark");
+
+    if (isDarkMode) {
+        themeStatusElement.textContent = "Dark theme active";
+    } else {
+        themeStatusElement.textContent = "Light theme active";
+    }
+};
+
+// Panggil fungsi saat halaman dimuat untuk menetapkan status awal
+updateThemeStatus();
+
+// Buat MutationObserver untuk mendengarkan perubahan pada atribut 'class' di elemen <html>
+const observer = new MutationObserver((mutations) => {
+    mutations.forEach((mutation) => {
+        if (mutation.attributeName === "class") {
+            // Jika atribut kelas berubah, perbarui status tema
+            updateThemeStatus();
+        }
+    });
+});
+
+// Konfigurasi observer untuk mendengarkan perubahan atribut
+const observerConfig = { attributes: true };
+
+// Mulai mendengarkan perubahan pada elemen <html>
+observer.observe(document.documentElement, observerConfig);

@@ -13,15 +13,48 @@
             x-transition:enter-end="opacity-100" x-transition:leave="ease-in duration-200"
             x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0"
             class="fixed inset-0 z-50 overflow-y-auto overflow-x-hidden flex justify-center items-center w-full h-full md:inset-0 max-h-full bg-black/60">
-            <div class="relative p-4 w-full max-w-md max-h-full z-90">
+            <div class="flex items-center justify-center p-4">
                 <!-- Modal content -->
-                <div class="relative bg-white rounded-lg shadow-sm dark:bg-gray-700 ">
+                <div
+                    class="glass border borde-border dark:border-gray-600 bg-gray-950/70 rounded-lg w-full max-w-md transform transition-all duration-300 scale-95 ">
                     <!-- Modal header -->
                     <div
                         class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600 border-gray-200">
-                        <h3 class="text-lg font-semibold text-gray-900 dark:text-white">
-                            {{ $transactionType === 'income' ? 'Tambah Penghasilan' : 'Tambah Pengeluaran' }}
-                        </h3>
+                        @if ($transactionType === 'income')
+                            <div class="p-2 mr-3 rounded-lg bg-gradient-to-br from-green-500 to-teal-600">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                    viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                    stroke-linecap="round" stroke-linejoin="round"
+                                    class="lucide lucide-trending-up-icon lucide-trending-up">
+                                    <path d="M16 7h6v6" />
+                                    <path d="m22 7-8.5 8.5-5-5L2 17" />
+                                </svg>
+                            </div>
+                        @else
+                            <div class="p-2 mr-3 rounded-lg bg-gradient-to-br from-red-500 to-rose-600">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                    viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                    stroke-linecap="round" stroke-linejoin="round"
+                                    class="lucide lucide-trending-down-icon lucide-trending-down">
+                                    <path d="M16 17h6v-6" />
+                                    <path d="m22 17-8.5-8.5-5 5L2 7" />
+                                </svg>
+                            </div>
+                        @endif
+
+
+                        <div class="flex flex-col">
+                            <h3 class="text-lg font-semibold text-gray-900 dark:text-white ">
+                                Tambah
+                                <span class="{{ $transactionType === 'income' ? ' text-green-500' : ' text-red-500' }}">
+                                    {{ $transactionType === 'income' ? ' Penghasilan' : ' Pengeluaran' }}
+                                </span>
+                            </h3>
+                            <p class="text-sm text-muted-foreground">
+                                {{ $transactionType === 'income' ? ' Record your earnings and income' : 'Track your spending and expenses' }}
+                            </p>
+                        </div>
+
                         <button type="button"wire:click="closeModal"
                             class="text-gray-400 bg-transparent cursor-pointer hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white">
                             <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
@@ -37,9 +70,9 @@
                         <div class="grid gap-4 mb-4 grid-cols-2">
                             <div class="col-span-2">
                                 <label for="name"
-                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Price</label>
+                                    class="block mb-2 text-md font-bold text-gray-900 dark:text-white">Price</label>
                                 <input type="number" name="price" id="price" wire:model="amount"
-                                    class="bg-transparent border border-gray-300 outline-none text-gray-900 text-sm rounded-lg focus:ring-black focus:border-black block w-full p-2.5 dark:border-gray-500 dark:placeholder-white dark:text-white dark:focus:ring-white dark:focus:border-white dark:focus:ring-1"
+                                    class="bg-transparent border border-gray-300 outline-none text-gray-900 text-sm font-medium rounded-lg block w-full p-2.5 dark:border-gray-500 dark:placeholder-white dark:text-white "
                                     placeholder="Rp 0">
                                 @error('amount')
                                     <span class="text-red-500 text-sm">{{ $message }}</span>
@@ -49,16 +82,18 @@
 
                             <div class="col-span-2 sm:col-span-1">
                                 <label for="category"
-                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Category</label>
+                                    class="block mb-2 text-md font-bold text-gray-900 dark:text-white ">Category</label>
                                 <button id="dropdownSearchButton" wire:click="openCategoryDropdown"
                                     data-dropdown-placement="bottom"
-                                    class="bg-transparent border cursor-pointer border-gray-300 text-gray-900 text-sm text-center items-center inline-flex rounded-lg focus:ring-black focus:border-black w-full p-2.5 dark:border-gray-500 hover:bg-gray-200 dark:hover:bg-gray-600 dark:placeholder-white dark:text-white dark:focus:ring-white dark:focus:border-white dark:focus:ring-1 focus:ring-1"
+                                    class="glass  border-border border cursor-pointer border-gray-300 text-gray-900 text-sm text-center items-center inline-flex rounded-lg focus:ring-black focus:border-black w-full p-2.5 dark:border-gray-500 hover:bg-gray-200 dark:hover:bg-gray-600 dark:placeholder-white dark:text-white dark:focus:ring-white dark:focus:border-white dark:focus:ring-1 focus:ring-1"
                                     type="button">
 
                                     @if ($category)
-                                        <span class="text-left flex-1" wire:model="category">{{ $category }}</span>
+                                        <span class="text-left flex-1 text-black dark:text-white font-medium"
+                                            wire:model="category">{{ $category }}</span>
                                     @else
-                                        <span class="text-left flex-1 text-gray-400">Category Select</span>
+                                        <span class="text-left flex-1 text-black dark:text-white font-medium">Category
+                                            Select</span>
                                     @endif
 
                                     <svg class="w-2.5 h-2.5 ms-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
@@ -70,90 +105,102 @@
                                 @error('category_id')
                                     <span class="text-red-500 text-sm">{{ $message }}</span>
                                 @enderror
-                                <div id="dropdownSearch" tabindex="-1" x-data="{ show: @entangle('showCategoryDropdown') }" x-show="show" x-cloak
-                                    x-transition:enter="ease-out duration-300" x-transition:enter-start="opacity-0"
-                                    x-transition:enter-end="opacity-100" x-transition:leave="ease-in duration-200"
-                                    x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0"
-                                    @click.away="show = false"
-                                    class="z-10 bg-white absolute mt-[10px] rounded-lg shadow-sm w-60 border dark:border-gray-500 dark:bg-gray-700">
-                                    <div class="flex flex-row gap-1.5 py-3 rounded-sm">
-                                        <label for="input-group-search" class="sr-only">Search Category...</label>
-                                        <div
-                                            class="inset-y-0 rtl:inset-r-0 start-0 flex items-center ps-3 pointer-events-none">
-                                            <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true"
-                                                xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
-                                                <path stroke="currentColor" stroke-linecap="round"
-                                                    stroke-linejoin="round" stroke-width="2"
-                                                    d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
-                                            </svg>
-                                        </div>
-                                        <input class="relative w-full outline-none placeholder-gray-400"
-                                            wire:model.live="categorySearch" placeholder="Search Category...">
-                                    </div>
-
-                                    <div class="mb-1">
-                                        <label for="input-group-search" class="sr-only">Tambah Kategori Baru</label>
-                                        <div
-                                            class="relative w-full flex flex-row rounded-sm border border-x-0 py-3 cursor-pointer border-gray-500 hover:bg-gray-100 dark:hover:bg-gray-600">
-                                            <div class="inset-y-0 start-0 flex items-center ps-2 pointer-events-none">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                                    viewBox="0 0 24 24">
-                                                    <path fill="#fff"
-                                                        d="M13 6a1 1 0 1 0-2 0v5H6a1 1 0 1 0 0 2h5v5a1 1 0 1 0 2 0v-5h5a1 1 0 1 0 0-2h-5z" />
+                                <div id="dropdownSearch" tabindex="-1" x-data="{ show: @entangle('showCategoryDropdown') }" x-show="show"
+                                    x-cloak x-transition:enter="ease-out duration-300"
+                                    x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100"
+                                    x-transition:leave="ease-in duration-200" x-transition:leave-start="opacity-100"
+                                    x-transition:leave-end="opacity-0" @click.away="show = false"
+                                    class="z-10 dark:bg-gray-950/70  absolute mt-[10px] rounded-lg shadow-sm w-60">
+                                    <div
+                                        class="glass border border-border rounded-lg w-full max-w-md transform transition-all duration-300">
+                                        <div class="flex flex-row gap-1.5 py-3 rounded-sm">
+                                            <label for="input-group-search" class="sr-only">Search Category...</label>
+                                            <div
+                                                class="inset-y-0 rtl:inset-r-0 start-0 flex items-center ps-3 pointer-events-none">
+                                                <svg class="w-4 h-4 text-gray-500 dark:text-gray-400"
+                                                    aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                                                    fill="none" viewBox="0 0 20 20">
+                                                    <path stroke="currentColor" stroke-linecap="round"
+                                                        stroke-linejoin="round" stroke-width="2"
+                                                        d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
                                                 </svg>
                                             </div>
-                                            <button class="cursor-pointer text-md text-gray-400"
-                                                wire:click="openCategoryModal" type="button">
-                                                Tambah Kategori Baru
-                                            </button>
+                                            <input
+                                                class="search-input w-full bg-transparent border-b border-gray-300 dark:border-gray-600 rounded-none px-2 py-1.5 text-md placeholder-gray-400 dark:placeholder-gray-400 transition-colors"
+                                                style="background-color: transparent;
+                                                            input:focus:outline-none;"wire:model.live="categorySearch"
+                                                placeholder="Search Category...">
                                         </div>
-                                    </div>
+
+                                        <div class="mb-1">
+                                            <label for="input-group-search" class="sr-only">Tambah Kategori
+                                                Baru</label>
+                                            <div
+                                                class="relative w-full flex flex-row rounded-sm border border-x-0 py-3 cursor-pointer border-gray-300 hover:bg-gray-100 dark:hover:bg-gray-600">
+                                                <div
+                                                    class="inset-y-0 start-0 flex items-center ps-2 pointer-events-none">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24"
+                                                        height="24" viewBox="0 0 24 24"
+                                                        class="fill-gray-400 dark:fill-white">
+                                                        <path
+                                                            d="M13 6a1 1 0 1 0-2 0v5H6a1 1 0 1 0 0 2h5v5a1 1 0 1 0 2 0v-5h5a1 1 0 1 0 0-2h-5z" />
+                                                    </svg>
+                                                </div>
+                                                <button class="cursor-pointer font-semibold text-md text-gray-400"
+                                                    wire:click="openCategoryModal" type="button">
+                                                    Tambah Kategori Baru
+                                                </button>
+                                            </div>
+                                        </div>
 
 
 
-                                    @if ($categories->count() > 0)
-                                        <ul class="h-fit px-2 pb-3 overflow-y-auto text-sm text-gray-700 dark:text-gray-200"
-                                            aria-labelledby="dropdownSearchButton">
-                                            @foreach ($categories as $category)
-                                                <li wire:click="selectCategory('{{ $category->id }}', '{{ $category->category }}')"
-                                                    class="cursor-pointer">
-                                                    <div @click="show = false"
-                                                        class="flex items-center ps-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-600 transition-colors duration-200">
+                                        @if ($categories->count() > 0)
+                                            <ul class="h-fit px-2 pb-3 overflow-y-auto text-md text-gray-700 dark:text-gray-200"
+                                                aria-labelledby="dropdownSearchButton">
+                                                @foreach ($categories as $category)
+                                                    <li wire:click="selectCategory('{{ $category->id }}', '{{ $category->category }}')"
+                                                        class="cursor-pointer">
+                                                        <div @click="show = false"
+                                                            class="flex items-center ps-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-600 transition-colors duration-200">
+                                                            <label
+                                                                class="w-full py-2 ms-2 text-md font-medium text-gray-950 rounded-sm dark:text-gray-300 cursor-pointer">
+                                                                {{ $category->category }}
+                                                            </label>
+
+
+                                                            <!-- Indicator jika kategori dipilih -->
+                                                            @if ($category_id == $category->id)
+                                                                <svg class="w-4 h-4 text-green-500 mr-2"
+                                                                    fill="currentColor" viewBox="0 0 20 20">
+                                                                    <path fill-rule="evenodd"
+                                                                        d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                                                                        clip-rule="evenodd" />
+                                                                </svg>
+                                                            @endif
+                                                        </div>
+                                                    </li>
+                                                @endforeach
+                                            </ul>
+                                        @else
+                                            <ul class="h-fit px-2 pb-3 overflow-y-auto text-sm text-gray-700 dark:text-gray-200"
+                                                aria-labelledby="dropdownSearchButton">
+                                                <li>
+                                                    <div class="flex items-center rounded-lg">
                                                         <label
-                                                            class="w-full py-2 ms-2 text-sm font-medium text-gray-900 rounded-sm dark:text-gray-300 cursor-pointer">
-                                                            {{ $category->category }}
+                                                            class="w-full py-2 ms-2 text-md font-medium text-black dark:text-gray-200 rounded-sm">
+                                                            @if (empty($categorySearch))
+                                                                Belum ada Category
+                                                            @else
+                                                                Tidak ada kategori yang cocok
+                                                            @endif
                                                         </label>
-
-                                                        <!-- Indicator jika kategori dipilih -->
-                                                        @if ($category_id == $category->id)
-                                                            <svg class="w-4 h-4 text-green-500 mr-2"
-                                                                fill="currentColor" viewBox="0 0 20 20">
-                                                                <path fill-rule="evenodd"
-                                                                    d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                                                                    clip-rule="evenodd" />
-                                                            </svg>
-                                                        @endif
                                                     </div>
                                                 </li>
-                                            @endforeach
-                                        </ul>
-                                    @else
-                                        <ul class="h-fit px-2 pb-3 overflow-y-auto text-sm text-gray-700 dark:text-gray-200"
-                                            aria-labelledby="dropdownSearchButton">
-                                            <li>
-                                                <div class="flex items-center ps-2 rounded-lg">
-                                                    <label
-                                                        class="w-full py-2 ms-2 text-sm font-medium text-gray-400 rounded-sm">
-                                                        @if (empty($categorySearch))
-                                                            Belum ada Category
-                                                        @else
-                                                            Tidak ada kategori yang cocok
-                                                        @endif
-                                                    </label>
-                                                </div>
-                                            </li>
-                                        </ul>
-                                    @endif
+                                            </ul>
+                                        @endif
+                                    </div>
+
                                 </div>
 
                             </div>
@@ -162,20 +209,20 @@
 
                             <div class="col-span-1 sm:col-span-1" wire:ignore.self>
                                 <label for="category"
-                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Transaction
+                                    class="block mb-2 text-md font-bold text-gray-900 dark:text-white">Transaction
                                     Date</label>
                                 <div class="relative max-w-sm">
                                     <input id="datepicker-actions" datepicker datepicker-format="yyyy-mm-dd"
                                         type="text" x-on:change="$wire.set('transaction_date', $el.value)"
                                         autocomplete="off" {{-- value="{{ \Carbon\Carbon::parse(date('Y-m-d'))->translatedFormat('l, d M Y') }}" --}}
-                                        class="bg-transparent border outline-none border-gra    y-300 text-gray-900 text-sm rounded-lg focus:ring-black focus:border-black block w-full ps-10 p-2.5 dark:bg-gray-700 dark:border-gray-500 hover:bg-gray-200 dark:hover:bg-gray-600 dark:placeholder-white dark:text-white dark:focus:ring-white dark:focus:border-white dark:focus:ring-1"
+                                        class="bg-transparent border border-border outline-none border-gray-300 text-gray-900 text-sm font-medium rounded-lg block w-full ps-10 p-2.5 dark:placeholder-white placeholder:text-gray-900 dark:text-white"
                                         placeholder="Select date">
                                     @error('transaction_date')
                                         <span class="text-red-500 text-sm">{{ $message }}</span>
                                     @enderror
 
                                     <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
-                                        <svg class="w-4 h-4 text-black/40 dark:text-white" aria-hidden="true"
+                                        <svg class="w-4 h-4 text-black/50 dark:text-white" aria-hidden="true"
                                             xmlns="http://www.w3.org/2000/svg" fill="currentColor"
                                             viewBox="0 0 20 20">
                                             <path
@@ -187,10 +234,10 @@
 
                             <div class="col-span-2">
                                 <label for="description"
-                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Product
+                                    class="block mb-2 text-md font-bold text-gray-900 dark:text-white">Product
                                     Description</label>
                                 <textarea id="description" rows="4" wire:model="description"
-                                    class="block p-2.5 outline-none w-full text-sm text-gray-900 bg-transparent rounded-lg border border-gray-300 focus:ring-black focus:border-black  dark:border-gray-500 dark:placeholder-white dark:text-white dark:focus:ring-white dark:focus:border-white dark:focus:ring-1"
+                                    class="block p-2.5 outline-none w-full text-sm font-medium text-gray-900 bg-transparent rounded-lg border border-gray-300 dark:border-gray-500 dark:placeholder-white dark:text-white"
                                     placeholder="Write product description here"></textarea>
                                 @error('description')
                                     <span class="text-red-500 text-sm">{{ $message }}</span>
@@ -199,27 +246,58 @@
                             </div>
 
                         </div>
-                        <button type="submit" wire:loading.attr="disabled"
-                            class="text-white inline-flex items-center cursor-pointer {{ $transactionType === 'income' ? 'bg-green-500 hover:bg-green-600' : 'bg-red-500 hover:bg-red-600' }} font-medium rounded-lg text-sm px-5 py-2.5 text-center">
-                            <span wire:loading.remove wire:target="saveTransaction">
-                                {{ $transactionType === 'income' ? 'Tambah Penghasilan' : 'Tambah Pengeluaran' }}
-                            </span>
-                            <span wire:loading wire:target="saveTransaction">
-                                <div role="status">
-                                    <svg aria-hidden="true"
-                                        class="w-5 h-5 text-gray-200 animate-spin dark:text-gray-600 fill-white"
-                                        viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <path
-                                            d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z"
-                                            fill="currentColor" />
-                                        <path
-                                            d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z"
-                                            fill="currentFill" />
-                                    </svg>
-                                </div>
-                            </span>
 
-                        </button>
+                        <div class="flex gap-2 pt-4">
+                            <button type="submit" wire:loading.attr="disabled"
+                                class="text-white inline-flex items-center cursor-pointer {{ $transactionType === 'income' ? 'bg-green-500 hover:bg-green-600' : 'bg-red-500 hover:bg-red-600' }} font-medium rounded-lg text-md px-4 py-1 text-center">
+                                @if ($transactionType === 'income')
+                                    <div class="p-1 mr-1 rounded-lg" wire:loading.remove
+                                        wire:target="saveTransaction">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19"
+                                            viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                            class="lucide lucide-trending-up-icon lucide-trending-up">
+                                            <path d="M16 7h6v6" />
+                                            <path d="m22 7-8.5 8.5-5-5L2 17" />
+                                        </svg>
+                                    </div>
+                                @else
+                                    <div class="p-1 mr-1 rounded-lg" wire:loading.remove
+                                        wire:target="saveTransaction">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19"
+                                            viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                            class="lucide lucide-trending-down-icon lucide-trending-down">
+                                            <path d="M16 17h6v-6" />
+                                            <path d="m22 17-8.5-8.5-5 5L2 7" />
+                                        </svg>
+                                    </div>
+                                @endif
+
+                                <span wire:loading.remove wire:target="saveTransaction">
+                                    {{ $transactionType === 'income' ? 'Tambah Penghasilan' : 'Tambah Pengeluaran' }}
+                                </span>
+                                <span wire:loading wire:target="saveTransaction">
+                                    <div role="status">
+                                        <svg aria-hidden="true"
+                                            class="w-5 h-5 text-gray-200 animate-spin dark:text-gray-600 fill-white"
+                                            viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path
+                                                d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z"
+                                                fill="currentColor" />
+                                            <path
+                                                d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z"
+                                                fill="currentFill" />
+                                        </svg>
+                                    </div>
+                                </span>
+                            </button>
+                            <button type="button"wire:click="closeModal"
+                                class="glass bg-gray-950/70 cursor-pointer flex-1 px-4 py-2 rounded-lg border border-border hover:bg-muted/50 transition-colors duration-300 hover:text-purple-400">
+                                Cancel
+                            </button>
+                        </div>
+
                     </form>
                 </div>
             </div>
@@ -283,17 +361,26 @@
         <nav id="sidebar"
             class="fixed left-0 top-0 h-full w-72 glass border-r border-border z-40 transition-all duration-300 transform -translate-x-full lg:translate-x-0">
             <!-- Header -->
-            <div class="p-6 border-b border-border">
+            <div class="p-6 border-b border-gray-700">
                 <div class="flex items-center gap-3">
                     <div
-                        class="p-2 rounded-lg bg-gradient-to-br from-blue-500 to-purple-600 shadow-theme hover:shadow-theme-lg transition-all duration-300">
-                        <i data-lucide="brain-circuit" class="h-6 w-6 text-white"></i>
+                        class="p-1 rounded-lg bg-gradient-to-br from-blue-400 to-white shadow-theme hover:shadow-theme-lg transition-all duration-300">
+                    <img src="/img/SmartSpend.png" alt="" width="50px" height="50px">
                     </div>
                     <div>
-                        <h1 class="text-lg font-bold gradient-text">FinanceAI</h1>
-                        <p class="text-xs text-muted-foreground flex items-center gap-1">
-                            <i data-lucide="sparkles" class="h-3 w-3"></i>
-                            Web3 Finance
+                        <h1 class="text-2xl font-bold gradient-text">SmartSpend</h1>
+                        <p class="text-xs text-muted-foreground flex items-center gap-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18"
+                                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round"
+                                class="lucide lucide-sparkles-icon lucide-sparkles">
+                                <path
+                                    d="M11.017 2.814a1 1 0 0 1 1.966 0l1.051 5.558a2 2 0 0 0 1.594 1.594l5.558 1.051a1 1 0 0 1 0 1.966l-5.558 1.051a2 2 0 0 0-1.594 1.594l-1.051 5.558a1 1 0 0 1-1.966 0l-1.051-5.558a2 2 0 0 0-1.594-1.594l-5.558-1.051a1 1 0 0 1 0-1.966l5.558-1.051a2 2 0 0 0 1.594-1.594z" />
+                                <path d="M20 2v4" />
+                                <path d="M22 4h-4" />
+                                <circle cx="4" cy="20" r="2" />
+                            </svg>
+                            Finance Tracking Modern
                         </p>
                     </div>
                 </div>
@@ -413,10 +500,8 @@
 
             <!-- Hero section -->
             <section
-                class="px-6 py-8 border-b border-gray-200 dark:border-gray-700 transition-colors duration-300 max-w-7xl mx-auto w-full flex flex-col md:flex-row md:items-center md:justify-between gap-6">
+                class="px-6 py-8 border-b border-gray-200 dark:border-gray-700 transition-colors duration-300 max-w-8xl mx-auto w-full flex flex-col md:flex-row md:items-center md:justify-between gap-6">
                 <div class="max-w-xl">
-
-
                     <h2 class="text-3xl font-extrabold  transition-colors duration-300">
                         Hai, {{ auth()->user()->name }} <span aria-label="raised hands" role="img">🙌</span>
                     </h2>
@@ -427,15 +512,16 @@
                         pengeluaran tanpa stres. Yuk, mulai lebih rapi hari ini!</p>
                     <div class="flex gap-4 flex-wrap transition-colors duration-300">
                         <button type="button" wire:click="openModal('income')"
-                            class="bg-green-800/30 hover:bg-teal-700 border border-green-500 cursor-pointer transition text-white font-semibold px-5 py-2 rounded-lg flex items-center gap-2 whitespace-nowrap">
+                            class="dark:bg-green-800/30 bg-green-800 hover:bg-green-700 border border-green-500 cursor-pointer transition text-white font-semibold px-5 py-2 rounded-lg flex items-center gap-2 whitespace-nowrap">
                             Tambah Penghasilan <span aria-label="money with wings" role="img">🪙</span>
                         </button>
                         <button type="button" wire:click="openModal('expense')"
-                            class="bg-expense bg-red-800/30 backdrop-blur-lg border border-red-500 hover:bg-red-700 text-white px-5 py-2 rounded-lg font-semibold transition-colors cursor-pointer">
+                            class="bg-expense dark:bg-red-800/30 bg-red-800 backdrop-blur-lg border border-red-500 hover:bg-red-700 text-white px-5 py-2 rounded-lg font-semibold transition-colors cursor-pointer">
                             Tambah Pengeluaran <span aria-label="worried face" role="img">🥵</span>
                         </button>
                     </div>
                 </div>
+
                 <aside
                     class="dark:bg-[#27272a] bg-[#f4f4f5] shadow-xl rounded-md p-3 text-gray-500 dark:text-gray-400 font-md max-w-lg italic select-none transition-colors duration-300">
                     <p><span aria-label="light bulb" role="img">💡</span> "Don't save the remaining money after

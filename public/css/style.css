@@ -11,6 +11,26 @@
 }
 
 
+  .search-input {
+    background-color: transparent !important;
+    border: none !important;
+    outline: none !important;
+    box-shadow: none !important;
+    appearance: none;
+    -webkit-appearance: none;
+  }
+
+  .search-input:focus,
+  .search-input:active {
+    background-color: transparent !important;
+    border: none !important;
+    outline: none !important;
+    box-shadow: none !important;
+    appearance: none;
+    -webkit-appearance: none;
+  }
+
+
 
 .datepicker-picker .datepicker-controls .button{
     background-color: red;
@@ -194,6 +214,8 @@
     inset 0 1px 0 rgba(255, 255, 255, 0.05);
 }
 
+
+
 .dark .shadow-theme {
   box-shadow: 
     0 4px 12px rgba(0, 0, 0, 0.4),
@@ -279,6 +301,8 @@
 /* Glass hover effects */
 .glass {
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  border: 2px solid rgba(0, 0, 0, 0.08);
+
 }
 
 :root:not(.dark) .glass:hover {

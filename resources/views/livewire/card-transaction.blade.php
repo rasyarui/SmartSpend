@@ -340,9 +340,9 @@
                 </button>
             </div>
 
-            {{-- Expense --}}
+            {{-- Income --}}
             <div
-                class="bg-white/2 backdrop-blur-sm border border-green-500/30 rounded-xl p-6 relative transition-all duration-300 hover:bg-white/15 shadow-lg card-hover ">
+                class="bg-gradient-to-r from-green-500/10 to-emerald-500/10 border border-green-500/20 rounded-xl p-6 relative transition-all duration-300 hover:bg-white/15 shadow-lg card-hover ">
                 <div class="flex items-center space-x-2 text-green-400 mb-2">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
                         <path fill-rule="evenodd"
@@ -388,7 +388,7 @@
 
             <!-- Expense Card -->
             <div
-                class="bg-gradient-to-r from-blue-500/10 to-purple-500/10 border relative border-blue-500/20 rounded-xl p-6 transition-all duration-300 hover:bg-white/15 shadow-lg card-hover ">
+                class="bg-gradient-to-r from-red-500/10 to-pink-500/10 border border-red-500/20 rounded-xl p-6 relative transition-all duration-300 hover:bg-white/15 shadow-lg card-hover ">
                 <div class="flex items-center space-x-2 text-red-400 mb-2">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-red-400" viewBox="0 0 20 20"
                         fill="currentColor">

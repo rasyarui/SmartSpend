@@ -3,6 +3,8 @@ document.addEventListener("DOMContentLoaded", () => {
     const modeMenuButton = document.getElementById("mode-menu-button");
     const modeMenu = document.getElementById("mode-menu");
     const backgroundSlider = document.getElementById("background-slider"); // Ambil elemen background slider
+    const themeLabelElement = document.getElementById("theme-label");
+
 
     // Dapatkan referensi ke setiap ikon SVG
     const iconLight = document.getElementById("icon-light");
@@ -15,6 +17,27 @@ document.addEventListener("DOMContentLoaded", () => {
             ? "dark"
             : "light";
     };
+
+    const updateThemeLabel = () => {
+    const savedMode = localStorage.getItem("themeMode");
+    let label = "System Mode"; // default
+
+    if (savedMode === "light") {
+        label = "Light Mode";
+    } else if (savedMode === "dark") {
+        label = "Dark Mode";
+    } else if (!savedMode) {
+        // Mode system — cek preferensi OS
+        const systemPref = window.matchMedia("(prefers-color-scheme: dark)").matches
+            ? "Dark Mode"
+            : "Light Mode";
+        label = `System Mode (${systemPref})`; // Opsional: tunjukkan hasil aktual
+    }
+
+    if (themeLabelElement) {
+        themeLabelElement.textContent = label;
+    }
+};
 
     // Fungsi untuk menyembunyikan semua ikon
     const hideAllIcons = () => {
@@ -31,28 +54,27 @@ document.addEventListener("DOMContentLoaded", () => {
             html.classList.add("dark");
             localStorage.setItem("themeMode", "dark");
             if (iconDark) iconDark.classList.remove("hidden");
-            backgroundSlider.style.transform = `translateX(-100%)`;
+            // backgroundSlider.style.transform = `translateX(100%)`;
             // Tampilkan ikon gelap
         } else if (mode === "light") {
             html.classList.remove("dark");
             localStorage.setItem("themeMode", "light");
             if (iconLight) iconLight.classList.remove("hidden"); // Tampilkan ikon terang
-            backgroundSlider.style.transform = `translateX(0)`;
+            // backgroundSlider.style.transform = `translateX(0)`;
         } else if (mode === "system") {
             const systemPref = getSystemPreference();
             if (systemPref === "dark") {
                 html.classList.add("dark");
                 if (iconDark) iconDark.classList.remove("hidden"); // Tampilkan ikon gelap (karena sistem gelap)
-                backgroundSlider.style.transform = `translateX(-100%)`;
+                // backgroundSlider.style.transform = `translateX(-100%)`;
             } else {
                 html.classList.remove("dark");
                 if (iconLight) iconLight.classList.remove("hidden"); // Tampilkan ikon terang (karena sistem terang)
-                backgroundSlider.style.transform = `translateX(0)`;
+                // backgroundSlider.style.transform = `translateX(0)`;
             }
-            localStorage.removeItem("themeMode"); // Hapus dari local storage jika system
-            // Opsional: Jika Anda ingin ikon 'system' selalu tampil sebagai ikon komputer, tidak peduli preferensi OS:
-            // if (iconSystem) iconSystem.classList.remove('hidden');
+            localStorage.removeItem("themeMode"); 
         }
+        updateThemeLabel();
     };
 
     // Inisialisasi mode saat halaman dimuat
@@ -62,8 +84,9 @@ document.addEventListener("DOMContentLoaded", () => {
     } else {
         applyMode("system"); // Default ke 'system' jika tidak ada preferensi tersimpan
     }
+    updateThemeLabel();
 
-    // Event listener untuk preferensi sistem berubah (saat mode 'system' aktif)
+
     window
         .matchMedia("(prefers-color-scheme: dark)")
         .addEventListener("change", (e) => {

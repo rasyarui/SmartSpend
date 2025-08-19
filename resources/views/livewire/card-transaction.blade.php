@@ -227,7 +227,8 @@
         <div class="flex items-center justify-between mb-[15px]">
 
             <div class="flex flex-col gap-2">
-                <h3 class="text-3xl font-extrabold text-black dark:text-white transition-colors duration-1000">Ringkasan</h3>
+                <h3 class="text-3xl font-extrabold text-black dark:text-white transition-colors duration-1000">Ringkasan
+                </h3>
                 <button type="button" @click="toggleAllDataAuto()"
                     class="border border-gray-300 dark:border-gray-600 dark:text-[#fafafa] cursor-pointer text-black rounded px-3 py-1 dark:hover:bg-gray-700 hover:bg-gray-200 transition-colors duration-1000  whitespace-nowrap flex items-center gap-2">
                     <!-- Show Icon (Simple) -->
@@ -292,174 +293,149 @@
 
         <!-- Wrapper dengan Alpine.js untuk animasi -->
 
-            <div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
-                <article
-                    class="dark:bg-gray-900 bg-white shadow-2xl rounded-lg p-5 flex items-center justify-between gap-4 card-hover transition-color duration-1000">
-                    <div class="flex items-center gap-3">
-                        <div
-                            class="p-3 bg-purple-900 rounded-lg transform transition-transform duration-200 hover:scale-110">
-                            <svg class="h-6 w-6 text-purple-300" fill="none" viewBox="0 0 24 24"
-                                stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M17 9V7a4 4 0 00-8 0v2m-5 3h14l1 9H4l1-9z" />
-                            </svg>
-                        </div>
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
+            {{-- Balance --}}
+            <div
+                class="bg-gradient-to-r from-blue-500/10 to-purple-500/10 border border-blue-500/20 rounded-xl p-6 relative transition-all duration-300 hover:bg-white/15 shadow-lg card-hover ">
+                <div class="flex items-center space-x-2 text-green-400 mb-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-blue-400" viewBox="0 0 20 20"
+                        fill="currentColor">
+                        <path fill-rule="evenodd"
+                            d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z"
+                            clip-rule="evenodd" />
+                    </svg>
+                    <span class="text-sm font-medium text-blue-400">Total Balance</span>
+                </div>
+                
+                <div class="flex items-center gap-3">
+                <p x-show="showBalance" :class="{ 'number-glow': isAnimating.balance }"
+                    class="text-2xl font-bold text-blue-400"> Rp <span x-text="formatNumber(animatedBalance)"
+                        :class="{ 'animate-pulse-gentle': isAnimating.balance }"></span></p>
+                <p x-show="!showBalance" class="dark:text-white text-2xl font-bold transition-all duration-1000">*******
+                </p>
+                </div>
 
-                        <div>
-                            <p class="text-gray-500 text-sm">Balance</p>
-                            <div class="relative">
-                                <p x-show="showBalance" class="dark:text-white text-xl font-bold animate-slide-up transition-all duration-1000"
-                                    :class="{ 'number-glow': isAnimating.balance }">
-                                    Rp <span x-text="formatNumber(animatedBalance)"
-                                        :class="{ 'animate-pulse-gentle': isAnimating.balance }"
-                                        class="text-purple-400"></span>
-                                </p>
-                                <p x-show="!showBalance" class="dark:text-white text-xl font-bold transition-all duration-1000">*******</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <button type="button" aria-label="Toggle visibility balance" @click="toggleCard('balance')"
-                        class="text-gray-500 hover:text-purple-400 transition-color duration-1000 cursor-pointer transform hover:scale-110 hover:rotate-12 btn-animate">
-                        <svg x-show="showBalance" x-transition:enter="transition ease-out duration-200 delay-100"
-                            x-transition:enter-start="opacity-0 rotate-180"
-                            x-transition:enter-end="opacity-100 rotate-0"
-                            x-transition:leave="transition ease-in duration-200"
-                            x-transition:leave-start="opacity-100 rotate-0"
-                            x-transition:leave-end="opacity-0 rotate-180" xmlns="http://www.w3.org/2000/svg"
-                            class="text-purple-400" width="24" height="24" fill="none"
-                            viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M2.458 12C3.732 7.943 7.523 5 12 5c4.477 0 8.268 2.943 9.542 7-1.274 4.057-5.065 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
-                        </svg>
-                        <svg x-show="!showBalance" x-transition:enter="transition ease-out duration-200 delay-100"
-                            x-transition:enter-start="opacity-0 rotate-180"
-                            x-transition:enter-end="opacity-100 rotate-0"
-                            x-transition:leave="transition ease-in duration-200"
-                            x-transition:leave-start="opacity-100 rotate-0"
-                            x-transition:leave-end="opacity-0 rotate-180" xmlns="http://www.w3.org/2000/svg"
-                            width="24" height="24" viewBox="0 0 24 24">
-                            <path fill="none" stroke="currentColor" stroke-linecap="round"
-                                stroke-linejoin="round" stroke-width="2"
-                                d="m4 4l16 16m-3.5-3.244C15.147 17.485 13.618 18 12 18c-3.53 0-6.634-2.452-8.413-4.221c-.47-.467-.705-.7-.854-1.159c-.107-.327-.107-.913 0-1.24c.15-.459.385-.693.855-1.16c.897-.892 2.13-1.956 3.584-2.793M19.5 14.634c.333-.293.638-.582.912-.854l.003-.003c.468-.466.703-.7.852-1.156c.107-.327.107-.914 0-1.241c-.15-.458-.384-.692-.854-1.159C18.633 8.452 15.531 6 12 6q-.507 0-1 .064m2.323 7.436a2 2 0 0 1-2.762-2.889" />
-                        </svg>
-                    </button>
-                </article>
-
-                <!-- Income Card -->
-                <article
-                    class="dark:bg-gray-900 bg-white shadow-2xl rounded-lg p-5 flex items-center justify-between gap-4 card-hover transition-color duration-1000">
-                    <div class="flex items-center gap-3">
-                        <div
-                            class="p-3 bg-emerald-900 rounded-lg transform transition-transform duration-200 hover:scale-110">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-emerald-300" fill="none"
-                                viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-                                <title>Income arrow icon</title>
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M7 11l5-5m0 0l5 5m-5-5v12" />
-                            </svg>
-                        </div>
-                        <div>
-                            <p class="text-gray-500 text-sm">Income</p>
-                            <div class="relative">
-                                <p x-show="showIncome" class="dark:text-white text-xl font-bold animate-slide-up transition-all duration-1000"
-                                    :class="{ 'number-glow': isAnimating.income }">
-                                    Rp <span x-text="formatNumber(animatedIncome)"
-                                        :class="{ 'animate-pulse-gentle': isAnimating.income }"
-                                        class="text-emerald-400"></span>
-                                </p>
-                                <p x-show="!showIncome" class="dark:text-white text-xl font-bold transition-all duration-1000">*******</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <button type="button" aria-label="Toggle visibility income" @click="toggleCard('income')"
-                        class="text-gray-500 hover:text-emerald-400 transition-all duration-300 cursor-pointer transform hover:scale-110 hover:rotate-12 btn-animate">
-                        <svg x-show="showIncome" x-transition:enter="transition ease-out duration-200 delay-100"
-                            x-transition:enter-start="opacity-0 rotate-180"
-                            x-transition:enter-end="opacity-100 rotate-0"
-                            x-transition:leave="transition ease-in duration-200"
-                            x-transition:leave-start="opacity-100 rotate-0"
-                            x-transition:leave-end="opacity-0 rotate-180" xmlns="http://www.w3.org/2000/svg"
-                            class="text-emerald-400" width="24" height="24" fill="none"
-                            viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M2.458 12C3.732 7.943 7.523 5 12 5c4.477 0 8.268 2.943 9.542 7-1.274 4.057-5.065 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
-                        </svg>
-                        <svg x-show="!showIncome" x-transition:enter="transition ease-out duration-200 delay-100"
-                            x-transition:enter-start="opacity-0 rotate-180"
-                            x-transition:enter-end="opacity-100 rotate-0"
-                            x-transition:leave="transition ease-in duration-200"
-                            x-transition:leave-start="opacity-100 rotate-0"
-                            x-transition:leave-end="opacity-0 rotate-180" xmlns="http://www.w3.org/2000/svg"
-                            width="24" height="24" viewBox="0 0 24 24">
-                            <path fill="none" stroke="currentColor" stroke-linecap="round"
-                                stroke-linejoin="round" stroke-width="2"
-                                d="m4 4l16 16m-3.5-3.244C15.147 17.485 13.618 18 12 18c-3.53 0-6.634-2.452-8.413-4.221c-.47-.467-.705-.7-.854-1.159c-.107-.327-.107-.913 0-1.24c.15-.459.385-.693.855-1.16c.897-.892 2.13-1.956 3.584-2.793M19.5 14.634c.333-.293.638-.582.912-.854l.003-.003c.468-.466.703-.7.852-1.156c.107-.327.107-.914 0-1.241c-.15-.458-.384-.692-.854-1.159C18.633 8.452 15.531 6 12 6q-.507 0-1 .064m2.323 7.436a2 2 0 0 1-2.762-2.889" />
-                        </svg>
-                    </button>
-                </article>
-
-                <!-- Expense Card -->
-                <article
-                    class="dark:bg-gray-900 bg-white shadow-2xl rounded-lg p-5 flex items-center justify-between gap-4 card-hover transition-all duration-1000">
-                    <div class="flex items-center gap-3">
-                        <div
-                            class="p-3 bg-red-900 rounded-lg transform transition-transform duration-200 hover:scale-110">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-red-400" fill="none"
-                                viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-                                <title>Expense down arrow icon</title>
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M17 13l-5 5m0 0l-5-5m5 5V6" />
-                            </svg>
-                        </div>
-                        <div>
-                            <p class="text-gray-500 text-sm">Expense</p>
-                            <div class="relative">
-                                <p x-show="showExpense" class="dark:text-white text-xl font-bold animate-slide-up"
-                                    :class="{ 'number-glow': isAnimating.expense }">
-                                    Rp <span x-text="formatNumber(animatedExpense)"
-                                        :class="{ 'animate-pulse-gentle': isAnimating.expense }"
-                                        class="text-red-400"></span>
-                                </p>
-                                <p x-show="!showExpense" class="dark:text-white text-xl font-bold transition-all duration-1000">*******</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <button type="button" aria-label="Toggle visibility expense" @click="toggleCard('expense')"
-                        class="text-gray-500 hover:text-red-400 transition-all duration-300 cursor-pointer transform hover:scale-110 hover:rotate-12 btn-animate">
-                        <svg x-show="showExpense" x-transition:enter="transition ease-out duration-200 delay-100"
-                            x-transition:enter-start="opacity-0 rotate-180"
-                            x-transition:enter-end="opacity-100 rotate-0"
-                            x-transition:leave="transition ease-in duration-200"
-                            x-transition:leave-start="opacity-100 rotate-0"
-                            x-transition:leave-end="opacity-0 rotate-180" xmlns="http://www.w3.org/2000/svg"
-                            class="text-red-400" width="24" height="24" fill="none" viewBox="0 0 24 24"
-                            stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M2.458 12C3.732 7.943 7.523 5 12 5c4.477 0 8.268 2.943 9.542 7-1.274 4.057-5.065 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
-                        </svg>
-                        <svg x-show="!showExpense" x-transition:enter="transition ease-out duration-200 delay-100"
-                            x-transition:enter-start="opacity-0 rotate-180"
-                            x-transition:enter-end="opacity-100 rotate-0"
-                            x-transition:leave="transition ease-in duration-200"
-                            x-transition:leave-start="opacity-100 rotate-0"
-                            x-transition:leave-end="opacity-0 rotate-180" xmlns="http://www.w3.org/2000/svg"
-                            width="24" height="24" viewBox="0 0 24 24">
-                            <path fill="none" stroke="currentColor" stroke-linecap="round"
-                                stroke-linejoin="round" stroke-width="2"
-                                d="m4 4l16 16m-3.5-3.244C15.147 17.485 13.618 18 12 18c-3.53 0-6.634-2.452-8.413-4.221c-.47-.467-.705-.7-.854-1.159c-.107-.327-.107-.913 0-1.24c.15-.459.385-.693.855-1.16c.897-.892 2.13-1.956 3.584-2.793M19.5 14.634c.333-.293.638-.582.912-.854l.003-.003c.468-.466.703-.7.852-1.156c.107-.327.107-.914 0-1.241c-.15-.458-.384-.692-.854-1.159C18.633 8.452 15.531 6 12 6q-.507 0-1 .064m2.323 7.436a2 2 0 0 1-2.762-2.889" />
-                        </svg>
-                    </button>
-                </article>
+                 <button type="button" aria-label="Toggle visibility expense" @click="toggleCard('balance')"
+                    class="text-gray-500 absolute top-3 right-3 hover:text-blue-400 transition-all duration-300 cursor-pointer transform hover:scale-110 hover:rotate-12 btn-animate">
+                    <svg x-show="showBalance" x-transition:enter="transition ease-out duration-200 delay-100"
+                        x-transition:enter-start="opacity-0 rotate-180" x-transition:enter-end="opacity-100 rotate-0"
+                        x-transition:leave="transition ease-in duration-200"
+                        x-transition:leave-start="opacity-100 rotate-0" x-transition:leave-end="opacity-0 rotate-180"
+                        xmlns="http://www.w3.org/2000/svg" class="text-blue-400" width="24" height="24"
+                        fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M2.458 12C3.732 7.943 7.523 5 12 5c4.477 0 8.268 2.943 9.542 7-1.274 4.057-5.065 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                    </svg>
+                    <svg x-show="!showBalance" x-transition:enter="transition ease-out duration-200 delay-100"
+                        x-transition:enter-start="opacity-0 rotate-180" x-transition:enter-end="opacity-100 rotate-0"
+                        x-transition:leave="transition ease-in duration-200"
+                        x-transition:leave-start="opacity-100 rotate-0" x-transition:leave-end="opacity-0 rotate-180"
+                        xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                        <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                            stroke-width="2"
+                            d="m4 4l16 16m-3.5-3.244C15.147 17.485 13.618 18 12 18c-3.53 0-6.634-2.452-8.413-4.221c-.47-.467-.705-.7-.854-1.159c-.107-.327-.107-.913 0-1.24c.15-.459.385-.693.855-1.16c.897-.892 2.13-1.956 3.584-2.793M19.5 14.634c.333-.293.638-.582.912-.854l.003-.003c.468-.466.703-.7.852-1.156c.107-.327.107-.914 0-1.241c-.15-.458-.384-.692-.854-1.159C18.633 8.452 15.531 6 12 6q-.507 0-1 .064m2.323 7.436a2 2 0 0 1-2.762-2.889" />
+                    </svg>
+                </button>
             </div>
+
+            {{-- Expense --}}
+            <div
+                class="bg-white/2 backdrop-blur-sm border border-green-500/30 rounded-xl p-6 relative transition-all duration-300 hover:bg-white/15 shadow-lg card-hover ">
+                <div class="flex items-center space-x-2 text-green-400 mb-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd"
+                            d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z"
+                            clip-rule="evenodd" />
+                    </svg>
+                    <span class="text-sm font-medium">Total Income</span>
+                </div>
+
+                <div class="flex items-center gap-3">
+                    <p x-show="showIncome" :class="{ 'number-glow': isAnimating.income }"
+                        class="text-2xl font-bold text-green-400"> Rp <span x-text="formatNumber(animatedIncome)"
+                            :class="{ 'animate-pulse-gentle': isAnimating.income }"></span></p>
+                    <p x-show="!showIncome" class="dark:text-white text-2xl font-bold transition-all duration-1000">
+                        *******
+                    </p>
+                </div>
+
+                <button type="button" aria-label="Toggle visibility expense" @click="toggleCard('income')"
+                    class="text-gray-500 absolute top-3 right-3 hover:text-green-400 transition-all duration-300 cursor-pointer transform hover:scale-110 hover:rotate-12 btn-animate">
+                    <svg x-show="showIncome" x-transition:enter="transition ease-out duration-200 delay-100"
+                        x-transition:enter-start="opacity-0 rotate-180" x-transition:enter-end="opacity-100 rotate-0"
+                        x-transition:leave="transition ease-in duration-200"
+                        x-transition:leave-start="opacity-100 rotate-0" x-transition:leave-end="opacity-0 rotate-180"
+                        xmlns="http://www.w3.org/2000/svg" class="text-green-400" width="24" height="24"
+                        fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M2.458 12C3.732 7.943 7.523 5 12 5c4.477 0 8.268 2.943 9.542 7-1.274 4.057-5.065 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                    </svg>
+                    <svg x-show="!showIncome" x-transition:enter="transition ease-out duration-200 delay-100"
+                        x-transition:enter-start="opacity-0 rotate-180" x-transition:enter-end="opacity-100 rotate-0"
+                        x-transition:leave="transition ease-in duration-200"
+                        x-transition:leave-start="opacity-100 rotate-0" x-transition:leave-end="opacity-0 rotate-180"
+                        xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                        <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                            stroke-width="2"
+                            d="m4 4l16 16m-3.5-3.244C15.147 17.485 13.618 18 12 18c-3.53 0-6.634-2.452-8.413-4.221c-.47-.467-.705-.7-.854-1.159c-.107-.327-.107-.913 0-1.24c.15-.459.385-.693.855-1.16c.897-.892 2.13-1.956 3.584-2.793M19.5 14.634c.333-.293.638-.582.912-.854l.003-.003c.468-.466.703-.7.852-1.156c.107-.327.107-.914 0-1.241c-.15-.458-.384-.692-.854-1.159C18.633 8.452 15.531 6 12 6q-.507 0-1 .064m2.323 7.436a2 2 0 0 1-2.762-2.889" />
+                    </svg>
+                </button>
+            </div>
+
+            <!-- Expense Card -->
+            <div
+                class="bg-gradient-to-r from-blue-500/10 to-purple-500/10 border relative border-blue-500/20 rounded-xl p-6 transition-all duration-300 hover:bg-white/15 shadow-lg card-hover ">
+                <div class="flex items-center space-x-2 text-red-400 mb-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-red-400" viewBox="0 0 20 20"
+                        fill="currentColor">
+                        <path fill-rule="evenodd"
+                            d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z"
+                            clip-rule="evenodd" />
+                    </svg>
+                    <span class="text-sm font-medium text-red-400">Total Expense</span>
+                </div>
+
+                <div class="flex items-center gap-3">
+                    <p x-show="showExpense" :class="{ 'number-glow': isAnimating.expense }"
+                        class="text-2xl font-bold text-red-400"> Rp <span x-text="formatNumber(animatedExpense)"
+                            :class="{ 'animate-pulse-gentle': isAnimating.expense }"></span></p>
+                    <p x-show="!showExpense" class="dark:text-white text-2xl font-bold">
+                        *******
+                    </p>
+                </div>
+
+                <button type="button" aria-label="Toggle visibility expense" @click="toggleCard('expense')"
+                    class="text-gray-500 absolute top-3 right-3 hover:text-red-400 transition-all duration-300 cursor-pointer transform hover:scale-110 hover:rotate-12 btn-animate">
+                    <svg x-show="showExpense" x-transition:enter="transition ease-out duration-200 delay-100"
+                        x-transition:enter-start="opacity-0 rotate-180" x-transition:enter-end="opacity-100 rotate-0"
+                        x-transition:leave="transition ease-in duration-200"
+                        x-transition:leave-start="opacity-100 rotate-0" x-transition:leave-end="opacity-0 rotate-180"
+                        xmlns="http://www.w3.org/2000/svg" class="text-red-400" width="24" height="24"
+                        fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M2.458 12C3.732 7.943 7.523 5 12 5c4.477 0 8.268 2.943 9.542 7-1.274 4.057-5.065 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                    </svg>
+                    <svg x-show="!showExpense" x-transition:enter="transition ease-out duration-200 delay-100"
+                        x-transition:enter-start="opacity-0 rotate-180" x-transition:enter-end="opacity-100 rotate-0"
+                        x-transition:leave="transition ease-in duration-200"
+                        x-transition:leave-start="opacity-100 rotate-0" x-transition:leave-end="opacity-0 rotate-180"
+                        xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                        <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                            stroke-width="2"
+                            d="m4 4l16 16m-3.5-3.244C15.147 17.485 13.618 18 12 18c-3.53 0-6.634-2.452-8.413-4.221c-.47-.467-.705-.7-.854-1.159c-.107-.327-.107-.913 0-1.24c.15-.459.385-.693.855-1.16c.897-.892 2.13-1.956 3.584-2.793M19.5 14.634c.333-.293.638-.582.912-.854l.003-.003c.468-.466.703-.7.852-1.156c.107-.327.107-.914 0-1.241c-.15-.458-.384-.692-.854-1.159C18.633 8.452 15.531 6 12 6q-.507 0-1 .064m2.323 7.436a2 2 0 0 1-2.762-2.889" />
+                    </svg>
+                </button>
+
+            </div>
+
+
+        </div>
 
 
 

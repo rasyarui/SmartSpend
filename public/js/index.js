@@ -57,32 +57,32 @@ btn.addEventListener("click", () => {
     sidebar.classList.toggle("translate-x-0"); 
 });
 
-document.addEventListener("click", (event) => {
-    // Periksa apakah klik berada di luar sidebar DAN di luar tombol menu
-    const isClickInsideSidebar = sidebar.contains(event.target);
-    const isClickOnMenuButton = btn.contains(event.target);
+// document.addEventListener("click", (event) => {
+//     // Periksa apakah klik berada di luar sidebar DAN di luar tombol menu
+//     const isClickInsideSidebar = sidebar.contains(event.target);
+//     const isClickOnMenuButton = btn.contains(event.target);
 
-    // Jika sidebar terbuka dan klik berada di luar kedua elemen tersebut, tutup sidebar
-    if (
-        sidebar.classList.contains("translate-x-0") &&
-        !isClickInsideSidebar &&
-        !isClickOnMenuButton
-    ) {
-        sidebar.classList.add("-translate-x-full");
-        sidebar.classList.remove("translate-x-0");
-        btn.setAttribute("aria-expanded", false);
-    }
-});
-// Optional: Close sidebar on navigation for small screens
-sidebar.querySelectorAll("a").forEach((link) => {
-    link.addEventListener("click", () => {
-        if (window.innerWidth < 768) {
-            sidebar.classList.add("-translate-x-full");
-            sidebar.classList.remove("translate-x-0");
-            btn.setAttribute("aria-expanded", false);
-        }
-    });
-});
+//     // Jika sidebar terbuka dan klik berada di luar kedua elemen tersebut, tutup sidebar
+//     if (
+//         sidebar.classList.contains("translate-x-0") &&
+//         !isClickInsideSidebar &&
+//         !isClickOnMenuButton
+//     ) {
+//         sidebar.classList.add("-translate-x-full");
+//         sidebar.classList.remove("translate-x-0");
+//         btn.setAttribute("aria-expanded", false);
+//     }
+// });
+// // Optional: Close sidebar on navigation for small screens
+// sidebar.querySelectorAll("a").forEach((link) => {
+//     link.addEventListener("click", () => {
+//         if (window.innerWidth < 768) {
+//             sidebar.classList.add("-translate-x-full");
+//             sidebar.classList.remove("translate-x-0");
+//             btn.setAttribute("aria-expanded", false);
+//         }
+//     });
+// });
 
 document.addEventListener("DOMContentLoaded", function () {
     const dropdownButton = document.getElementById("dropdown-button");
@@ -112,3 +112,5 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     });
 });
+
+

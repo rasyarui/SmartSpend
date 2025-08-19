@@ -1,12 +1,12 @@
 <div>
     <div class="flex h-screen">
-         <button id="menu-btn" aria-label="Toggle sidebar" aria-expanded="false" aria-controls="sidebar"
-                class="focus:outline-none fixed rounded-md  top-4 left-4 bg-gray-950 border-gray-300 focus:ring-2 focus:ring-green-500 p-2  md:hidden">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
-                    stroke="currentColor" stroke-width="2">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
-                </svg>
-            </button>
+        <button id="menu-btn" aria-label="Toggle sidebar" aria-expanded="false" aria-controls="sidebar"
+            class="focus:outline-none fixed rounded-md top-4 left-4 bg-gray-950 border-gray-300 focus:ring-2 focus:ring-green-500 p-2  md:hidden">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+                stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
+            </svg>
+        </button>
         {{-- Modal --}}
         <div id="crud-modal" wire:click.self="closeModal" tabindex="-1" x-data="{ show: @entangle('showModal') }" x-show="show" x-cloak
             x-transition:enter="ease-out duration-300" x-transition:enter-start="opacity-0"
@@ -278,128 +278,175 @@
             </div>
         </div>
         {{-- End Modal --}}
+
         <!-- Sidebar -->
-        <div>
-            <aside
-                class="sidebar w-64 bg-white shadow-lg border-r border-gray-200 transition-transform duration-300 transform -translate-x-full  md:translate-x-0 md:fixed md:flex-shrink-0 flex flex-col fixed h-full z-30 ease-in-out">
-                <!-- Header -->
-                <div class="p-6 border-b border-gray-200">
-                    <div class="flex items-center gap-3">
-                        <div
-                            class="w-10 h-10 bg-gradient-to-br from-purple-500 to-blue-500 rounded-lg flex items-center justify-center text-white">
-                            <i class="fas fa-brain text-lg"></i>
-                        </div>
-                        <div>
-                            <h1 class="text-xl font-bold text-gray-900">FinanceAI</h1>
-                            <p class="text-xs text-gray-500 flex items-center gap-1">
-                                <i class="fas fa-sparkles"></i>
-                                Web3 Finance
-                            </p>
-                        </div>
+        <nav id="sidebar"
+            class="fixed left-0 top-0 h-full w-72 glass border-r border-border z-40 transition-all duration-300 transform -translate-x-full lg:translate-x-0">
+            <!-- Header -->
+            <div class="p-6 border-b border-border">
+                <div class="flex items-center gap-3">
+                    <div
+                        class="p-2 rounded-lg bg-gradient-to-br from-blue-500 to-purple-600 shadow-theme hover:shadow-theme-lg transition-all duration-300">
+                        <i data-lucide="brain-circuit" class="h-6 w-6 text-white"></i>
+                    </div>
+                    <div>
+                        <h1 class="text-lg font-bold gradient-text">FinanceAI</h1>
+                        <p class="text-xs text-muted-foreground flex items-center gap-1">
+                            <i data-lucide="sparkles" class="h-3 w-3"></i>
+                            Web3 Finance
+                        </p>
                     </div>
                 </div>
-
-                <!-- Navigation -->
-                <nav class="flex-1 px-4 py-6 space-y-3">
-                    <a href="#"
-                        class="flex items-center gap-3 px-3 py-2 rounded-lg bg-indigo-100 text-indigo-700 font-medium hover:bg-indigo-200 transition-all duration-300 ease-in-out hover:scale-105 shadow-md">
-                        <div class="w-6 h-6 bg-indigo-500 rounded-lg flex items-center justify-center text-white">
-                            <i class="fas fa-home"></i>
-                        </div>
-                        <span>Dashboard</span>
-                        <div class="ml-auto w-2 h-2 bg-indigo-500 rounded-full"></div>
-                    </a>
-
-                    <a href="#"
-                        class="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-gray-100 transition-all duration-300 ease-in-out hover:scale-105">
-                        <div class="w-6 h-6 bg-green-500 rounded-lg flex items-center justify-center text-white">
-                            <i class="fas fa-credit-card"></i>
-                        </div>
-                        <span class="text-gray-950 ">Transaksi</span>
-                    </a>
-
-                    <a href="#"
-                        class="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-gray-100 transition-all duration-300 ease-in-out hover:scale-105">
-                        <div class="w-6 h-6 bg-pink-500 rounded-lg flex items-center justify-center text-white">
-                            <i class="fas fa-piggy-bank"></i>
-                        </div>
-                        <span class="text-gray-950">Tabunganku</span>
-                    </a>
-
-                    <a href="#"
-                        class="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-gray-100 transition-all duration-300 ease-in-out hover:scale-105">
-                        <div class="w-6 h-6 bg-orange-500 rounded-lg flex items-center justify-center text-white">
-                            <i class="fas fa-cog"></i>
-                        </div>
-                        <span class="text-gray-950">Kelola</span>
-                    </a>
-                </nav>
-
-                <!-- Status Section -->
-                <div class="p-4 border-t border-gray-200">
-                    <div class="space-y-2">
-                        <div class="flex items-center gap-2 px-3 py-2 bg-gray-100 rounded-lg text-sm">
-                            <div class="w-2 h-2 bg-purple-500 rounded-full"></div>
-                            <span class="text-gray-700" id="theme-status">Dark Theme Active</span>
-                        </div>
-                        <div class="flex items-center gap-2 px-3 py-2 bg-green-50 rounded-lg text-sm">
-                            <div class="w-2 h-2 bg-green-500 rounded-full"></div>
-                            <div>
-                                <div class="font-medium text-green-800">AI Assistant</div>
-                                <div class="text-green-600 text-xs">Online & Ready</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </aside>
-
-        </div>
-
-        <!-- Main Content -->
-        <main class="min-h-screen w-full md:ml-64">
-
-            <div id="background-slider" wire:ignore
-                class="fixed inset-0 -z-10 flex transition-transform duration-1100 ease-in-out">
-                <div id="slide-light" class="w-full h-full flex-shrink-0 bg-white"></div>
-                <div id="slide-dark" class="w-full h-full flex-shrink-0 bg-gray-950"></div>
             </div>
+
+            <!-- Navigation Items -->
+            <div class="p-4 space-y-2">
+                <a href=""
+                    class="nav-item active flex items-center gap-3 px-4 py-3 rounded-lg transition-all duration-300 hover:scale-105"
+                    data-page="dashboard">
+                    <div class="p-2 rounded-lg bg-gradient-to-br from-blue-500 to-purple-600">
+                        <i data-lucide="home" class="h-4 w-4 text-white"></i>
+                    </div>
+                    <span class="font-medium">Dashboard</span>
+                </a>
+
+                <a href=""
+                    class="nav-item flex items-center gap-3 px-4 py-3 rounded-lg transition-all duration-300 hover:scale-105"
+                    data-page="transactions">
+                    <div class="p-2 rounded-lg bg-gradient-to-br from-green-500 to-blue-500">
+                        <i data-lucide="credit-card" class="h-4 w-4 text-white"></i>
+                    </div>
+                    <span class="font-medium">Transaksi</span>
+                </a>
+
+                <a href=""
+                    class="nav-item flex items-center gap-3 px-4 py-3 rounded-lg transition-all duration-300 hover:scale-105"
+                    data-page="savings">
+                    <div class="p-2 rounded-lg bg-gradient-to-br from-purple-500 to-pink-500">
+                        <i data-lucide="piggy-bank" class="h-4 w-4 text-white"></i>
+                    </div>
+                    <span class="font-medium">Tabunganku</span>
+                </a>
+
+                <a href=""
+                    class="nav-item flex items-center gap-3 px-4 py-3 rounded-lg transition-all duration-300 hover:scale-105"
+                    data-page="settings">
+                    <div class="p-2 rounded-lg bg-gradient-to-br from-yellow-500 to-orange-500">
+                        <i data-lucide="settings" class="h-4 w-4 text-white"></i>
+                    </div>
+                    <span class="font-medium">Kelola</span>
+                </a>
+            </div>
+
+            <!-- Theme Status Indicator -->
+            <div class="absolute bottom-20 left-4 right-4">
+                <div class="p-3 rounded-lg glass border border-border transition-all duration-300">
+                    <div class="flex items-center gap-2 text-xs">
+                        <div id="theme-indicator" class="w-2 h-2 rounded-full animate-pulse bg-yellow-400"></div>
+                        <span class="text-muted-foreground" id="theme-status">Light Theme Active</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Footer -->
+            <div class="absolute bottom-4 left-4 right-4">
+                <div class="p-4 glass border border-border rounded-lg">
+                    <div class="flex items-center gap-3">
+                        <div class="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
+                        <div>
+                            <p class="text-sm font-medium">AI Assistant</p>
+                            <p class="text-xs text-muted-foreground">Online & Ready</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+        <div class="lg:hidden fixed top-4 left-4 z-50">
+            <button id="mobile-menu-btn"
+                class="p-2 rounded-lg glass border border-border hover:bg-card transition-all duration-300 shadow-theme">
+                <i data-lucide="menu" class="h-5 w-5"></i>
+            </button>
+        </div>
+        <!-- Main Content -->
+        <main class="min-h-screen w-full lg:ml-72">
+
+            <div class="background-slider fixed inset-0 pointer-events-none transition-all duration-300"
+                id="background-slider" wire:ignore>
+                <!-- Light Mode Background -->
+                <div class="absolute inset-0 transition-opacity duration-300 light-bg" id="slide-light">
+                    <!-- Light mode gradient orbs -->
+                    <div
+                        class="absolute top-0 left-1/4 w-96 h-96 bg-gradient-to-br from-blue-400/12 to-indigo-400/8 rounded-full blur-3xl animate-pulse">
+                    </div>
+                    <div class="absolute top-1/3 right-1/4 w-80 h-80 bg-gradient-to-br from-purple-400/8 to-pink-400/6 rounded-full blur-3xl animate-pulse"
+                        style="animation-delay: 1s;"></div>
+                    <div class="absolute bottom-1/4 left-1/3 w-72 h-72 bg-gradient-to-br from-emerald-400/6 to-cyan-400/8 rounded-full blur-3xl animate-pulse"
+                        style="animation-delay: 2s;"></div>
+
+                    <!-- Enhanced light mode grid -->
+                    <div class="absolute inset-0 opacity-30"
+                        style="background-image: linear-gradient(rgba(59,130,246,0.015) 1px, transparent 1px), linear-gradient(90deg, rgba(59,130,246,0.015) 1px, transparent 1px); background-size: 50px 50px;">
+                    </div>
+                </div>
+
+                <!-- Dark Mode Background -->
+                <div class="absolute inset-0 transition-opacity duration-300 dark-bg opacity-0" id="slide-dark">
+                    <!-- Dark mode gradient orbs -->
+                    <div
+                        class="absolute top-0 left-1/4 w-96 h-96 bg-gradient-to-br from-blue-500/18 to-indigo-600/15 rounded-full blur-3xl animate-pulse">
+                    </div>
+                    <div class="absolute top-1/3 right-1/4 w-80 h-80 bg-gradient-to-br from-purple-500/15 to-pink-500/12 rounded-full blur-3xl animate-pulse"
+                        style="animation-delay: 1s;"></div>
+                    <div class="absolute bottom-1/4 left-1/3 w-72 h-72 bg-gradient-to-br from-emerald-400/8 to-cyan-500/10 rounded-full blur-3xl animate-pulse"
+                        style="animation-delay: 2s;"></div>
+
+                    <!-- Dark mode grid -->
+                    <div class="absolute inset-0 opacity-20"
+                        style="background-image: linear-gradient(rgba(139,92,246,0.02) 1px, transparent 1px), linear-gradient(90deg, rgba(139,92,246,0.02) 1px, transparent 1px); background-size: 50px 50px;">
+                    </div>
+                </div>
+            </div>
+
             <!-- Header -->
             <livewire:navbar />
+
             <!-- Hero section -->
             <section
-                class="px-6 py-8 border-b border-gray-700 max-w-7xl mx-auto w-full flex flex-col md:flex-row md:items-center md:justify-between gap-6">
+                class="px-6 py-8 border-b border-gray-200 dark:border-gray-700 transition-colors duration-300 max-w-7xl mx-auto w-full flex flex-col md:flex-row md:items-center md:justify-between gap-6">
                 <div class="max-w-xl">
-                    <h2 class="text-3xl font-extrabold mb-2 transition-colors duration-1000">
+
+
+                    <h2 class="text-3xl font-extrabold  transition-colors duration-300">
                         Hai, {{ auth()->user()->name }} <span aria-label="raised hands" role="img">🙌</span>
                     </h2>
-                    <p class="text-gray-500 dark:text-gray-400 mb-6 max-w-xl transition-colors duration-1000">Lacak
+                    <p class="text-gray-500 dark:text-gray-400 mb-6 max-w-lg transition-colors duration-300">Lacak
                         keuanganmu dengan mudah sekarang!
                         Kelola pemasukan
                         &
                         pengeluaran tanpa stres. Yuk, mulai lebih rapi hari ini!</p>
-                    <div class="flex gap-4 flex-wrap transition-colors duration-1000">
+                    <div class="flex gap-4 flex-wrap transition-colors duration-300">
                         <button type="button" wire:click="openModal('income')"
-                            class="bg-teal-800 hover:bg-teal-700 cursor-pointer transition text-white font-semibold px-5 py-2 rounded flex items-center gap-2 whitespace-nowrap">
+                            class="bg-green-800/30 hover:bg-teal-700 border border-green-500 cursor-pointer transition text-white font-semibold px-5 py-2 rounded-lg flex items-center gap-2 whitespace-nowrap">
                             Tambah Penghasilan <span aria-label="money with wings" role="img">🪙</span>
                         </button>
                         <button type="button" wire:click="openModal('expense')"
-                            class="border border-red-600 hover:bg-red-700 cursor-pointer transition text-red-400 hover:text-white font-semibold px-5 py-2 rounded flex items-center gap-2 whitespace-nowrap">
+                            class="bg-expense bg-red-800/30 backdrop-blur-lg border border-red-500 hover:bg-red-700 text-white px-5 py-2 rounded-lg font-semibold transition-colors cursor-pointer">
                             Tambah Pengeluaran <span aria-label="worried face" role="img">🥵</span>
                         </button>
                     </div>
                 </div>
                 <aside
-                    class="dark:bg-[#27272a] bg-[#f4f4f5] shadow-xl rounded-md p-4 text-gray-500 dark:text-gray-400 max-w-md italic select-none transition-colors duration-1000">
-                    <p><span aria-label="light bulb" role="img">💡</span> “It’s not how much money you make,
-                        but how
-                        much money you keep.”</p>
-                    <footer class="text-gray-500 dark:text-gray-400 mt-2 text-right font-light">– Robert Kiyosaki
+                    class="dark:bg-[#27272a] bg-[#f4f4f5] shadow-xl rounded-md p-3 text-gray-500 dark:text-gray-400 font-md max-w-lg italic select-none transition-colors duration-300">
+                    <p><span aria-label="light bulb" role="img">💡</span> "Don't save the remaining money after
+                        spending, but spend the remaining money after saving."</p>
+                    <footer class="text-gray-500 dark:text-gray-400 mt-2 text-right font-light">– Warren Buffett
                     </footer>
                 </aside>
             </section>
 
             <!-- Summary section -->
-            <section class="px-6 py-8 max-w-7xl mx-auto w-full flex flex-col gap-6">
+            <section class="px-5 py-8 max-w-8xl mx-auto w-full flex flex-col gap-6">
                 <livewire:card-transaction />
             </section>
 
@@ -410,19 +457,19 @@
                     <div class="flex flex-col items-start">
                         <div class="mb-5">
                             <h2
-                                class="text-3xl font-extrabold text-black dark:text-white transition-colors duration-1000">
+                                class="text-3xl font-extrabold text-black dark:text-white transition-colors duration-300">
                                 Tabel Transaksi</h2>
-                            <p class="text-[15px] text-gray-500 dark:text-gray-400 transition-colors duration-1000">
+                            <p class="text-[15px] text-gray-500 dark:text-gray-400 transition-colors duration-300">
                                 Daftar semua transaksi keuangan</p>
                         </div>
 
                         <div class="flex flex-row w-full justify-between mb-2">
                             <div class="flex flex-row gap-3">
                                 <button id="kategori-btn"
-                                    class="flex cursor-pointer items-center gap-1 px-3 border border-gray-200 dark:border-gray-700 rounded-md bg-white dark:bg-gray-950 text-gray-950 font-semibold dark:text-white text-sm hover:bg-gray-50 dark:hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500  transition-colors duration-1000"
+                                    class="flex cursor-pointer items-center gap-1 px-3 border border-gray-200 dark:border-gray-700 rounded-md bg-white dark:bg-gray-950 text-gray-950 font-semibold dark:text-white text-sm hover:bg-gray-50 dark:hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500  transition-colors duration-300"
                                     title="Export data ke Excel">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18"
-                                        class="fill-gray-950 dark:fill-white transition-colors duration-1000"
+                                        class="fill-gray-950 dark:fill-white transition-colors duration-300"
                                         viewBox="0 0 24 24">
                                         <path fill=""
                                             d="M5 11q-.825 0-1.412-.587T3 9V5q0-.825.588-1.412T5 3h4q.825 0 1.413.588T11 5v4q0 .825-.587 1.413T9 11zm0 10q-.825 0-1.412-.587T3 19v-4q0-.825.588-1.412T5 13h4q.825 0 1.413.588T11 15v4q0 .825-.587 1.413T9 21zm10-10q-.825 0-1.412-.587T13 9V5q0-.825.588-1.412T15 3h4q.825 0 1.413.588T21 5v4q0 .825-.587 1.413T19 11zm0 10q-.825 0-1.412-.587T13 19v-4q0-.825.588-1.412T15 13h4q.825 0 1.413.588T21 15v4q0 .825-.587 1.413T19 21z" />
@@ -430,10 +477,10 @@
                                     Kategory
                                 </button>
                                 <button id="type-button" data-dropdown-toggle="dropdownSearchType"
-                                    class="flex cursor-pointer items-center gap-1 px-3 border border-gray-200 dark:border-gray-700 rounded-md bg-white dark:bg-gray-950 text-gray-950 font-semibold dark:text-white text-sm hover:bg-gray-50 dark:hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors duration-1000"
+                                    class="flex cursor-pointer items-center gap-1 px-3 border border-gray-200 dark:border-gray-700 rounded-md bg-white dark:bg-gray-950 text-gray-950 font-semibold dark:text-white text-sm hover:bg-gray-50 dark:hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors duration-300"
                                     title="Export data ke Excel">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18"
-                                        class="fill-gray-950 dark:fill-white transition-colors duration-1000"
+                                        class="fill-gray-950 dark:fill-white transition-colors duration-300"
                                         viewBox="0 0 24 24">
                                         <path fill=""
                                             d="M5 11q-.825 0-1.412-.587T3 9V5q0-.825.588-1.412T5 3h4q.825 0 1.413.588T11 5v4q0 .825-.587 1.413T9 11zm0 10q-.825 0-1.412-.587T3 19v-4q0-.825.588-1.412T5 13h4q.825 0 1.413.588T11 15v4q0 .825-.587 1.413T9 21zm10-10q-.825 0-1.412-.587T13 9V5q0-.825.588-1.412T15 3h4q.825 0 1.413.588T21 5v4q0 .825-.587 1.413T19 11zm0 10q-.825 0-1.412-.587T13 19v-4q0-.825.588-1.412T15 13h4q.825 0 1.413.588T21 15v4q0 .825-.587 1.413T19 21z" />
@@ -467,7 +514,7 @@
                             <div class="flex flex-row gap-3">
                                 <!-- Export Button -->
                                 <button id="export-btn"
-                                    class="flex cursor-pointer items-center gap-2 px-4 py-2 border border-gray-200 dark:border-gray-700 rounded-md bg-white dark:bg-gray-950 text-gray-950 font-semibold dark:text-white text-sm hover:bg-gray-50 dark:hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors duration-1000"
+                                    class="flex cursor-pointer items-center gap-2 px-4 py-2 border border-gray-200 dark:border-gray-700 rounded-md bg-white dark:bg-gray-950 text-gray-950 font-semibold dark:text-white text-sm hover:bg-gray-50 dark:hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors duration-300"
                                     title="Export data ke Excel">
                                     <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -477,10 +524,10 @@
                                 </button>
 
                                 <div class="relative">
-                                    <button id="dropdown-button" aria-expanded="true" aria-haspopup="true"
-                                        class="items-cente flex cursor-pointer px-3 py-2 border gap-1 border-gray-200 dark:border-gray-700 rounded-md bg-white dark:bg-gray-950 text-gray-950 font-semibold dark:text-white text-sm hover:bg-gray-50 dark:hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500 appearance-none transition-colors duration-1000">
+                                    <button id="dropdown-button"
+                                        class="items-cente flex cursor-pointer px-3 py-2 border gap-1 border-gray-200 dark:border-gray-700 rounded-md bg-white dark:bg-gray-950 text-gray-950 font-semibold dark:text-white text-sm hover:bg-gray-50 dark:hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500 appearance-none transition-colors duration-300">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="19" height="17"
-                                            class="fill-gray-950 dark:fill-white transition-colors duration-1000"
+                                            class="fill-gray-950 dark:fill-white transition-colors duration-300"
                                             viewBox="0 0 24 24">
                                             <path
                                                 d="M12 18.88a1 1 0 0 1-.29.83a1 1 0 0 1-1.41 0l-4-4a1 1 0 0 1-.3-.84V9.75L1.21 3.62a1 1 0 0 1 .17-1.4A1 1 0 0 1 2 2h14a1 1 0 0 1 .62.22a1 1 0 0 1 .17 1.4L12 9.75zM4 4l4 5.06v5.52l2 2V9.05L14 4m-1 12l5 5l5-5Z" />
@@ -633,8 +680,6 @@
                         </div>
                     </div>
                 </div>
-
-
 
                 <!-- Table Content -->
                 <div class="px-6 pb-6">

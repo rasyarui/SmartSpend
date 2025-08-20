@@ -9,6 +9,7 @@
                     <h1 class="text-3xl font-bold gradient-text">FinanceAI</h1>
                 </div>
 
+
                 <div class="hidden lg:block">
                     <h1 class="text-4xl font-bold gradient-text" id="page-title">Dashboard</h1>
                     <p class="text-md text-muted-foreground flex items-center gap-2 mt-2">
@@ -117,7 +118,30 @@
                                 </button>
                             </div>
                         </div>
+
                     </div>
+
+                    <div class="relative" x-data="{ open: false }" @click.outside="open = false">
+                        <button @click="open = !open"
+                            class="flex items-center px-3 py-3 rounded-full glass border border-border text-xs transition-all cursor-pointer duration-300 hover:scale-105">
+                            Account
+                        </button>
+
+                        <!-- Theme Dropdown -->
+                        <div x-show="open" x-transition:enter="transition ease-out duration-150"
+                            x-transition:enter-start="opacity-0 scale-90" x-transition:enter-end="opacity-100 scale-100"
+                            x-transition:leave="transition ease-in duration-100"
+                            x-transition:leave-start="opacity-100 scale-100"
+                            x-transition:leave-end="opacity-0 scale-90"
+                            class="absolute right-0 top-full mt-2 w-33 glass border border-border rounded-lg shadow-theme-lg  z-50">
+                            <button class="p-2 cursor-pointer" wire:click="logout">
+                                <span class="text-xs font-medium text-muted-foreground mb-2 px-2">Logout
+                                </span>
+                            </button>
+                        </div>
+
+                    </div>
+
                 </div>
             </div>
         </div>

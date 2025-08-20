@@ -1,14 +1,16 @@
 <?php
 
-use App\Http\Controllers\SendMail;
 use App\Models\User;
 use App\Livewire\Auth\Login;
 use App\Livewire\Auth\Register;
 use App\Livewire\Page\Dashboard;
 use App\Mail\OtpVerificationMail;
+use App\Http\Controllers\SendMail;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
 use App\Livewire\Auth\OtpVerification;
+use App\Http\Controllers\LoginController;
+use App\Http\Controllers\RegisterController;
 
 
 
@@ -16,9 +18,11 @@ use App\Livewire\Auth\OtpVerification;
 
 Route::middleware('guest')->group(function () {
 
-    Route::get('/login', Login::class)->name('login');
+    // Route::get('/login', LoginController::class, 'index')->name('index');
+    Route::get('/login', [LoginController::class, 'index'])->name('login');
 
-    Route::get('/register', Register::class)->name('register');
+
+    Route::get('/register', [RegisterController::class, 'index'])->name('register');
     Route::get('/otp-verification', OtpVerification::class)->name('otp-verification');
     // Route::get('/otp/verify', [Register::class, 'showOtpVerification'])->name('otp.verify');
 

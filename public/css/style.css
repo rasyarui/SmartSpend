@@ -36,20 +36,8 @@
     background-color: red;
     display: none;
 }
-/* .datepicker-controls{
-    margin-top: 0;
-    margin-bottom: 0;
-} */
-/* 
-.datepicker-grid{
-    grid-template-columns: repeat(7, minmax(0, 1fr));
-    width: 320px;
-    height: 200px;
 
-} */
- /* Sembunyikan checkbox bawaan */
 .custom-checkbox-container input {
-  /* Atur agar tidak terlihat tetapi masih bisa diakses secara fungsional */
   position: absolute;
   opacity: 0;
   cursor: pointer;
@@ -57,7 +45,7 @@
   width: 0;
 }
 
-/* Buat kotak visual */
+
 .custom-checkmark {
   position: relative;
   height: 25px;
@@ -68,28 +56,27 @@
   display: inline-block;
 }
 
-/* Ketika checkbox di-hover */
+
 .custom-checkbox-container:hover input ~ .custom-checkmark {
   background-color: transparent;
 }
 
-/* Ketika checkbox diceklis */
+
 .custom-checkbox-container input:checked ~ .custom-checkmark {
   background-color: #2196F3;
   border: 2px solid #2196F3;
 }
 
-/* Buat tanda ceklis */
+
 .custom-checkmark:after {
   content: "";
   position: absolute;
   display: none;
 }
 
-/* Tampilkan tanda ceklis ketika checkbox diceklis */
+
 .custom-checkbox-container input:checked ~ .custom-checkmark:after {
   display: block;
-  /* Atur posisi dan bentuk ceklis */
   left: 9px;
   top: 5px;
   width: 5px;
@@ -99,12 +86,11 @@
   transform: rotate(45deg);
 }
 
-/* Transisi untuk efek menghilang dan muncul */
 .custom-checkmark {
   transition: all 0.2s ease-in-out;
 }
 
-/* Efek ketika diceklis: kotak menghilang dan hanya menyisakan ceklis */
+
 .custom-checkbox-container input:checked ~ .custom-checkmark {
   background-color: transparent;
   border-color: transparent;
@@ -112,7 +98,6 @@
 }
 
 
-/* Custom CSS Variables for Theme */
 :root {
   --font-size: 14px;
   /* Enhanced Light Mode Background */
@@ -144,7 +129,7 @@
   --secondary: rgba(148, 163, 184, 0.1);
   --secondary-foreground: #f1f5f9;
   --muted: rgba(148, 163, 184, 0.1);
-  --muted-foreground: #94a3b8;
+  --aca: #94a3b8;
   --accent: rgba(139, 92, 246, 0.12);
   --accent-foreground: #a855f7;
   --border: rgba(255, 255, 255, 0.1);
@@ -152,32 +137,6 @@
   --ring: rgba(139, 92, 246, 0.4);
 }
 
-/* Register CSS Custom Properties with Tailwind */
-@layer base {
-  * {
-    border-color: var(--border);
-  }
-
-  html {
-    font-size: var(--font-size);
-    transition: background-color 0.3s ease, color 0.3s ease;
-  }
-
-  body {
-    background: var(--background);
-    color: var(--foreground);
-    min-height: 100vh;
-    transition: background 0.5s ease, color 0.3s ease;
-    position: relative;
-  }
-
-  /* Global smooth transitions for theme changes */
-  *, *::before, *::after {
-    transition-property: background-color, border-color, color, fill, stroke, opacity, box-shadow, transform, background;
-    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-    transition-duration: 300ms;
-  }
-}
 
 /* Enhanced Light Mode Styles */
 :root:not(.dark) .glass {

@@ -1,10 +1,68 @@
 <div>
-    <div class=" flex flex-col mx-autorounded-lg pt-5 my-5 ">
+    <div class=" flex flex-col mx-auto rounded-lg pt-5 my-5 ">
+        <header class=" absolute left-10 top-10">
+            <div class="flex justify-between items-center max-w-7xl mx-auto">
+                <a href="" class="flex items-center gap-3 group">
+                    <div
+                        class="p-3 rounded-xl bg-gradient-to-br from-blue-500 to-purple-600 shadow-theme hover:shadow-theme-lg transition-all duration-300 group-hover:scale-105">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                            class="lucide lucide-brain-cog-icon lucide-brain-cog h-8 w-8 text-white">
+                            <path d="m10.852 14.772-.383.923" />
+                            <path d="m10.852 9.228-.383-.923" />
+                            <path d="m13.148 14.772.382.924" />
+                            <path d="m13.531 8.305-.383.923" />
+                            <path d="m14.772 10.852.923-.383" />
+                            <path d="m14.772 13.148.923.383" />
+                            <path
+                                d="M17.598 6.5A3 3 0 1 0 12 5a3 3 0 0 0-5.63-1.446 3 3 0 0 0-.368 1.571 4 4 0 0 0-2.525 5.771" />
+                            <path d="M17.998 5.125a4 4 0 0 1 2.525 5.771" />
+                            <path d="M19.505 10.294a4 4 0 0 1-1.5 7.706" />
+                            <path
+                                d="M4.032 17.483A4 4 0 0 0 11.464 20c.18-.311.892-.311 1.072 0a4 4 0 0 0 7.432-2.516" />
+                            <path d="M4.5 10.291A4 4 0 0 0 6 18" />
+                            <path d="M6.002 5.125a3 3 0 0 0 .4 1.375" />
+                            <path d="m9.228 10.852-.923-.383" />
+                            <path d="m9.228 13.148-.923.383" />
+                            <circle cx="12" cy="12" r="3" />
+                        </svg>
+                    </div>
+                    <div>
+                        <h1 class="text-2xl font-bold gradient-text">SmartSpend</h1>
+                        <p class="text-xs text-muted-foreground flex items-center gap-1">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                class="lucide lucide-sparkles-icon lucide-sparkles h-3 w-3">
+                                <path
+                                    d="M11.017 2.814a1 1 0 0 1 1.966 0l1.051 5.558a2 2 0 0 0 1.594 1.594l5.558 1.051a1 1 0 0 1 0 1.966l-5.558 1.051a2 2 0 0 0-1.594 1.594l-1.051 5.558a1 1 0 0 1-1.966 0l-1.051-5.558a2 2 0 0 0-1.594-1.594l-5.558-1.051a1 1 0 0 1 0-1.966l5.558-1.051a2 2 0 0 0 1.594-1.594z" />
+                                <path d="M20 2v4" />
+                                <path d="M22 4h-4" />
+                                <circle cx="4" cy="20" r="2" />
+                            </svg>
+                            Web3 Financial Intelligence
+                        </p>
+                    </div>
+                </a>
 
-        <div class="flex justify-center items-center w-full h-full py-8 xl:gap-14 lg:justify-normal md:gap-5 draggable ">
+            </div>
+        </header>
+        <div
+            class="flex justify-center items-center w-full h-full py-8 xl:gap-14 lg:justify-normal md:gap-5 draggable ">
             <div
                 class="glass flex w-lg gap items-center border-border mx-auto mt-5 rounded-2xl p-8 flex-col hover:scale-[1.02] backdrop-blur-xl shadow-theme-lg hover:shadow-xl transition-all duration-300">
-                <img src="/img/SmartSpend.png" alt="" width="100px" class="cursor-pointer">
+                <div class="flex items-center justify-center mb-2">
+                    <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full glass border border-border/50">
+                        <div class="relative">
+                            <i data-lucide="zap" class="h-3 w-3 text-yellow-500 animate-pulse"></i>
+                            <div class="absolute inset-0 h-3 w-3 text-yellow-400 animate-ping opacity-30"></div>
+                        </div>
+                        <span
+                            class="text-xs font-medium bg-gradient-to-r from-yellow-600 to-orange-500 bg-clip-text text-transparent">
+                            AI-Powered Security
+                        </span>
+                        <div class="w-1.5 h-1.5 bg-green-400 rounded-full animate-pulse"></div>
+                    </div>
+                </div>
                 <div class="flex flex-col w-full h-full pb-6 text-center rounded-3xl mt-5">
                     <h3 class="text-3xl font-bold mb-3 gradient-text">Login</h3>
                     <p class="mb-3 text-muted-foreground leading-relaxed">Sign in to your FinanceAI account and continue
@@ -75,7 +133,8 @@
                                         <rect x="2" y="4" width="20" height="16" rx="2" />
                                     </svg>
                                 </label>
-                                <span class="font-medium" id="submit-text" wire:loading.remove wire:target="login">Sign
+                                <span class="font-medium" id="submit-text" wire:loading.remove
+                                    wire:target="login">Sign
                                     in with Email </span>
                                 <span class="font-medium" wire:loading wire:target="login">Memproses...</span>
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
@@ -108,8 +167,50 @@
                             </p>
                         </div>
                     </form>
+
+                    {{-- Features --}}
+                    <div class="grid grid-cols-2 gap-5 pt-4">
+                        <div
+                            class="text-center p-3 rounded-lg glass border border-border/50 hover:border-blue-500/30 transition-all duration-300 hover:scale-105">
+                            <div
+                                class="w-8 h-8 bg-gradient-to-br from-blue-500 to-purple-600 rounded-lg mx-auto mb-2 flex items-center justify-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                                    stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    class="lucide lucide-shield-icon lucide-shield h-4 w-4 text-white">
+                                    <path
+                                        d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z" />
+                                </svg>
+                            </div>
+                            <p class="text-xs font-medium">AI Security</p>
+                            <p class="text-xs text-muted-foreground">Advanced protection</p>
+                        </div>
+
+                        <div
+                            class="text-center p-3 rounded-lg glass border border-border/50 hover:border-purple-500/30 transition-all duration-300 hover:scale-105">
+                            <div
+                                class="w-8 h-8 bg-gradient-to-br from-purple-500 to-pink-500 rounded-lg mx-auto mb-2 flex items-center justify-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                                    stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    class="lucide lucide-sparkles-icon lucide-sparkles h-4 w-4 text-white">
+                                    <path
+                                        d="M11.017 2.814a1 1 0 0 1 1.966 0l1.051 5.558a2 2 0 0 0 1.594 1.594l5.558 1.051a1 1 0 0 1 0 1.966l-5.558 1.051a2 2 0 0 0-1.594 1.594l-1.051 5.558a1 1 0 0 1-1.966 0l-1.051-5.558a2 2 0 0 0-1.594-1.594l-5.558-1.051a1 1 0 0 1 0-1.966l5.558-1.051a2 2 0 0 0 1.594-1.594z" />
+                                    <path d="M20 2v4" />
+                                    <path d="M22 4h-4" />
+                                    <circle cx="4" cy="20" r="2" />
+                                </svg>
+                            </div>
+                            <p class="text-xs font-medium">Smart Analytics</p>
+                            <p class="text-xs text-muted-foreground">Personalized insights</p>
+                        </div>
+                    </div>
                 </div>
+
             </div>
+
         </div>
+
     </div>
+
 </div>

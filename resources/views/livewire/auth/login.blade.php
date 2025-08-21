@@ -1,5 +1,5 @@
 <div>
-    <div class=" flex flex-col mx-auto rounded-lg pt-5 my-5 ">
+    <div class=" flex flex-col mx-auto rounded-lg ">
         <header class=" absolute left-10 top-10">
             <div class="flex justify-between items-center max-w-7xl mx-auto">
                 <a href="" class="flex items-center gap-3 group">

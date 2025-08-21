@@ -83,7 +83,54 @@
 <body class="dark:text-white text text-black font-sans ">
 
   
-    
+      <div class="background-slider fixed inset-0 pointer-events-none transition-all duration-300"
+                id="background-slider" wire:ignore>
+                <!-- Light Mode Background -->
+                <div class="absolute inset-0 transition-opacity duration-300 light-bg" id="slide-light">
+                    <!-- Light mode gradient orbs -->
+                    <div
+                        class="absolute top-0 left-1/4 w-96 h-96 bg-gradient-to-br from-blue-400/12 to-indigo-400/8 rounded-full blur-3xl animate-pulse">
+                    </div>
+                    <div class="absolute top-1/3 right-1/4 w-80 h-80 bg-gradient-to-br from-purple-400/8 to-pink-400/6 rounded-full blur-3xl animate-pulse"
+                        style="animation-delay: 1s;"></div>
+                    <div class="absolute bottom-1/4 left-1/3 w-72 h-72 bg-gradient-to-br from-emerald-400/6 to-cyan-400/8 rounded-full blur-3xl animate-pulse"
+                        style="animation-delay: 2s;"></div>
+
+                    <!-- Enhanced light mode grid -->
+                    <div class="absolute inset-0 opacity-30"
+                        style="background-image: linear-gradient(rgba(59,130,246,0.015) 1px, transparent 1px), linear-gradient(90deg, rgba(59,130,246,0.015) 1px, transparent 1px); background-size: 50px 50px;">
+                    </div>
+                </div>
+
+                <!-- Dark Mode Background -->
+                <div class="absolute inset-0 transition-opacity duration-300 dark-bg opacity-0" id="slide-dark">
+                    <!-- Dark mode gradient orbs -->
+                    <div
+                        class="absolute top-0 left-1/4 w-96 h-96 bg-gradient-to-br from-blue-500/18 to-indigo-600/15 rounded-full blur-3xl animate-pulse">
+                    </div>
+                    <div class="absolute top-1/3 right-1/4 w-80 h-80 bg-gradient-to-br from-purple-500/15 to-pink-500/12 rounded-full blur-3xl animate-pulse"
+                        style="animation-delay: 1s;"></div>
+                    <div class="absolute bottom-1/4 left-1/3 w-72 h-72 bg-gradient-to-br from-emerald-400/8 to-cyan-500/10 rounded-full blur-3xl animate-pulse"
+                        style="animation-delay: 2s;"></div>
+
+                    <!-- Dark mode grid -->
+                    <div class="absolute inset-0 opacity-20"
+                        style="background-image: linear-gradient(rgba(139,92,246,0.02) 1px, transparent 1px), linear-gradient(90deg, rgba(139,92,246,0.02) 1px, transparent 1px); background-size: 50px 50px;">
+                    </div>
+                </div>
+
+                <div class="absolute inset-0">
+                    <div
+                        class="absolute top-1/4 left-1/4 w-1 h-1 bg-blue-400 rounded-full animate-ping opacity-30 animation-delay-0">
+                    </div>
+                    <div
+                        class="absolute top-1/3 right-1/3 w-1 h-1 bg-purple-400 rounded-full animate-ping opacity-30 animation-delay-1000">
+                    </div>
+                    <div
+                        class="absolute bottom-1/3 left-1/2 w-1 h-1 bg-pink-400 rounded-full animate-ping opacity-30 animation-delay-2000">
+                    </div>
+                </div>
+            </div>
 
     <livewire:pages.dashboard />
     @livewireScripts
@@ -95,6 +142,34 @@
 
     <script src="/js/index.js"></script>
     <script src="/js/darkMode.js"></script>
+    <script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const mobileBtn = document.getElementById("mobile-menu-btn");
+    const sidebar = document.getElementById("sidebar");
+
+    mobileBtn.addEventListener("click", function () {
+      // Toggle kelas untuk slide in/out
+      if (sidebar.classList.contains("-translate-x-full")) {
+        sidebar.classList.remove("-translate-x-full");
+        sidebar.classList.add("translate-x-0");
+      } else {
+        sidebar.classList.remove("translate-x-0");
+        sidebar.classList.add("-translate-x-full");
+      }
+    });
+
+    // Tutup sidebar saat klik di luar (opsional)
+    document.addEventListener("click", function (e) {
+      const isClickInsideSidebar = sidebar.contains(e.target);
+      const isClickOnButton = mobileBtn.contains(e.target);
+
+      if (!isClickInsideSidebar && !isClickOnButton) {
+        sidebar.classList.remove("translate-x-0");
+        sidebar.classList.add("-translate-x-full");
+      }
+    });
+  });
+</script>
 
    
 </body>

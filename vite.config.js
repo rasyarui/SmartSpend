@@ -17,14 +17,12 @@ export default defineConfig({
                 "./resources/**/*.js",
                 "./resources/**/*.vue",
             ],
-
             // theme: {
             //     extend: {
             //         colors: {
-            //             background:
-            //                 "linear-gradient(135deg, #fafbff 0%, #f1f4f9 30%, #e8f2ff 70%, #dbeafe 100%)",
-            //             muted: "rgba(100, 116, 139, 0.08)",
-            //             "muted-foreground": "#475569",
+            //             foreground: "var(--foreground)",
+            //             muted: "var(--muted)",
+            //             mutedForeground: "var(--muted-foreground)",
             //         },
             //     },
             // },

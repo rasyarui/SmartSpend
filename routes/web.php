@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Route;
 use App\Livewire\Auth\OtpVerification;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RegisterController;
+use App\Http\Controllers\OtpVerificationController;
 
 
 
@@ -23,7 +24,7 @@ Route::middleware('guest')->group(function () {
 
 
     Route::get('/register', [RegisterController::class, 'index'])->name('register');
-    Route::get('/otp-verification', OtpVerification::class)->name('otp-verification');
+    Route::get('/otp-verification', [OtpVerificationController::class, 'index'])->name('otp-verification');
     // Route::get('/otp/verify', [Register::class, 'showOtpVerification'])->name('otp.verify');
 
 });

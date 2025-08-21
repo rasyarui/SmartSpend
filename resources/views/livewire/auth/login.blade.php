@@ -63,6 +63,7 @@
                         <div class="w-1.5 h-1.5 bg-green-400 rounded-full animate-pulse"></div>
                     </div>
                 </div>
+
                 <div class="flex flex-col w-full h-full pb-6 text-center rounded-3xl mt-5">
                     <h3 class="text-3xl font-bold mb-3 gradient-text">Login</h3>
                     <p class="mb-3 text-muted-foreground leading-relaxed">Sign in to your FinanceAI account and continue
@@ -112,7 +113,7 @@
                                 Email Address
                             </label>
                             <input id="email" type="email" name="email" wire:model.live="email"
-                                placeholder="Enter your email address"
+                                placeholder="Enter your email address" autocomplete="off"
                                 class="w-full h-12 px-4 border border-border glass bg-input text-lg rounded-lg transition-all duration-300 focus:scale-[1.02] focus:shadow-theme focus:border-blue-500 focus:outline-none"
                                 required value="{{ old('email') }}" />
                             @error('email')

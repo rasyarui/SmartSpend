@@ -6,16 +6,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 
-    <title>Register</title>
+    <title>Login</title>
     {{-- <link href="./dist/output.css" rel="stylesheet"> --}}
     {{-- <script src="https://cdn.tailwindcss.com"></script> --}}
 
     <link rel="stylesheet" href="/css/style.css">
     {{-- @vite('resources/js/app.js') --}}
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-
-
-
+  
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 
 
@@ -137,98 +135,14 @@
     </div>
 
 
-    <livewire:auth.register />
-
+    <livewire:auth.otp-verification />
+  
 
     <script src="/js/index.js"></script>
     <script src="/js/darkMode.js"></script>
 
-   <script>
-  document.addEventListener("DOMContentLoaded", function () {
-    const passwordInput = document.getElementById("password");
-    const validationBox = document.getElementById("password-validation");
-    const registerBtn = document.getElementById("register-btn");
 
-    const requirements = {
-      length: document.querySelector('[data-requirement="length"]'),
-      uppercase: document.querySelector('[data-requirement="uppercase"]'),
-      lowercase: document.querySelector('[data-requirement="lowercase"]'),
-      number: document.querySelector('[data-requirement="number"]'),
-      special: document.querySelector('[data-requirement="special"]')
-    };
-
-    // Regex untuk validasi
-    const tests = {
-      length: val => val.length >= 8,
-      uppercase: val => /[A-Z]/.test(val),
-      lowercase: val => /[a-z]/.test(val),
-      number: val => /[0-9]/.test(val),
-      special: val => /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/.test(val)
-    };
-
-    // Fungsi update ikon
-    function updateIcon(element, passed) {
-      const icon = element.querySelector("svg");
-      if (passed) {
-        icon.classList.replace("lucide-x", "lucide-check");
-        icon.classList.replace("text-red-400", "text-green-500");
-        icon.innerHTML = '<path d="M20 6 9 17l-5-5"/>'; // Check
-      } else {
-        icon.classList.replace("lucide-check", "lucide-x");
-        icon.classList.replace("text-green-500", "text-red-400");
-        icon.innerHTML = '<path d="M18 6 6 18"/><path d="m6 6 12 12"/>'; // X
-      }
-    }
-
-    // Fungsi validasi utama
-    function validatePassword() {
-      const value = passwordInput.value;
-
-      // Tampilkan validasi jika tidak kosong
-      if (value.trim() === "") {
-        validationBox.classList.add("hidden");
-        registerBtn.disabled = true;
-        registerBtn.classList.add("opacity-50", "cursor-not-allowed");
-        registerBtn.classList.remove("bg-blue-600");
-        return;
-      }
-
-      validationBox.classList.remove("hidden");
-
-      let allPassed = true;
-
-      Object.keys(requirements).forEach(key => {
-        const passed = tests[key](value);
-        updateIcon(requirements[key], passed);
-        if (!passed) allPassed = false;
-      });
-
-      // 🔥 Enable tombol jika semua terpenuhi
-      if (allPassed) {
-        registerBtn.disabled = false;
-        registerBtn.classList.remove("opacity-50", "cursor-not-allowed");
-        registerBtn.classList.add("bg-blue-600");
-      } else {
-        registerBtn.disabled = true;
-        registerBtn.classList.add("opacity-50", "cursor-not-allowed");
-        registerBtn.classList.remove("bg-blue-600");
-      }
-    }
-
-    // 🔄 Event: Saat user mengetik
-    passwordInput.addEventListener("input", validatePassword);
-
-    // ✅ Tambahkan event: Saat fokus hilang (blur)
-    passwordInput.addEventListener("blur", validatePassword);
-
-    // ✅ Tambahkan event: Saat user selesai input (misal pakai autocomplete)
-    passwordInput.addEventListener("change", validatePassword);
-
-    // Inisialisasi status tombol
-    registerBtn.disabled = true;
-    registerBtn.classList.add("opacity-50", "cursor-not-allowed");
-  });
-</script>
+    
     @livewireScripts
 
 </body>

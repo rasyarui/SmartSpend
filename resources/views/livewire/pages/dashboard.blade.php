@@ -364,8 +364,28 @@
             <div class="p-6 border-b border-gray-700">
                 <div class="flex items-center gap-3">
                     <div
-                        class="p-1 rounded-lg bg-gradient-to-br from-blue-400 to-white shadow-theme hover:shadow-theme-lg transition-all duration-300">
-                    <img src="/img/SmartSpend.png" alt="" width="50px" height="50px">
+                        class="p-3 rounded-xl bg-gradient-to-br from-blue-500 to-purple-600 shadow-theme hover:shadow-theme-lg transition-all duration-300 group-hover:scale-105">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                            class="lucide lucide-brain-cog-icon lucide-brain-cog h-7 w-7 text-white">
+                            <path d="m10.852 14.772-.383.923" />
+                            <path d="m10.852 9.228-.383-.923" />
+                            <path d="m13.148 14.772.382.924" />
+                            <path d="m13.531 8.305-.383.923" />
+                            <path d="m14.772 10.852.923-.383" />
+                            <path d="m14.772 13.148.923.383" />
+                            <path
+                                d="M17.598 6.5A3 3 0 1 0 12 5a3 3 0 0 0-5.63-1.446 3 3 0 0 0-.368 1.571 4 4 0 0 0-2.525 5.771" />
+                            <path d="M17.998 5.125a4 4 0 0 1 2.525 5.771" />
+                            <path d="M19.505 10.294a4 4 0 0 1-1.5 7.706" />
+                            <path
+                                d="M4.032 17.483A4 4 0 0 0 11.464 20c.18-.311.892-.311 1.072 0a4 4 0 0 0 7.432-2.516" />
+                            <path d="M4.5 10.291A4 4 0 0 0 6 18" />
+                            <path d="M6.002 5.125a3 3 0 0 0 .4 1.375" />
+                            <path d="m9.228 10.852-.923-.383" />
+                            <path d="m9.228 13.148-.923.383" />
+                            <circle cx="12" cy="12" r="3" />
+                        </svg>
                     </div>
                     <div>
                         <h1 class="text-2xl font-bold gradient-text">SmartSpend</h1>
@@ -392,7 +412,13 @@
                     class="nav-item active flex items-center gap-3 px-4 py-3 rounded-lg transition-all duration-300 hover:scale-105"
                     data-page="dashboard">
                     <div class="p-2 rounded-lg bg-gradient-to-br from-blue-500 to-purple-600">
-                        <i data-lucide="home" class="h-4 w-4 text-white"></i>
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                            class="lucide lucide-house-icon lucide-house h-4 w-4 text-white">
+                            <path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8" />
+                            <path
+                                d="M3 10a2 2 0 0 1 .709-1.528l7-5.999a2 2 0 0 1 2.582 0l7 5.999A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
+                        </svg>
                     </div>
                     <span class="font-medium">Dashboard</span>
                 </a>
@@ -401,7 +427,12 @@
                     class="nav-item flex items-center gap-3 px-4 py-3 rounded-lg transition-all duration-300 hover:scale-105"
                     data-page="transactions">
                     <div class="p-2 rounded-lg bg-gradient-to-br from-green-500 to-blue-500">
-                        <i data-lucide="credit-card" class="h-4 w-4 text-white"></i>
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                            class="lucide lucide-credit-card-icon lucide-credit-card h-4 w-4 text-white">
+                            <rect width="20" height="14" x="2" y="5" rx="2" />
+                            <line x1="2" x2="22" y1="10" y2="10" />
+                        </svg>
                     </div>
                     <span class="font-medium">Transaksi</span>
                 </a>
@@ -410,7 +441,14 @@
                     class="nav-item flex items-center gap-3 px-4 py-3 rounded-lg transition-all duration-300 hover:scale-105"
                     data-page="savings">
                     <div class="p-2 rounded-lg bg-gradient-to-br from-purple-500 to-pink-500">
-                        <i data-lucide="piggy-bank" class="h-4 w-4 text-white"></i>
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                            class="lucide lucide-piggy-bank-icon lucide-piggy-bank h-4 w-4 text-">
+                            <path
+                                d="M11 17h3v2a1 1 0 0 0 1 1h2a1 1 0 0 0 1-1v-3a3.16 3.16 0 0 0 2-2h1a1 1 0 0 0 1-1v-2a1 1 0 0 0-1-1h-1a5 5 0 0 0-2-4V3a4 4 0 0 0-3.2 1.6l-.3.4H11a6 6 0 0 0-6 6v1a5 5 0 0 0 2 4v3a1 1 0 0 0 1 1h2a1 1 0 0 0 1-1z" />
+                            <path d="M16 10h.01" />
+                            <path d="M2 8v1a2 2 0 0 0 2 2h1" />
+                        </svg>
                     </div>
                     <span class="font-medium">Tabunganku</span>
                 </a>
@@ -419,7 +457,13 @@
                     class="nav-item flex items-center gap-3 px-4 py-3 rounded-lg transition-all duration-300 hover:scale-105"
                     data-page="settings">
                     <div class="p-2 rounded-lg bg-gradient-to-br from-yellow-500 to-orange-500">
-                        <i data-lucide="settings" class="h-4 w-4 text-white"></i>
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                            class="lucide lucide-settings-icon lucide-settings h-4 w-4 text-white">
+                            <path
+                                d="M9.671 4.136a2.34 2.34 0 0 1 4.659 0 2.34 2.34 0 0 0 3.319 1.915 2.34 2.34 0 0 1 2.33 4.033 2.34 2.34 0 0 0 0 3.831 2.34 2.34 0 0 1-2.33 4.033 2.34 2.34 0 0 0-3.319 1.915 2.34 2.34 0 0 1-4.659 0 2.34 2.34 0 0 0-3.32-1.915 2.34 2.34 0 0 1-2.33-4.033 2.34 2.34 0 0 0 0-3.831A2.34 2.34 0 0 1 6.35 6.051a2.34 2.34 0 0 0 3.319-1.915" />
+                            <circle cx="12" cy="12" r="3" />
+                        </svg>
                     </div>
                     <span class="font-medium">Kelola</span>
                 </a>
@@ -537,14 +581,24 @@
             </section>
 
             {{-- Table --}}
-            <div class="w-full">
+            <div class="w-full ">
                 <!-- Card Header -->
                 <div class="px-6 py-2 space-y-4 relative">
                     <div class="flex flex-col items-start">
                         <div class="mb-5">
-                            <h2
-                                class="text-3xl font-extrabold text-black dark:text-white transition-colors duration-300">
-                                Tabel Transaksi</h2>
+                           <div class="flex items-center gap-2 mb-2">
+                                <div class="p-3 w-fit rounded-xl bg-gradient-to-br from-blue-500 to-purple-600 shadow-theme hover:shadow-theme-lg transition-all duration-300 group-hover:scale-105">
+                                <svg xmlns="http://www.w3.org/2000/svg" 
+                                    viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                    stroke-linecap="round" stroke-linejoin="round"
+                                    class="lucide lucide-database-icon lucide-database h-5 w-5 text-white">
+                                    <ellipse cx="12" cy="5" rx="9" ry="3" />
+                                    <path d="M3 5V19A9 3 0 0 0 21 19V5" />
+                                    <path d="M3 12A9 3 0 0 0 21 12" />
+                                </svg>
+                            </div>
+                            <h2 class="text-3xl font-extrabold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">Tabel Transaksi</h2>
+                             </div>
                             <p class="text-[15px] text-gray-500 dark:text-gray-400 transition-colors duration-300">
                                 Daftar semua transaksi keuangan</p>
                         </div>
@@ -552,8 +606,8 @@
                         <div class="flex flex-row w-full justify-between mb-2">
                             <div class="flex flex-row gap-3">
                                 <button id="kategori-btn"
-                                    class="flex cursor-pointer items-center gap-1 px-3 border border-gray-200 dark:border-gray-700 rounded-md bg-white dark:bg-gray-950 text-gray-950 font-semibold dark:text-white text-sm hover:bg-gray-50 dark:hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500  transition-colors duration-300"
-                                    title="Export data ke Excel">
+                                    class="items-center flex justify-center font-semibold text-sm cursor-pointer px-5 py-2 border-[1px] gap-2 bg-gradient-to-br from-white/10 to-white/5 hover:transform hover:scale-105 rounded-lg hover:shadow-xl transition-all duration-400"
+                                    title="Category">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18"
                                         class="fill-gray-950 dark:fill-white transition-colors duration-300"
                                         viewBox="0 0 24 24">
@@ -563,8 +617,8 @@
                                     Kategory
                                 </button>
                                 <button id="type-button" data-dropdown-toggle="dropdownSearchType"
-                                    class="flex cursor-pointer items-center gap-1 px-3 border border-gray-200 dark:border-gray-700 rounded-md bg-white dark:bg-gray-950 text-gray-950 font-semibold dark:text-white text-sm hover:bg-gray-50 dark:hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors duration-300"
-                                    title="Export data ke Excel">
+                                    class="items-center flex justify-center font-semibold text-sm cursor-pointer px-5 py-2 border-[1px] gap-2 bg-gradient-to-br from-white/10 to-white/5 hover:transform hover:scale-105 rounded-lg hover:shadow-xl transition-all duration-400"
+                                    title="Tipe">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18"
                                         class="fill-gray-950 dark:fill-white transition-colors duration-300"
                                         viewBox="0 0 24 24">
@@ -600,9 +654,9 @@
                             <div class="flex flex-row gap-3">
                                 <!-- Export Button -->
                                 <button id="export-btn"
-                                    class="flex cursor-pointer items-center gap-2 px-4 py-2 border border-gray-200 dark:border-gray-700 rounded-md bg-white dark:bg-gray-950 text-gray-950 font-semibold dark:text-white text-sm hover:bg-gray-50 dark:hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors duration-300"
+                                    class="flex cursor-pointer hover:transform font-semibold text-sm hover:scale-105 items-center gap-2 text-[#f8fafc] dark:text-black rounded-lg px-4 py-2 bg-gradient-to-r from-green-500 to-blue-500 hover:from-green-600 hover:to-blue-600 border-0 shadow-lg hover:shadow-xl transition-all duration-400"
                                     title="Export data ke Excel">
-                                    <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                             d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
                                     </svg>
@@ -611,7 +665,7 @@
 
                                 <div class="relative">
                                     <button id="dropdown-button"
-                                        class="items-cente flex cursor-pointer px-3 py-2 border gap-1 border-gray-200 dark:border-gray-700 rounded-md bg-white dark:bg-gray-950 text-gray-950 font-semibold dark:text-white text-sm hover:bg-gray-50 dark:hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500 appearance-none transition-colors duration-300">
+                                        class="items-center flex justify-center font-semibold text-sm cursor-pointer px-5 py-2 border-[1px] gap-2 bg-gradient-to-br from-white/10 to-white/5 hover:transform hover:scale-105 rounded-lg hover:shadow-xl transition-all duration-400">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="19" height="17"
                                             class="fill-gray-950 dark:fill-white transition-colors duration-300"
                                             viewBox="0 0 24 24">
@@ -621,7 +675,7 @@
                                         View
                                     </button>
                                     <div id="dropdown-menu"
-                                        class="origin-top-left hidden absolute mt-2 right-0 w-35 rounded-md shadow-lg bg-white dark:bg-gray-950 border border-gray-300 dark:border-gray-600">
+                                        class="origin-top-left z-1 hidden absolute mt-2 right-0 w-35 rounded-md shadow-lg bg-white dark:bg-gray-950 border border-gray-300 dark:border-gray-600">
                                         <div
                                             class="font-bold text-[14px] border-b border-gray-300 p-2 dark:border-gray-600 w-full text-center">
                                             Toggle Columns
@@ -771,52 +825,53 @@
                 <div class="px-6 pb-6">
                     <!-- Table Container with horizontal scroll -->
                     <div class="border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden">
-                        <div class="overflow-x-auto table-container">
-                            <table class="w-full min-w-full">
+                        <div class="overflow-x-auto table-container ">
+                            <table
+                                class="w-full min-w-full border border-white/10 rounded-lg overflow-hidden bg-white/5 backdrop-blur-sm">
                                 <thead>
                                     <tr
-                                        class="bg-gray-50 dark:bg-gray-950 border-b border-gray-200 dark:border-gray-700">
+                                        class=" border-b dark:border-gray-700 bg-gradient-to-r from-blue-500/10 to-purple-500/10 border-white/10 hover:bg-transparent">
                                         @unless (in_array('kategori', $hiddenColumns))
                                             <th
-                                                class="px-4 py-3 text-left text-sm font-medium text-gray-900 dark:text-gray-400">
+                                                class="px-4 py-3 font-semibold text-left text-sm  text-gray-900 dark:text-[#f8fafc]">
                                                 Kategori </th>
                                         @endunless
                                         @unless (in_array('deskripsi', $hiddenColumns))
                                             <th
-                                                class="px-4 py-3 text-left text-sm font-medium text-gray-900 dark:text-gray-400">
+                                                class="px-4 py-3 font-semibold text-left text-sm  text-gray-900 dark:text-[#f8fafc]">
                                                 Deskripsi</th>
                                         @endunless
                                         @unless (in_array('tanggal', $hiddenColumns))
                                             <th
-                                                class="px-4 py-3 text-left text-sm font-medium text-gray-900 dark:text-gray-400">
+                                                class="px-4 py-3 font-semibold text-left text-sm  text-gray-900 dark:text-[#f8fafc]">
                                                 Tanggal</th>
                                         @endunless
                                         @unless (in_array('tipe', $hiddenColumns))
                                             <th
-                                                class="px-4 py-3 text-left text-sm font-medium text-gray-900 dark:text-gray-400">
+                                                class="px-4 py-3 font-semibold text-left text-sm  text-gray-900 dark:text-[#f8fafc]">
                                                 Tipe</th>
                                         @endunless
                                         @unless (in_array('jumlah', $hiddenColumns))
                                             <th
-                                                class="px-4 py-3 text-right text-sm font-medium text-gray-900 dark:text-gray-400">
+                                                class="px-4 py-3 font-semibold text-right text-sm  text-gray-900 dark:text-[#f8fafc]">
                                                 Jumlah</th>
                                         @endunless
 
                                         <th
-                                            class="px-4 py-3 text-center text-sm font-medium text-gray-900 dark:text-gray-400 w-[70px]">
+                                            class="px-4 py-3 text-center text-sm  text-gray-900 dark:text-[#f8fafc] w-[70px]">
                                             Aksi</th>
 
 
                                     </tr>
                                 </thead>
-                                <tbody
-                                    id="transaction-tbody"class="divide-y divide-gray-200 dark:divide-gray-700 bg-white dark:bg-gray-950">
+                                <tbody id="transaction-tbody"class="divide-y divide-gray-200 dark:divide-gray-700 ">
                                     @forelse ($transactions as $dataTransaction)
-                                        <tr class="table-row border-b border-gray-200 dark:border-gray-700">
+                                        <tr
+                                            class="table-row border-b border-gray-200  dark:border-white/10 hover:bg-white/5 transition-all duration-300 group">
                                             @unless (in_array('kategori', $hiddenColumns))
                                                 <td class="px-3 py-3">
                                                     <span
-                                                        class="font-medium text-gray-500  dark:text-gray-400">{{ $dataTransaction->category->category }}</span>
+                                                        class="font-medium text-[#0f172a] dark:text-[#f8fafc]">{{ $dataTransaction->category->category }}</span>
 
                                                 </td>
                                             @endunless
@@ -830,7 +885,7 @@
 
                                             @unless (in_array('tanggal', $hiddenColumns))
                                                 <td class="px-3 py-3 text-gray-900 dark:text-white">
-                                                    <span class="text-gray-500 dark:text-gray-400">
+                                                    <span class="text-[#0f172a] dark:text-[#f8fafc]">
                                                         {{ \Carbon\Carbon::parse($dataTransaction->transaction_date)->translatedFormat('d M Y') }}
                                                     </span>
 
@@ -839,15 +894,15 @@
                                             @unless (in_array('tipe', $hiddenColumns))
                                                 <td class="px-3 py-3">
                                                     <div
-                                                        class="w-full px-2 py-0.5 text-center text-md rounded-md {{ $dataTransaction->type == 'income' ? 'bg-[#DCFCE7] dark:bg-[#14532D] hover:bg-green-600 dark:text-[#BBF7D0] text-[#166534]' : 'bg-[#FEE2E2] dark:bg-[#7F1D1D] hover:bg-red-600 text-[#991B1B] dark:text-[#FCA5A5]' }}">
+                                                        class="w-full px-2 py-0.5 text-center text-md rounded-md {{ $dataTransaction->type == 'income' ? 'bg-gradient-to-r from-green-500 to-emerald-500 text-white border-0 shadow-lg' : 'bg-gradient-to-r from-red-500 to-pink-500 text-white border-0 shadow-lg' }}">
                                                         <span class=" ">{{ $dataTransaction->type }}</span>
                                                     </div>
                                                 </td>
                                             @endunless
                                             @unless (in_array('jumlah', $hiddenColumns))
-                                                <td class="px-3 py-3 text-right font-medium">
+                                                <td class="px-3 py-3 text-right font-medium ">
                                                     <span
-                                                        class="{{ $dataTransaction->type == 'income' ? ' text-green-500' : 'text-red-500' }}">
+                                                        class="{{ $dataTransaction->type == 'income' ? ' text-green-400' : 'text-red-400' }}">
                                                         @if ($dataTransaction->type == 'income')
                                                             +Rp {{ number_format($dataTransaction->amount) }},00
                                                         @else

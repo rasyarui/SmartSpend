@@ -106,7 +106,7 @@
                                 Name
                             </label>
                             <input id="name" type="name" name="name" wire:model.live="name"
-                                placeholder="name" required
+                                placeholder="name" required autocomplete="off"
                                 class="fw-full h-12 px-4 border border-border glass bg-input text-lg rounded-lg transition-all duration-300 focus:scale-[1.02] focus:shadow-theme focus:border-blue-500 focus:outline-none" />
                             @error('name')
                                 <span class="error">{{ $message }}</span>
@@ -124,7 +124,7 @@
                                 Email Address
                             </label>
                             <input id="email" type="email" name="email" wire:model.live="email"
-                                placeholder="Enter your email address"
+                                placeholder="Enter your email address" autocomplete="off"
                                 class="w-full h-12 px-4 border border-border glass bg-input text-lg rounded-lg transition-all duration-300 focus:scale-[1.02] focus:shadow-theme focus:border-blue-500 focus:outline-none"
                                 required value="{{ old('email') }}" />
                             @error('email')
@@ -143,9 +143,27 @@
                                 </svg>
                                 Password
                             </label>
-                            <input id="password" type="password" name="password" wire:model.live="password"
-                                placeholder="password" required
-                                class="w-full h-12 px-4 border border-border glass bg-input text-lg rounded-lg transition-all duration-300 focus:scale-[1.02] focus:shadow-theme focus:border-blue-500 focus:outline-none" />
+                            <div class="relative">
+                                <input id="password" type="password" name="password" wire:model.live="password"
+                                    placeholder="password" required
+                                    class="w-full h-12 px-4 border border-border glass bg-input text-lg rounded-lg transition-all duration-300 focus:scale-[1.02] focus:shadow-theme focus:border-blue-500 focus:outline-none" />
+                                <button type="button" id="toggle-password"
+                                    class="absolute right-3 top-1/2 transform -translate-y-1/2 text-muted-foreground hover:text-foreground transition-colors duration-300 p-1 rounded-md hover:bg-muted/50">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                                        stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        class="lucide lucide-eye-off-icon lucide-eye-off h-4 w-4">
+                                        <path
+                                            d="M10.733 5.076a10.744 10.744 0 0 1 11.205 6.575 1 1 0 0 1 0 .696 10.747 10.747 0 0 1-1.444 2.49" />
+                                        <path d="M14.084 14.158a3 3 0 0 1-4.242-4.242" />
+                                        <path
+                                            d="M17.479 17.499a10.75 10.75 0 0 1-15.417-5.151 1 1 0 0 1 0-.696 10.75 10.75 0 0 1 4.446-5.143" />
+                                        <path d="m2 2 20 20" />
+                                    </svg>
+                                </button>
+                            </div>
+
+
                             <div id="password-validation" wire:ignore
                                 class="p-3 mt-2 rounded-lg glass border border-border/50 space-y-2 hidden">
                                 <p class="text-xs text-start font-semibold text-muted-foreground mb-2">Password
@@ -204,8 +222,9 @@
                                 </div>
                             </div>
                         </div>
-                        <button type="submit" id="submit-btn"
-                            class="w-full h-12 mb-5 cursor-pointer bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white border-0 shadow-theme hover:shadow-theme-lg transition-all duration-300 hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none group relative overflow-hidden rounded-lg">
+                        <button type="submit" id="register-btn" wire:ignore
+                            class="w-full h-12 mb-5 cursor-pointer bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white border-0 shadow-theme hover:shadow-theme-lg transition-all duration-300 hover:scale-105  disabled:opacity-50  group relative overflow-hidden rounded-lg  disabled:pointer-events-none"
+                            disabled>
                             <div class="flex items-center justify-center gap-3 relative z-10">
                                 <label for="email" class="text-sm font-medium flex items-center gap-2">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
@@ -249,6 +268,7 @@
                         </div>
                     </form>
 
+                    {{-- Features --}}
                     <div class="grid grid-cols-3 gap-2 pt-4">
                         <div
                             class="text-center p-2 rounded-lg glass border border-border/50 hover:border-blue-500/30 transition-all duration-300 hover:scale-105">
@@ -302,77 +322,5 @@
         </div>
     </div>
 
-    <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            const passwordInput = document.getElementById("password");
-            const validationBox = document.getElementById("password-validation");
-            const requirements = {
-                length: document.querySelector('[data-requirement="length"]'),
-                uppercase: document.querySelector('[data-requirement="uppercase"]'),
-                lowercase: document.querySelector('[data-requirement="lowercase"]'),
-                number: document.querySelector('[data-requirement="number"]'),
-                special: document.querySelector('[data-requirement="special"]')
-            };
-
-            // Regex untuk validasi
-            const tests = {
-                length: val => val.length >= 8,
-                uppercase: val => /[A-Z]/.test(val),
-                lowercase: val => /[a-z]/.test(val),
-                number: val => /[0-9]/.test(val),
-                special: val => /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/.test(val)
-            };
-
-            // Fungsi untuk update ikon
-            function updateIcon(element, passed) {
-                const icon = element.querySelector("svg");
-                if (passed) {
-                    icon.classList.replace("lucide-x", "lucide-check");
-                    icon.classList.replace("text-red-400", "text-green-500");
-                    icon.innerHTML = '<path d="M20 6 9 17l-5-5"/>'; // Check icon
-                } else {
-                    icon.classList.replace("lucide-check", "lucide-x");
-                    icon.classList.replace("text-green-500", "text-red-400");
-                    icon.innerHTML = '<path d="M18 6 6 18"/><path d="m6 6 12 12"/>'; // X icon
-                }
-            }
-
-            // Fungsi validasi utama
-            function validatePassword() {
-                const value = passwordInput.value;
-
-                // Tampilkan box jika input tidak kosong
-                if (value.trim() === "") {
-                    validationBox.classList.add("hidden");
-                    return;
-                }
-
-                // Tampilkan box jika belum muncul
-                if (validationBox.classList.contains("hidden")) {
-                    validationBox.classList.remove("hidden");
-                }
-
-                // Update setiap requirement
-                Object.keys(requirements).forEach(key => {
-                    const passed = tests[key](value);
-                    updateIcon(requirements[key], passed);
-                });
-            }
-
-            // Tampilkan validasi saat fokus (opsional)
-            passwordInput.addEventListener("focus", function() {
-                if (passwordInput.value.trim() !== "") {
-                    validationBox.classList.remove("hidden");
-                }
-            });
-
-            // Update saat user mengetik
-            passwordInput.addEventListener("input", validatePassword);
-
-            // (Opsional) Inisialisasi Lucide icons jika pakai CDN
-            if (typeof lucide !== "undefined") {
-                lucide.createIcons();
-            }
-        });
-    </script>
+  
 </div>

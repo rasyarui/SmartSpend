@@ -1,6 +1,5 @@
 <div>
-
-    <div class="min-h-screen bg-gray-100 flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
+    <div class="min-h-screen flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
         <div class="max-w-md w-full space-y-8">
             <div class="text-center">
                 <div class="mx-auto h-12 w-12 bg-blue-100 rounded-full flex items-center justify-center">
@@ -10,12 +9,12 @@
                         </path>
                     </svg>
                 </div>
-                <h2 class="mt-3 text-3xl font-extrabold text-gray-900">Verifikasi OTP</h2>
-                <div class="mt-2 text-sm text-gray-600 justify-items-center w-ful">
+                <h2 class="mt-3 text-3xl font-extrabold gradient-text">Verifikasi OTP</h2>
+                <div class="mt-2 text-sm text-[#f8fafc] justify-items-center w-ful">
                     <p> Masukkan kode 6 digit yang telah dikirim ke</p>
                     <div class="flex gap-2">
                         <span class="font-medium text-blue-600">{{ $user->email }}</span>
-                        <button wire:click="openEditEmailModal" class="" type="button">
+                        <button wire:click="openEditEmailModal" class="cursor-pointer" type="button">
                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24">
                                 <path fill="currentColor"
                                     d="M19.07 13.88L13 19.94V22h2.06l6.06-6.07m1.58-2.35l-1.28-1.28a.52.52 0 0 0-.38-.17c-.15.01-.29.06-.39.17l-1 1l2.05 2l1-1c.19-.2.19-.52 0-.72M11 18H4V8l8 5l8-5v2h2V6c0-1.1-.9-2-2-2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h7zm9-12l-8 5l-8-5z" />
@@ -74,7 +73,7 @@
                 </div>
             </div>
 
-            <div class="bg-white shadow-lg rounded-lg p-8">
+            <div class="glass shadow-lg rounded-lg p-8">
                 <!-- Message Alert -->
                 @if ($message)
                     <div
@@ -100,7 +99,7 @@
                 <!-- Timer Display -->
                 <div class="text-center mb-6">
                     @if (!$isExpired && $timeLeft > 0)
-                        <div class="text-sm text-gray-600" wire:poll.1s="calculateTimeLeft">
+                        <div class="text-sm text-[#f8fafc]" wire:poll.1s="calculateTimeLeft">
                             Kode akan kedaluwarsa dalam:
                             <span class="font-bold text-red-600">
                                 {{ gmdate('i:s', $timeLeft) }}
@@ -185,7 +184,7 @@
         </div>
     </div>
 
-    <script>
+  <script>
         document.addEventListener('livewire:initialized', () => {
             // Auto-focus on OTP input
             document.getElementById('otp_code').focus();

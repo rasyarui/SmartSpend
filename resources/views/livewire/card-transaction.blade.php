@@ -227,7 +227,7 @@
         <div class="flex items-center justify-between mb-[15px]">
 
             <div class="flex flex-col gap-2">
-                <h3 class="text-3xl font-extrabold text-black dark:text-white transition-colors duration-1000">Ringkasan
+                <h3 class="text-3xl font-extrabold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">Ringkasan
                 </h3>
                 <button type="button" @click="toggleAllDataAuto()"
                     class="border border-gray-300 dark:border-gray-600 dark:text-[#fafafa] cursor-pointer text-black rounded px-3 py-1 dark:hover:bg-gray-700 hover:bg-gray-200 transition-colors duration-1000  whitespace-nowrap flex items-center gap-2">

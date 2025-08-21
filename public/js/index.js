@@ -54,7 +54,7 @@ btn.addEventListener("click", () => {
     btn.setAttribute("aria-expanded", !expanded);
     sidebar.classList.toggle("-translate-x-full");
     sidebar.classList.toggle("-translate-x-full");
-    sidebar.classList.toggle("translate-x-0"); 
+    sidebar.classList.toggle("translate-x-0");
 });
 
 // document.addEventListener("click", (event) => {
@@ -112,5 +112,7 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     });
 });
+
+// Register JS
 
 

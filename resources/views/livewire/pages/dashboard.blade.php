@@ -627,6 +627,7 @@
                 <!-- Card Header -->
                 <div class="px-6 py-2 space-y-4 relative">
                     <div class="flex flex-col items-start">
+
                         <div class="mb-5">
                             <div class="flex items-center gap-2 mb-2">
                                 <div
@@ -661,38 +662,66 @@
                                     </svg>
                                     Kategory
                                 </button>
-                                <button id="type-button" data-dropdown-toggle="dropdownSearchType"
-                                    class="items-center flex justify-center font-semibold text-sm cursor-pointer px-5 py-2 border-[1px] gap-2 bg-gradient-to-br from-white/10 to-white/5 hover:transform hover:scale-105 rounded-lg hover:shadow-xl transition-all duration-400"
-                                    title="Tipe">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18"
-                                        class="fill-gray-950 dark:fill-white transition-colors duration-300"
-                                        viewBox="0 0 24 24">
-                                        <path fill=""
-                                            d="M5 11q-.825 0-1.412-.587T3 9V5q0-.825.588-1.412T5 3h4q.825 0 1.413.588T11 5v4q0 .825-.587 1.413T9 11zm0 10q-.825 0-1.412-.587T3 19v-4q0-.825.588-1.412T5 13h4q.825 0 1.413.588T11 15v4q0 .825-.587 1.413T9 21zm10-10q-.825 0-1.412-.587T13 9V5q0-.825.588-1.412T15 3h4q.825 0 1.413.588T21 5v4q0 .825-.587 1.413T19 11zm0 10q-.825 0-1.412-.587T13 19v-4q0-.825.588-1.412T15 13h4q.825 0 1.413.588T21 15v4q0 .825-.587 1.413T19 21z" />
-                                    </svg>
-                                    Tipe
-                                </button>
-                                <div id="dropdownSearchType" role="menu"
-                                    class="origin-top-right hidden absolute right-0 mt-2 w-50 rounded-md shadow-lg bg-white dark:bg-gray-950 border border-gray-300 dark:border-gray-600">
-                                    <div class="flex flex-col gap-2 items-center p-2 rounded-sm">
-                                        <button
-                                            class="flex flex-row ho ver:bg-gray-100 dark:hover:bg-gray-600 py-1 px-3 rounded-md items-center cursor-pointer">
-                                            <input id="checkbox-item-1" type="checkbox"
-                                                wire:model.live="filter_types" value="income"
-                                                class="w-4 h-4 text-blue-600 bg-white border-gray-300 rounded-sm focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-950 dark:border-gray-500  ">
-                                            <label for="checkbox-item-1"
-                                                class="w-full ms-2 text-sm font-medium text-gray-900 rounded-sm dark:text-gray-300 cursor-pointer">Penghasilan</label>
-                                        </button>
-                                        <button
-                                            class="flex flex-row hover:bg-gray-100 dark:hover:bg-gray-600 p-1 rounded-md items-center cursor-pointer">
-                                            <input id="checkbox-item-2" type="checkbox"
-                                                wire:model.live="filter_types" value="expense"
-                                                class="w-4 h-4 text-blue-600 bg-white border-gray-300 rounded-sm focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-950 dark:border-gray-500 ">
-                                            <label for="checkbox-item-2"
-                                                class="w-full ms-2 text-sm font-medium text-gray-900 rounded-sm dark:text-gray-300 cursor-pointer">Pengeluaran</label>
-                                        </button>
+
+                                <div class="relative" x-data="{ openType: false }">
+                                    <button id="type-button" @click="openType = !openType"
+                                        class="items-center flex justify-center font-semibold text-sm cursor-pointer px-5 py-2 border-[1px] gap-2 bg-gradient-to-br from-white/10 to-white/5 hover:transform hover:scale-105 rounded-lg hover:shadow-xl transition-all duration-400"
+                                        title="Tipe">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18"
+                                            class="fill-gray-950 dark:fill-white transition-colors duration-300"
+                                            viewBox="0 0 24 24">
+                                            <path fill=""
+                                                d="M5 11q-.825 0-1.412-.587T3 9V5q0-.825.588-1.412T5 3h4q.825 0 1.413.588T11 5v4q0 .825-.587 1.413T9 11zm0 10q-.825 0-1.412-.587T3 19v-4q0-.825.588-1.412T5 13h4q.825 0 1.413.588T11 15v4q0 .825-.587 1.413T9 21zm10-10q-.825 0-1.412-.587T13 9V5q0-.825.588-1.412T15 3h4q.825 0 1.413.588T21 5v4q0 .825-.587 1.413T19 11zm0 10q-.825 0-1.412-.587T13 19v-4q0-.825.588-1.412T15 13h4q.825 0 1.413.588T21 15v4q0 .825-.587 1.413T19 21z" />
+                                        </svg>
+                                        Type
+
+                                        <template
+                                            x-if="typeof $wire.filter_types !== 'undefined' && $wire.filter_types.length > 0">
+                                            <span
+                                                class="ml-2 px-2 py-0.5 text-xs font-medium bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200 rounded-full">
+                                                <p
+                                                    x-text="$wire.filter_types.length === 2 ? 'Semua Tipe' : $wire.filter_types.join(', ')">
+                                                </p>
+                                            </span>
+                                        </template>
+                                    </button>
+                                    <div role="menu" x-show="openType" @click.outside="openType = false"
+                                        x-transition:enter="transition ease-out duration-150"
+                                        x-transition:enter-start="opacity-0 scale-95"
+                                        x-transition:enter-end="opacity-100 scale-100"
+                                        x-transition:leave="transition ease-in duration-100"
+                                        x-transition:leave-start="opacity-100 scale-100"
+                                        x-transition:leave-end="opacity-0 scale-95"
+                                        class="origin-top-left glass absolute left-0 mt-2 w-40 rounded-md shadow-lg border border-gray-300 z-99">
+                                        <div class="flex flex-col gap-2 items-center p-2 rounded-sm">
+                                            <button
+                                                class="flex  hover:bg-gray-100 dark:hover:bg-[#94A3B81A] w-full gap-2 items-center p-1 rounded-md  cursor-pointer">
+                                                <input id="checkbox-item-1" type="checkbox"
+                                                    wire:model.live="filter_types" value="income"
+                                                    class="w-4 h-4  text-blue-600 bg-gray-100 border-gray-300 rounded-sm focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+
+                                                <label for="checkbox-item-1"
+                                                    class=" text-sm font-medium text-gray-900 rounded-sm dark:text-gray-300 cursor-pointer">Income</label>
+                                            </button>
+                                            <button
+                                                class="flex  hover:bg-gray-100 dark:hover:bg-[#94A3B81A] w-full gap-2 items-center p-1 rounded-md  cursor-pointer">
+                                                <input id="checkbox-item-2" type="checkbox"
+                                                    wire:model.live="filter_types" value="expense"
+                                                    class="w-4 h-4  text-blue-600 bg-gray-100 border-gray-300 rounded-sm focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                                                <label for="checkbox-item-2"
+                                                    class=" text-sm font-medium text-gray-900 rounded-sm dark:text-gray-300 cursor-pointer">Expense</label>
+                                            </button>
+                                            <template x-if="typeof $wire.filter_types !== 'undefined' && $wire.filter_types.length > 0">
+                                                  <button @click="$wire.filter_types = []"
+                                                class="flex text-sm font-medium justify-center hover:bg-gray-100 dark:hover:bg-[#94A3B81A] w-full gap-2 items-center p-1 rounded-md  cursor-pointer">
+                                                Clear Filter
+                                            </button>
+                                            </template>
+                                        </div>
                                     </div>
                                 </div>
+
+
                             </div>
 
                             <!-- Filter Dropdown -->

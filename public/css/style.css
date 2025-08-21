@@ -92,8 +92,8 @@
 
 
 .custom-checkbox-container input:checked ~ .custom-checkmark {
-  background-color: transparent;
-  border-color: transparent;
+  /* background-color: transparent; */
+  /* border-color: transparent; */
   transform: scale(1.2); /* Memperbesar sedikit tanda ceklis */
 }
 
@@ -362,25 +362,14 @@
 }
 
 /* Form Styles */
-input, select, textarea {
+/* input, select, textarea {
   background: var(--input);
   border: 1px solid var(--border);
   color: var(--foreground);
   transition: all 0.3s ease;
-}
+} */
 
-input:focus, select:focus, textarea:focus {
-  outline: none;
-  border-color: #3b82f6;
-  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
-}
 
-.dark input:focus, 
-.dark select:focus, 
-.dark textarea:focus {
-  border-color: #60a5fa;
-  box-shadow: 0 0 0 3px rgba(96, 165, 250, 0.1);
-}
 
 /* Custom Scrollbar */
 ::-webkit-scrollbar {

@@ -352,23 +352,24 @@
         {{-- End Modal --}}
 
         <div>
-            <div class="lg:hidden fixed top-4 left-4 z-50">
-                <button @click="sidebarOpen = true"
+            <div class="fixed top-4 left-4 z-50 lg:hidden">
+                <button id="sidebar-open-btn" onclick="openSidebar()"
                     class="p-2 rounded-lg glass border border-border hover:bg-card transition-all duration-300 shadow-theme">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                         stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
                         class="lucide lucide-align-justify-icon lucide-align-justify h-5 w-5">
                         <path d="M3 12h18" />
-                        <path d="M3 18h18" />€
+                        <path d="M3 18h18" />
                         <path d="M3 6h18" />
                     </svg>
                 </button>
             </div>
             <!-- Sidebar -->
-            {{-- <div x-show="sidebarOpen" class="fixed inset-0 bg-black/50 z-1 lg:hidden" @click="sidebarOpen = false"
-                x-cloak></div> --}}
-            <nav id="sidebar"
-                class="fixed left-0 top-0 h-full w-72 glass border-r border-border z-99 transition-all duration-300">
+            <div class="fixed inset-0 bg-black/50 z-2 hidden lg:hidden" id="overlay" onclick="closeSidebar()">
+            </div>
+
+            <nav id="sidebar2"
+                class="fixed  h-full w-72 glass border-r border-border z-99  transform -translate-x-full lg:translate-x-0  transition-transform duration-300 ease-in-out">
                 <!-- Header -->
                 <div class="p-6 border-b border-gray-700">
                     <div class="flex items-center gap-3">
@@ -1096,4 +1097,20 @@
 
         </main>
     </div>
+
+    <script>
+        const sidebar = document.getElementById('sidebar2');
+        const sidebarOpenBtn = document.getElementById('sidebar-open-btn');
+        const overlay = document.getElementById('overlay');
+        const closeSidebar = () => {
+            sidebar.classList.remove('translate-x-0');
+            sidebar.classList.add('-translate-x-full');
+            overlay.classList.add('hidden');
+        };
+        const openSidebar = () => {
+            sidebar.classList.remove('-translate-x-full');
+            sidebar.classList.add('translate-x-0');
+            overlay.classList.remove('hidden');
+        };
+    </script>
 </div>

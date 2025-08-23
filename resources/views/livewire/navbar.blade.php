@@ -62,7 +62,7 @@
                                     </path>
                                 </svg>
                             </div>
-                            <span id="theme-label" class="font-medium w-full">Light Mode</span>
+                            <span id="theme-label" class="font-medium w-full"></span>
                         </button>
 
                         <!-- Theme Dropdown -->

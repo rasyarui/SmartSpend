@@ -35,6 +35,7 @@ class Dashboard extends Component
     public $transaction_type = null;
 
     public $filter_types = [];
+    public $filter_category = [];
 
     public $sortField = 'transaction_date'; // Default field untuk pengurutan
     public $sortDirection = 'desc'; // Default direction
@@ -42,29 +43,36 @@ class Dashboard extends Component
 
     public function render()
     {
-
         $transactionsQuery = Transaction::with('category')
             ->forUser(Auth::id())
             ->orderBy('transaction_date', 'desc')
             ->orderBy('created_at', 'desc');
 
-
         // Tambahkan filter kondisional
         if (!empty($this->filter_types)) {
             $transactionsQuery->whereIn('type', $this->filter_types);
         }
-        $transactions = $transactionsQuery->paginate(5);
 
+         if (!empty($this->filter_category)) {
+        $transactionsQuery->whereHas('category', function ($query) {
+            $query->whereIn('category', $this->filter_category);
+        });
+    }
+        $transactions = $transactionsQuery->paginate(5);
 
         return view('livewire.pages.dashboard', [
             'transactions' => $transactions,
             'stats' => $this->stats,
-
-
             'categories' => $this->categories
         ]);
     }
 
+    public function clearFilter()
+{
+    $this->filter_types = [];
+    $this->filter_category = [];
+    // Tidak perlu memanggil render() secara manual, Livewire otomatis merender ulang
+}
     public function sortBy($field)
     {
         if ($this->sortField === $field) {

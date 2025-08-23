@@ -142,34 +142,7 @@
 
     <script src="/js/index.js"></script>
     <script src="/js/darkMode.js"></script>
-    <script>
-  document.addEventListener("DOMContentLoaded", function () {
-    const mobileBtn = document.getElementById("mobile-menu-btn");
-    const sidebar = document.getElementById("sidebar");
-
-    mobileBtn.addEventListener("click", function () {
-      // Toggle kelas untuk slide in/out
-      if (sidebar.classList.contains("-translate-x-full")) {
-        sidebar.classList.remove("-translate-x-full");
-        sidebar.classList.add("translate-x-0");
-      } else {
-        sidebar.classList.remove("translate-x-0");
-        sidebar.classList.add("-translate-x-full");
-      }
-    });
-
-    // Tutup sidebar saat klik di luar (opsional)
-    document.addEventListener("click", function (e) {
-      const isClickInsideSidebar = sidebar.contains(e.target);
-      const isClickOnButton = mobileBtn.contains(e.target);
-
-      if (!isClickInsideSidebar && !isClickOnButton) {
-        sidebar.classList.remove("translate-x-0");
-        sidebar.classList.add("-translate-x-full");
-      }
-    });
-  });
-</script>
+    
 
    
 </body>

@@ -131,26 +131,16 @@ document.addEventListener("DOMContentLoaded", () => {
 const themeStatusElement = document.getElementById("theme-status");
 
 // Fungsi untuk memperbarui teks status tema
-const updateThemeStatus = () => {
-    // Cek apakah elemen html memiliki kelas 'dark'
-    const isDarkMode = document.documentElement.classList.contains("dark");
 
-    if (isDarkMode) {
-        themeStatusElement.textContent = "Dark theme active";
-    } else {
-        themeStatusElement.textContent = "Light theme active";
-    }
-};
 
 // Panggil fungsi saat halaman dimuat untuk menetapkan status awal
-updateThemeStatus();
+
 
 // Buat MutationObserver untuk mendengarkan perubahan pada atribut 'class' di elemen <html>
 const observer = new MutationObserver((mutations) => {
     mutations.forEach((mutation) => {
         if (mutation.attributeName === "class") {
             // Jika atribut kelas berubah, perbarui status tema
-            updateThemeStatus();
         }
     });
 });

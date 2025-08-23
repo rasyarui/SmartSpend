@@ -1,12 +1,6 @@
 <div>
     <div class="flex h-screen">
-        <button id="menu-btn" aria-label="Toggle sidebar" aria-expanded="false" aria-controls="sidebar"
-            class="focus:outline-none fixed rounded-md top-4 left-4 bg-gray-950 border-gray-300 focus:ring-2 focus:ring-green-500 p-2  md:hidden">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"
-                stroke-width="2">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
-            </svg>
-        </button>
+
         {{-- Modal --}}
         <div id="crud-modal" wire:click.self="closeModal" tabindex="-1" x-data="{ show: @entangle('showModal') }" x-show="show" x-cloak
             x-transition:enter="ease-out duration-300" x-transition:enter-start="opacity-0"
@@ -105,11 +99,11 @@
                                 @error('category_id')
                                     <span class="text-red-500 text-sm">{{ $message }}</span>
                                 @enderror
-                                <div id="dropdownSearch" tabindex="-1" x-data="{ show: @entangle('showCategoryDropdown') }" x-show="show"
-                                    x-cloak x-transition:enter="ease-out duration-300"
-                                    x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100"
-                                    x-transition:leave="ease-in duration-200" x-transition:leave-start="opacity-100"
-                                    x-transition:leave-end="opacity-0" @click.away="show = false"
+                                <div id="dropdownSearch" tabindex="-1" x-data="{ show: @entangle('showCategoryDropdown') }" x-show="show" x-cloak
+                                    x-transition:enter="ease-out duration-300" x-transition:enter-start="opacity-0"
+                                    x-transition:enter-end="opacity-100" x-transition:leave="ease-in duration-200"
+                                    x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0"
+                                    @click.away="show = false"
                                     class="z-11 dark:bg-gray-950/70  absolute mt-[10px] rounded-lg shadow-sm w-60">
                                     <div
                                         class="glass border border-border rounded-lg w-full max-w-md transform transition-all duration-300">
@@ -356,154 +350,167 @@
             </div>
         </div>
         {{-- End Modal --}}
-        <div class="lg:hidden fixed top-4 left-4 z-50">
-            <button id="mobile-menu-btn"
-                class="p-2 rounded-lg glass border border-border hover:bg-card transition-all duration-300 shadow-theme">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                    class="lucide lucide-align-justify-icon lucide-align-justify h-5 w-5">
-                    <path d="M3 12h18" />
-                    <path d="M3 18h18" />
-                    <path d="M3 6h18" />
-                </svg>
-            </button>
-        </div>
-        <!-- Sidebar -->
-        <nav id="sidebar"
-            class="fixed left-0 top-0 h-full w-72 glass border-r border-border z-13 transition-all duration-300 transform -translate-x-full lg:translate-x-0">
 
-            <!-- Header -->
-            <div class="p-6 border-b border-gray-700">
-                <div class="flex items-center gap-3">
-                    <div
-                        class="p-3 rounded-xl bg-gradient-to-br from-blue-500 to-purple-600 shadow-theme hover:shadow-theme-lg transition-all duration-300 group-hover:scale-105">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
-                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                            class="lucide lucide-brain-cog-icon lucide-brain-cog h-7 w-7 text-white">
-                            <path d="m10.852 14.772-.383.923" />
-                            <path d="m10.852 9.228-.383-.923" />
-                            <path d="m13.148 14.772.382.924" />
-                            <path d="m13.531 8.305-.383.923" />
-                            <path d="m14.772 10.852.923-.383" />
-                            <path d="m14.772 13.148.923.383" />
-                            <path
-                                d="M17.598 6.5A3 3 0 1 0 12 5a3 3 0 0 0-5.63-1.446 3 3 0 0 0-.368 1.571 4 4 0 0 0-2.525 5.771" />
-                            <path d="M17.998 5.125a4 4 0 0 1 2.525 5.771" />
-                            <path d="M19.505 10.294a4 4 0 0 1-1.5 7.706" />
-                            <path
-                                d="M4.032 17.483A4 4 0 0 0 11.464 20c.18-.311.892-.311 1.072 0a4 4 0 0 0 7.432-2.516" />
-                            <path d="M4.5 10.291A4 4 0 0 0 6 18" />
-                            <path d="M6.002 5.125a3 3 0 0 0 .4 1.375" />
-                            <path d="m9.228 10.852-.923-.383" />
-                            <path d="m9.228 13.148-.923.383" />
-                            <circle cx="12" cy="12" r="3" />
-                        </svg>
-                    </div>
-                    <div>
-                        <h1 class="text-2xl font-bold gradient-text">SmartSpend</h1>
-                        <p class="text-xs text-muted-foreground flex items-center gap-2">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18"
-                                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                                stroke-linecap="round" stroke-linejoin="round"
-                                class="lucide lucide-sparkles-icon lucide-sparkles">
-                                <path
-                                    d="M11.017 2.814a1 1 0 0 1 1.966 0l1.051 5.558a2 2 0 0 0 1.594 1.594l5.558 1.051a1 1 0 0 1 0 1.966l-5.558 1.051a2 2 0 0 0-1.594 1.594l-1.051 5.558a1 1 0 0 1-1.966 0l-1.051-5.558a2 2 0 0 0-1.594-1.594l-5.558-1.051a1 1 0 0 1 0-1.966l5.558-1.051a2 2 0 0 0 1.594-1.594z" />
-                                <path d="M20 2v4" />
-                                <path d="M22 4h-4" />
-                                <circle cx="4" cy="20" r="2" />
-                            </svg>
-                            Finance Tracking Modern
-                        </p>
-                    </div>
-                </div>
+        <div>
+            <div class="lg:hidden fixed top-4 left-4 z-50">
+                <button @click="sidebarOpen = true"
+                    class="p-2 rounded-lg glass border border-border hover:bg-card transition-all duration-300 shadow-theme">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                        class="lucide lucide-align-justify-icon lucide-align-justify h-5 w-5">
+                        <path d="M3 12h18" />
+                        <path d="M3 18h18" />€
+                        <path d="M3 6h18" />
+                    </svg>
+                </button>
             </div>
-
-            <!-- Navigation Items -->
-            <div class="p-4 space-y-2">
-                <a href=""
-                    class="nav-item active flex items-center gap-3 px-4 py-3 rounded-lg transition-all duration-300 hover:scale-105"
-                    data-page="dashboard">
-                    <div class="p-2 rounded-lg bg-gradient-to-br from-blue-500 to-purple-600">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
-                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                            class="lucide lucide-house-icon lucide-house h-4 w-4 text-white">
-                            <path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8" />
-                            <path
-                                d="M3 10a2 2 0 0 1 .709-1.528l7-5.999a2 2 0 0 1 2.582 0l7 5.999A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
-                        </svg>
-                    </div>
-                    <span class="font-medium">Dashboard</span>
-                </a>
-
-                <a href=""
-                    class="nav-item flex items-center gap-3 px-4 py-3 rounded-lg transition-all duration-300 hover:scale-105"
-                    data-page="transactions">
-                    <div class="p-2 rounded-lg bg-gradient-to-br from-green-500 to-blue-500">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
-                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                            class="lucide lucide-credit-card-icon lucide-credit-card h-4 w-4 text-white">
-                            <rect width="20" height="14" x="2" y="5" rx="2" />
-                            <line x1="2" x2="22" y1="10" y2="10" />
-                        </svg>
-                    </div>
-                    <span class="font-medium">Transaksi</span>
-                </a>
-
-                <a href=""
-                    class="nav-item flex items-center gap-3 px-4 py-3 rounded-lg transition-all duration-300 hover:scale-105"
-                    data-page="savings">
-                    <div class="p-2 rounded-lg bg-gradient-to-br from-purple-500 to-pink-500">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
-                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                            class="lucide lucide-piggy-bank-icon lucide-piggy-bank h-4 w-4 text-">
-                            <path
-                                d="M11 17h3v2a1 1 0 0 0 1 1h2a1 1 0 0 0 1-1v-3a3.16 3.16 0 0 0 2-2h1a1 1 0 0 0 1-1v-2a1 1 0 0 0-1-1h-1a5 5 0 0 0-2-4V3a4 4 0 0 0-3.2 1.6l-.3.4H11a6 6 0 0 0-6 6v1a5 5 0 0 0 2 4v3a1 1 0 0 0 1 1h2a1 1 0 0 0 1-1z" />
-                            <path d="M16 10h.01" />
-                            <path d="M2 8v1a2 2 0 0 0 2 2h1" />
-                        </svg>
-                    </div>
-                    <span class="font-medium">Tabunganku</span>
-                </a>
-
-                <a href=""
-                    class="nav-item flex items-center gap-3 px-4 py-3 rounded-lg transition-all duration-300 hover:scale-105"
-                    data-page="settings">
-                    <div class="p-2 rounded-lg bg-gradient-to-br from-yellow-500 to-orange-500">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
-                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                            class="lucide lucide-settings-icon lucide-settings h-4 w-4 text-white">
-                            <path
-                                d="M9.671 4.136a2.34 2.34 0 0 1 4.659 0 2.34 2.34 0 0 0 3.319 1.915 2.34 2.34 0 0 1 2.33 4.033 2.34 2.34 0 0 0 0 3.831 2.34 2.34 0 0 1-2.33 4.033 2.34 2.34 0 0 0-3.319 1.915 2.34 2.34 0 0 1-4.659 0 2.34 2.34 0 0 0-3.32-1.915 2.34 2.34 0 0 1-2.33-4.033 2.34 2.34 0 0 0 0-3.831A2.34 2.34 0 0 1 6.35 6.051a2.34 2.34 0 0 0 3.319-1.915" />
-                            <circle cx="12" cy="12" r="3" />
-                        </svg>
-                    </div>
-                    <span class="font-medium">Kelola</span>
-                </a>
-            </div>
-
-            <!-- Theme Status Indicator -->
-            <div class="absolute bottom-20 left-4 right-4">
-                <div class="p-3 rounded-lg glass border border-border transition-all duration-300">
-                    <div class="flex items-center gap-2 text-xs">
-                        <div id="theme-indicator" class="w-2 h-2 rounded-full animate-pulse bg-yellow-400"></div>
-                        <span class="text-muted-foreground" id="theme-status">Light Theme Active</span>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Footer -->
-            <div class="absolute bottom-4 left-4 right-4">
-                <div class="p-4 glass border border-border rounded-lg">
+            <!-- Sidebar -->
+            {{-- <div x-show="sidebarOpen" class="fixed inset-0 bg-black/50 z-1 lg:hidden" @click="sidebarOpen = false"
+                x-cloak></div> --}}
+            <nav id="sidebar"
+                class="fixed left-0 top-0 h-full w-72 glass border-r border-border z-99 transition-all duration-300">
+                <!-- Header -->
+                <div class="p-6 border-b border-gray-700">
                     <div class="flex items-center gap-3">
-                        <div class="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
+                        <div
+                            class="p-3 rounded-xl bg-gradient-to-br from-blue-500 to-purple-600 shadow-theme hover:shadow-theme-lg transition-all duration-300 group-hover:scale-105">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                                stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round"
+                                class="lucide lucide-brain-cog-icon lucide-brain-cog h-7 w-7 text-white">
+                                <path d="m10.852 14.772-.383.923" />
+                                <path d="m10.852 9.228-.383-.923" />
+                                <path d="m13.148 14.772.382.924" />
+                                <path d="m13.531 8.305-.383.923" />
+                                <path d="m14.772 10.852.923-.383" />
+                                <path d="m14.772 13.148.923.383" />
+                                <path
+                                    d="M17.598 6.5A3 3 0 1 0 12 5a3 3 0 0 0-5.63-1.446 3 3 0 0 0-.368 1.571 4 4 0 0 0-2.525 5.771" />
+                                <path d="M17.998 5.125a4 4 0 0 1 2.525 5.771" />
+                                <path d="M19.505 10.294a4 4 0 0 1-1.5 7.706" />
+                                <path
+                                    d="M4.032 17.483A4 4 0 0 0 11.464 20c.18-.311.892-.311 1.072 0a4 4 0 0 0 7.432-2.516" />
+                                <path d="M4.5 10.291A4 4 0 0 0 6 18" />
+                                <path d="M6.002 5.125a3 3 0 0 0 .4 1.375" />
+                                <path d="m9.228 10.852-.923-.383" />
+                                <path d="m9.228 13.148-.923.383" />
+                                <circle cx="12" cy="12" r="3" />
+                            </svg>
+                        </div>
                         <div>
-                            <p class="text-sm font-medium">AI Assistant</p>
-                            <p class="text-xs text-muted-foreground">Online & Ready</p>
+                            <h1 class="text-2xl font-bold gradient-text">SmartSpend</h1>
+                            <p class="text-xs text-muted-foreground flex items-center gap-2">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18"
+                                    viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                    stroke-linecap="round" stroke-linejoin="round"
+                                    class="lucide lucide-sparkles-icon lucide-sparkles">
+                                    <path
+                                        d="M11.017 2.814a1 1 0 0 1 1.966 0l1.051 5.558a2 2 0 0 0 1.594 1.594l5.558 1.051a1 1 0 0 1 0 1.966l-5.558 1.051a2 2 0 0 0-1.594 1.594l-1.051 5.558a1 1 0 0 1-1.966 0l-1.051-5.558a2 2 0 0 0-1.594-1.594l-5.558-1.051a1 1 0 0 1 0-1.966l5.558-1.051a2 2 0 0 0 1.594-1.594z" />
+                                    <path d="M20 2v4" />
+                                    <path d="M22 4h-4" />
+                                    <circle cx="4" cy="20" r="2" />
+                                </svg>
+                                Finance Tracking Modern
+                            </p>
                         </div>
                     </div>
                 </div>
-            </div>
-        </nav>
+
+                <!-- Navigation Items -->
+                <div class="p-4 space-y-2">
+                    <a href=""
+                        class="nav-item active flex items-center gap-3 px-4 py-3 rounded-lg transition-all duration-300 hover:scale-105"
+                        data-page="dashboard">
+                        <div class="p-2 rounded-lg bg-gradient-to-br from-blue-500 to-purple-600">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                                stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round"
+                                class="lucide lucide-house-icon lucide-house h-4 w-4 text-white">
+                                <path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8" />
+                                <path
+                                    d="M3 10a2 2 0 0 1 .709-1.528l7-5.999a2 2 0 0 1 2.582 0l7 5.999A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
+                            </svg>
+                        </div>
+                        <span class="font-medium">Dashboard</span>
+                    </a>
+
+                    <a href=""
+                        class="nav-item flex items-center gap-3 px-4 py-3 rounded-lg transition-all duration-300 hover:scale-105"
+                        data-page="transactions">
+                        <div class="p-2 rounded-lg bg-gradient-to-br from-green-500 to-blue-500">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                                stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round"
+                                class="lucide lucide-credit-card-icon lucide-credit-card h-4 w-4 text-white">
+                                <rect width="20" height="14" x="2" y="5" rx="2" />
+                                <line x1="2" x2="22" y1="10" y2="10" />
+                            </svg>
+                        </div>
+                        <span class="font-medium">Transaksi</span>
+                    </a>
+
+                    <a href=""
+                        class="nav-item flex items-center gap-3 px-4 py-3 rounded-lg transition-all duration-300 hover:scale-105"
+                        data-page="savings">
+                        <div class="p-2 rounded-lg bg-gradient-to-br from-purple-500 to-pink-500">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                                stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round"
+                                class="lucide lucide-piggy-bank-icon lucide-piggy-bank h-4 w-4 text-">
+                                <path
+                                    d="M11 17h3v2a1 1 0 0 0 1 1h2a1 1 0 0 0 1-1v-3a3.16 3.16 0 0 0 2-2h1a1 1 0 0 0 1-1v-2a1 1 0 0 0-1-1h-1a5 5 0 0 0-2-4V3a4 4 0 0 0-3.2 1.6l-.3.4H11a6 6 0 0 0-6 6v1a5 5 0 0 0 2 4v3a1 1 0 0 0 1 1h2a1 1 0 0 0 1-1z" />
+                                <path d="M16 10h.01" />
+                                <path d="M2 8v1a2 2 0 0 0 2 2h1" />
+                            </svg>
+                        </div>
+                        <span class="font-medium">Tabunganku</span>
+                    </a>
+
+                    <a href=""
+                        class="nav-item flex items-center gap-3 px-4 py-3 rounded-lg transition-all duration-300 hover:scale-105"
+                        data-page="settings">
+                        <div class="p-2 rounded-lg bg-gradient-to-br from-yellow-500 to-orange-500">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                                stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round"
+                                class="lucide lucide-settings-icon lucide-settings h-4 w-4 text-white">
+                                <path
+                                    d="M9.671 4.136a2.34 2.34 0 0 1 4.659 0 2.34 2.34 0 0 0 3.319 1.915 2.34 2.34 0 0 1 2.33 4.033 2.34 2.34 0 0 0 0 3.831 2.34 2.34 0 0 1-2.33 4.033 2.34 2.34 0 0 0-3.319 1.915 2.34 2.34 0 0 1-4.659 0 2.34 2.34 0 0 0-3.32-1.915 2.34 2.34 0 0 1-2.33-4.033 2.34 2.34 0 0 0 0-3.831A2.34 2.34 0 0 1 6.35 6.051a2.34 2.34 0 0 0 3.319-1.915" />
+                                <circle cx="12" cy="12" r="3" />
+                            </svg>
+                        </div>
+                        <span class="font-medium">Kelola</span>
+                    </a>
+                </div>
+
+                <!-- Theme Status Indicator -->
+                <div class="absolute bottom-20 left-4 right-4 mb-5">
+                    <div class="p-3 rounded-lg glass border border-border transition-all duration-300">
+                        <div class="flex items-center gap-2 text-xs">
+                            <div id="theme-indicator" class="w-2 h-2 rounded-full animate-pulse bg-yellow-400"></div>
+
+                            <span class="text-muted-foreground" id="theme-label"></span>
+
+
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Footer -->
+                <div class="absolute bottom-4 left-4 right-4">
+                    <div class="p-4 glass border border-border rounded-lg">
+                        <div class="flex items-center gap-3">
+                            <div class="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
+                            <div>
+                                <p class="text-sm font-medium">AI Assistant</p>
+                                <p class="text-xs text-muted-foreground">Online & Ready</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+        </div>
+
 
 
         <!-- Main Content -->
@@ -651,17 +658,63 @@
 
                         <div class="flex flex-row w-full justify-between mb-2">
                             <div class="flex flex-row gap-3">
-                                <button id="kategori-btn"
-                                    class="items-center flex justify-center font-semibold text-sm cursor-pointer px-5 py-2 border-[1px] gap-2 bg-gradient-to-br from-white/10 to-white/5 hover:transform hover:scale-105 rounded-lg hover:shadow-xl transition-all duration-400"
-                                    title="Category">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18"
-                                        class="fill-gray-950 dark:fill-white transition-colors duration-300"
-                                        viewBox="0 0 24 24">
-                                        <path fill=""
-                                            d="M5 11q-.825 0-1.412-.587T3 9V5q0-.825.588-1.412T5 3h4q.825 0 1.413.588T11 5v4q0 .825-.587 1.413T9 11zm0 10q-.825 0-1.412-.587T3 19v-4q0-.825.588-1.412T5 13h4q.825 0 1.413.588T11 15v4q0 .825-.587 1.413T9 21zm10-10q-.825 0-1.412-.587T13 9V5q0-.825.588-1.412T15 3h4q.825 0 1.413.588T21 5v4q0 .825-.587 1.413T19 11zm0 10q-.825 0-1.412-.587T13 19v-4q0-.825.588-1.412T15 13h4q.825 0 1.413.588T21 15v4q0 .825-.587 1.413T19 21z" />
-                                    </svg>
-                                    Kategory
-                                </button>
+                                <div class="relative" x-data="{ openCategory: false }">
+                                    <button id="type-button" @click="openCategory = !openCategory"
+                                        class="items-center flex justify-center font-semibold text-sm cursor-pointer px-5 py-2 border-[1px] gap-2 bg-gradient-to-br from-white/10 to-white/5 hover:transform hover:scale-105 rounded-lg hover:shadow-xl transition-all duration-400"
+                                        title="Tipe">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18"
+                                            class="fill-gray-950 dark:fill-white transition-colors duration-300"
+                                            viewBox="0 0 24 24">
+                                            <path fill=""
+                                                d="M5 11q-.825 0-1.412-.587T3 9V5q0-.825.588-1.412T5 3h4q.825 0 1.413.588T11 5v4q0 .825-.587 1.413T9 11zm0 10q-.825 0-1.412-.587T3 19v-4q0-.825.588-1.412T5 13h4q.825 0 1.413.588T11 15v4q0 .825-.587 1.413T9 21zm10-10q-.825 0-1.412-.587T13 9V5q0-.825.588-1.412T15 3h4q.825 0 1.413.588T21 5v4q0 .825-.587 1.413T19 11zm0 10q-.825 0-1.412-.587T13 19v-4q0-.825.588-1.412T15 13h4q.825 0 1.413.588T21 15v4q0 .825-.587 1.413T19 21z" />
+                                        </svg>
+                                        Category
+
+                                        <template
+                                            x-if="typeof $wire.filter_category !== 'undefined' && $wire.filter_category.length > 0">
+                                            <span
+                                                class="ml-2 px-2 py-0.5 text-xs font-medium bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200 rounded-full">
+                                                <p
+                                                    x-text="$wire.filter_category.length === 2 ? 'Semua Category' : $wire.filter_category.join(', ')">
+                                                </p>
+
+                                            </span>
+                                        </template>
+                                    </button>
+                                    <div role="menu" x-show="openCategory" @click.outside="openCategory = false"
+                                        x-transition:enter="transition ease-out duration-150"
+                                        x-transition:enter-start="opacity-0 scale-95"
+                                        x-transition:enter-end="opacity-100 scale-100"
+                                        x-transition:leave="transition ease-in duration-100"
+                                        x-transition:leave-start="opacity-100 scale-100"
+                                        x-transition:leave-end="opacity-0 scale-95" x-cloak=""
+                                        class="origin-top-left glass absolute left-0 mt-2 w-40 rounded-md shadow-lg border border-gray-300 z-99">
+                                        <div class="flex flex-col gap-2 items-center p-2 rounded-sm">
+                                            @foreach ($categories as $category)
+                                                <button
+                                                    class="flex  hover:bg-gray-100 dark:hover:bg-[#94A3B81A] w-full gap-2 items-center p-1 rounded-md  cursor-pointer">
+                                                    <input id="category-{{ $category->category }}"
+                                                        wire:model.live="filter_category"
+                                                        wire:key="category-checkbox-{{ $category->category }}"
+                                                        value="{{ $category->category }}" type="checkbox"
+                                                        class="w-4 h-4  text-blue-600 bg-gray-100 border-gray-300 rounded-sm focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+
+                                                    <label for="category-{{ $category->category }}"
+                                                        class=" text-sm font-medium text-gray-900 rounded-sm dark:text-gray-300 cursor-pointer">{{ $category->category }}</label>
+                                                </button>
+                                            @endforeach
+                                            <template
+                                                x-if="typeof $wire.filter_category !== 'undefined' && $wire.filter_category.length > 0">
+                                                <button @click="$wire.filter_category = []" value="clear"
+                                                    wire:click="clearFilter"
+                                                    class="flex text-sm font-medium justify-center hover:bg-gray-100 dark:hover:bg-[#94A3B81A] w-full gap-2 items-center p-1 rounded-md  cursor-pointer">
+                                                    Clear Filter
+                                                </button>
+                                            </template>
+                                        </div>
+                                    </div>
+                                </div>
+
 
                                 <div class="relative" x-data="{ openType: false }">
                                     <button id="type-button" @click="openType = !openType"
@@ -691,7 +744,7 @@
                                         x-transition:enter-end="opacity-100 scale-100"
                                         x-transition:leave="transition ease-in duration-100"
                                         x-transition:leave-start="opacity-100 scale-100"
-                                        x-transition:leave-end="opacity-0 scale-95"
+                                        x-transition:leave-end="opacity-0 scale-95" x-cloak=""
                                         class="origin-top-left glass absolute left-0 mt-2 w-40 rounded-md shadow-lg border border-gray-300 z-99">
                                         <div class="flex flex-col gap-2 items-center p-2 rounded-sm">
                                             <button
@@ -701,7 +754,16 @@
                                                     class="w-4 h-4  text-blue-600 bg-gray-100 border-gray-300 rounded-sm focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
 
                                                 <label for="checkbox-item-1"
-                                                    class=" text-sm font-medium text-gray-900 rounded-sm dark:text-gray-300 cursor-pointer">Income</label>
+                                                    class=" text-sm flex gap-2 text-center items-center font-medium text-gray-900 rounded-sm dark:text-gray-300 cursor-pointer">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+                                                        fill="none" stroke="currentColor" stroke-width="2"
+                                                        stroke-linecap="round" stroke-linejoin="round"
+                                                        class="lucide lucide-trending-up-icon lucide-trending-up h-4 w-4 text-green-400">
+                                                        <path d="M16 7h6v6" />
+                                                        <path d="m22 7-8.5 8.5-5-5L2 17" />
+                                                    </svg>
+
+                                                    Income</label>
                                             </button>
                                             <button
                                                 class="flex  hover:bg-gray-100 dark:hover:bg-[#94A3B81A] w-full gap-2 items-center p-1 rounded-md  cursor-pointer">
@@ -709,13 +771,24 @@
                                                     wire:model.live="filter_types" value="expense"
                                                     class="w-4 h-4  text-blue-600 bg-gray-100 border-gray-300 rounded-sm focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
                                                 <label for="checkbox-item-2"
-                                                    class=" text-sm font-medium text-gray-900 rounded-sm dark:text-gray-300 cursor-pointer">Expense</label>
+                                                    class=" text-sm flex gap-2 text-center items-center font-medium text-gray-900 rounded-sm dark:text-gray-300 cursor-pointer">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+                                                        fill="none" stroke="currentColor" stroke-width="2"
+                                                        stroke-linecap="round" stroke-linejoin="round"
+                                                        class="lucide lucide-trending-down-icon lucide-trending-down h-4 w-4 text-red-400">
+                                                        <path d="M16 17h6v-6" />
+                                                        <path d="m22 17-8.5-8.5-5 5L2 7" />
+                                                    </svg>
+
+                                                    Expense</label>
                                             </button>
-                                            <template x-if="typeof $wire.filter_types !== 'undefined' && $wire.filter_types.length > 0">
-                                                  <button @click="$wire.filter_types = []"
-                                                class="flex text-sm font-medium justify-center hover:bg-gray-100 dark:hover:bg-[#94A3B81A] w-full gap-2 items-center p-1 rounded-md  cursor-pointer">
-                                                Clear Filter
-                                            </button>
+                                            <template
+                                                x-if="typeof $wire.filter_types !== 'undefined' && $wire.filter_types.length > 0">
+                                                <button @click="$wire.filter_types = []" value="clear"
+                                                    wire:click="clearFilter"
+                                                    class="flex text-sm font-medium justify-center hover:bg-gray-100 dark:hover:bg-[#94A3B81A] w-full gap-2 items-center p-1 rounded-md  cursor-pointer">
+                                                    Clear Filter
+                                                </button>
                                             </template>
                                         </div>
                                     </div>
@@ -934,8 +1007,6 @@
                                         <th
                                             class="px-4 py-3 text-center text-sm  text-gray-900 dark:text-[#f8fafc] w-[70px]">
                                             Aksi</th>
-
-
                                     </tr>
                                 </thead>
                                 <tbody id="transaction-tbody"class="divide-y divide-gray-200 dark:divide-gray-700 ">

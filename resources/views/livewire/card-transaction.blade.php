@@ -224,13 +224,33 @@
         }
     }">
 
-        <div class="flex items-center justify-between mb-[15px]">
+        <div class="flex flex-col mb-[15px]">
 
             <div class="flex flex-col gap-2">
-                <h3 class="text-3xl font-extrabold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">Ringkasan
-                </h3>
-                <button type="button" @click="toggleAllDataAuto()"
-                    class="border border-gray-300 dark:border-gray-600 dark:text-[#fafafa] cursor-pointer text-black rounded px-3 py-1 dark:hover:bg-gray-700 hover:bg-gray-200 transition-colors duration-1000  whitespace-nowrap flex items-center gap-2">
+                <div class="mb-5">
+                    <div class="flex items-center gap-2 mb-2">
+                        <div
+                            class="p-3 w-fit rounded-xl bg-gradient-to-br from-blue-500 to-purple-600 shadow-theme hover:shadow-theme-lg transition-all duration-300 group-hover:scale-105">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                class="lucide lucide-clipboard-minus-icon lucide-clipboard-minus h-5 w-5 text-white">
+                                <rect width="8" height="4" x="8" y="2" rx="1" ry="1" />
+                                <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2" />
+                                <path d="M9 14h6" />
+                            </svg>
+                        </div>
+                        <h2
+                            class="text-3xl font-extrabold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+                            Ringkasan</h2>
+                    </div>
+                    <p class="text-[15px] text-gray-500 dark:text-gray-400 ">
+                        Data keuangan anda saat ini</p>
+                </div>
+            </div>
+
+            <div class="w-full flex justify-between">
+                <button type="button" @click="toggleAllDataAuto()" x-cloak
+                    class="border glass border-gray-300 rounded-lg cursor-pointer px-3 py-2 flex items-center gap-2">
                     <!-- Show Icon (Simple) -->
                     <svg x-show="!(showBalance && showIncome && showExpense)" class="w-4 h-4" fill="none"
                         stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5">
@@ -247,11 +267,8 @@
                     <p x-show="!(showBalance && showIncome && showExpense)">Tampilkan Semua Data</p>
                     <p x-show="(showBalance && showIncome && showExpense)">Sembunyikan Semua Data</p>
                 </button>
-            </div>
-
-            <div class="flex items-center gap-3 flex-wrap relative" x-data="{ open: false }">
-                <button type="button" @click="open = !open"
-                    class="flex items-center gap-2 border border-gray-300 dark:border-gray-600 dark:text-[#fafafa] text-black rounded px-4 py-1 dark:hover:bg-gray-700 hover:bg-gray-200 transition-colors duration-1000 cursor-pointer whitespace-nowrap">
+                <button type="button" @click="open = !open"  x-cloak
+                    class="border glass border-gray-300 rounded-lg cursor-pointer px-3 py-2 flex items-center gap-2">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
                         stroke="currentColor" aria-hidden="true">
                         <title>Filter icon</title>
@@ -264,29 +281,9 @@
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
                     </svg>
                 </button>
-
-                <div x-show="open" @click.outside="open = false" x-transition:enter="transition ease-out duration-200"
-                    x-transition:enter-start="opacity-0 scale-95" x-transition:enter-end="opacity-100 scale-100"
-                    x-transition:leave="transition ease-in duration-75" x-transition:leave-start="opacity-100 scale-100"
-                    x-transition:leave-end="opacity-0 scale-95" x-cloak
-                    class="absolute right-0 top-full mt-2 w-72 rounded-md shadow-lg bg-white dark:bg-gray-800 ring-1 ring-black ring-opacity-5 z-10 p-4">
-
-
-                    <div class="border-t border-gray-200 dark:border-gray-700 pt-4 transition-colors duration-1000">
-                        <label class="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-2">Custom
-                            Range</label>
-                        <div class="flex flex-col items-center space-x-2">
-                            <input type="date" wire:model="startDate"
-                                class="form-input rounded-md shadow-sm w-full dark:bg-gray-700 dark:text-white ">
-                            <span>to</span>
-                            <input type="date" wire:model="endDate"
-                                class="form-input rounded-md shadow-sm w-full dark:bg-gray-700 dark:text-white">
-                        </div>
-                        <button @click="$wire.loadFinancialData(); open = false"
-                            class="mt-4 w-full bg-indigo-600 text-white py-2 px-4 rounded-md hover:bg-indigo-700 transition">Apply</button>
-                    </div>
-                </div>
             </div>
+
+
         </div>
 
 
@@ -306,16 +303,17 @@
                     </svg>
                     <span class="text-sm font-medium text-blue-400">Total Balance</span>
                 </div>
-                
+
                 <div class="flex items-center gap-3">
-                <p x-show="showBalance" :class="{ 'number-glow': isAnimating.balance }"
-                    class="text-2xl font-bold text-blue-400"> Rp <span x-text="formatNumber(animatedBalance)"
-                        :class="{ 'animate-pulse-gentle': isAnimating.balance }"></span></p>
-                <p x-show="!showBalance" class="dark:text-white text-2xl font-bold transition-all duration-1000">*******
-                </p>
+                    <p x-show="showBalance" :class="{ 'number-glow': isAnimating.balance }"
+                        class="text-2xl font-bold text-blue-400"> Rp <span x-text="formatNumber(animatedBalance)"
+                            :class="{ 'animate-pulse-gentle': isAnimating.balance }"></span></p>
+                    <p x-show="!showBalance" class="dark:text-white text-2xl font-bold transition-all duration-1000">
+                        *******
+                    </p>
                 </div>
 
-                 <button type="button" aria-label="Toggle visibility expense" @click="toggleCard('balance')"
+                <button type="button" aria-label="Toggle visibility expense" @click="toggleCard('balance')"
                     class="text-gray-500 absolute top-3 right-3 hover:text-blue-400 transition-all duration-300 cursor-pointer transform hover:scale-110 hover:rotate-12 btn-animate">
                     <svg x-show="showBalance" x-transition:enter="transition ease-out duration-200 delay-100"
                         x-transition:enter-start="opacity-0 rotate-180" x-transition:enter-end="opacity-100 rotate-0"

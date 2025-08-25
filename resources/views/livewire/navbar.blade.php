@@ -47,7 +47,7 @@
 
                     <!-- Theme Toggle -->
                     <div class="relative">
-                        <button id="mode-menu-button"
+                        <button id="mode-menu-button"  x-cloak
                             class="flex items-center gap-1 px-3 py-2 rounded-full glass border border-border text-xs transition-all cursor-pointer duration-300 hover:scale-105">
                             <div
                                 class="inline-flex justify-center px-1 py-1 text-sm font-medium cursor-pointer rounded-lg  transition-colors duration-1100">
@@ -133,7 +133,7 @@
 
 
                     <!-- Account Dropdown -->
-                    <div class="relative" x-data="{ open: false }" @click.outside="open = false">
+                    <div class="relative" x-data="{ open: false }" @click.outside="open = false"  x-cloak>
                         <button @click="open = !open"
                             class="flex items-center px-3 py-3 rounded-full glass border border-border text-xs transition-all cursor-pointer duration-300 hover:scale-105">
                             Account

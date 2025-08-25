@@ -1,5 +1,27 @@
 <div>
     <div class="flex h-screen">
+        {{-- Notif Loading --}}
+        <div x-init="setTimeout(() => show = false, 5000)" wire:loading.delay wire:target="deleteTransaction">
+            <div class="notification" id="notif">
+                <div class="notification-content">
+                    <div role="status">
+                        <svg aria-hidden="true" class="w-5 h-5 text-gray-200 animate-spin dark:text-gray-600 fill-white"
+                            viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path
+                                d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z"
+                                fill="currentColor" />
+                            <path
+                                d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z"
+                                fill="currentFill" />
+                        </svg>
+                    </div>
+                    <div class="message">
+                        <span class="text text-md">Deleting Transaction.....</span>
+                    </div>
+                </div>
+                <div class="progressBarLoading"></div>
+            </div>
+        </div>
 
         {{-- Modal --}}
         <div id="crud-modal" wire:click.self="closeModal" tabindex="-1" x-data="{ show: @entangle('showModal') }" x-show="show" x-cloak
@@ -99,11 +121,11 @@
                                 @error('category_id')
                                     <span class="text-red-500 text-sm">{{ $message }}</span>
                                 @enderror
-                                <div id="dropdownSearch" tabindex="-1" x-data="{ show: @entangle('showCategoryDropdown') }" x-show="show" x-cloak
-                                    x-transition:enter="ease-out duration-300" x-transition:enter-start="opacity-0"
-                                    x-transition:enter-end="opacity-100" x-transition:leave="ease-in duration-200"
-                                    x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0"
-                                    @click.away="show = false"
+                                <div id="dropdownSearch" tabindex="-1" x-data="{ show: @entangle('showCategoryDropdown') }" x-show="show"
+                                    x-cloak x-transition:enter="ease-out duration-300"
+                                    x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100"
+                                    x-transition:leave="ease-in duration-200" x-transition:leave-start="opacity-100"
+                                    x-transition:leave-end="opacity-0" @click.away="show = false"
                                     class="z-11 dark:bg-gray-950/70  absolute mt-[10px] rounded-lg shadow-sm w-60">
                                     <div
                                         class="glass border border-border rounded-lg w-full max-w-md transform transition-all duration-300">
@@ -350,8 +372,9 @@
             </div>
         </div>
         {{-- End Modal --}}
+
         {{-- Btn Menu Mobile --}}
-        <div class="fixed top-4 left-4 z-50 lg:hidden">
+        <div class="fixed top-4 left-4 z-1 lg:hidden">
             <button id="sidebar-open-btn" onclick="openSidebar()"
                 class="p-2 rounded-lg glass border border-border hover:bg-card transition-all duration-300 shadow-theme">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
@@ -363,12 +386,15 @@
                 </svg>
             </button>
         </div>
+
         <!-- Sidebar -->
+
+        {{-- Overlay --}}
         <div class="fixed inset-0 bg-black/50 z-2 hidden lg:hidden" id="overlay" onclick="closeSidebar()">
         </div>
 
         <nav id="sidebar2"
-            class="fixed  h-full w-72 glass border-r border-border z-1  transform -translate-x-full lg:translate-x-0  transition-transform duration-300 ease-in-out">
+            class="fixed  h-full w-72 glass border-r border-border z-3  transform -translate-x-full lg:translate-x-0  transition-transform duration-300 ease-in-out">
             <!-- Header -->
             <div class="p-6 border-b border-gray-700">
                 <div class="flex items-center gap-3">
@@ -512,29 +538,6 @@
         <main class="min-h-screen w-full lg:ml-72">
             <!-- Header -->
             <livewire:navbar />
-            <div x-init="setTimeout(() => show = false, 5000)" wire:loading.delay wire:target="deleteTransaction">
-                <div class="notification" id="notif">
-                    <div class="notification-content">
-                        <div role="status">
-                            <svg aria-hidden="true"
-                                class="w-5 h-5 text-gray-200 animate-spin dark:text-gray-600 fill-white"
-                                viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path
-                                    d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z"
-                                    fill="currentColor" />
-                                <path
-                                    d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z"
-                                    fill="currentFill" />
-                            </svg>
-                        </div>
-                        <div class="message">
-                            <span class="text text-md">Deleting Transaction.....</span>
-                        </div>
-                    </div>
-                    <div class="progressBarLoading"></div>
-                </div>
-            </div>
-
             @if (session()->has('successD'))
                 <div x-data="{ show: true }" x-init="setTimeout(() => show = false, 3000)" x-show="show">
                     <div class="notification" id="notif">
@@ -561,7 +564,7 @@
                 </div>
             @endif
             {{-- Content Main --}}
-            <div class="px-5">
+            <div class="px-5 pb-10">
                 <section class="px-5 py-6  max-w-8xl mx-auto w-full flex flex-col items-center">
                     <div
                         class="inline-flex items-center gap-2 px-6 py-3 rounded-full glass border transition-all duration-300 hover:scale-105 hover:shadow-theme mb-4">
@@ -638,9 +641,8 @@
                     </div>
                 </section>
 
-
+                <!-- Quote Card -->
                 <section class="quote-card-container px-5 relative group">
-                    <!-- Main Quote Card -->
                     <div
                         class="relative p-4 glass border border-border rounded-2xl shadow-theme-lg hover:shadow-xl transition-all duration-500 hover:scale-[1.02] hover-lift overflow-hidden">
                         <!-- Top Icon Section -->
@@ -726,7 +728,7 @@
                 </section>
 
                 {{-- Table --}}
-                <div class="w-full ">
+                <section class="w-full ">
                     <!-- Card Header -->
                     <div class="px-6 py-2 space-y-4 relative">
                         <div class="flex flex-col items-start">
@@ -1244,6 +1246,32 @@
                         </div>
 
                     </div>
+                </section>
+
+                <section class="px-5">
+                    @livewire('transaction-chart')
+                </section>
+
+
+                {{-- Footer --}}
+                <div class="mt-16 text-center">
+                    <div
+                        class="inline-flex items-center gap-3 px-8 py-4 rounded-full bg-gradient-to-r from-blue-500 to-purple-600 text-white font-medium shadow-theme-lg hover:shadow-xl transition-all duration-300 cursor-pointer hover:scale-105 btn-premium group">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+                            fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                            stroke-linejoin="round" class="lucide lucide-sparkles-icon lucide-sparkles h-5 w-5 group-hover:rotate-12 transition-transform duration-300">
+                            <path
+                                d="M11.017 2.814a1 1 0 0 1 1.966 0l1.051 5.558a2 2 0 0 0 1.594 1.594l5.558 1.051a1 1 0 0 1 0 1.966l-5.558 1.051a2 2 0 0 0-1.594 1.594l-1.051 5.558a1 1 0 0 1-1.966 0l-1.051-5.558a2 2 0 0 0-1.594-1.594l-5.558-1.051a1 1 0 0 1 0-1.966l5.558-1.051a2 2 0 0 0 1.594-1.594z" />
+                            <path d="M20 2v4" />
+                            <path d="M22 4h-4" />
+                            <circle cx="4" cy="20" r="2" />
+                        </svg>
+                        <span>Upgrade to Pro for Advanced AI Features</span>
+                        <div class="w-2 h-2 bg-white/40 rounded-full animate-pulse"> </div>
+                    </div>
+                    <p class="text-sm text-muted-foreground mt-4 max-w-md mx-auto">
+                        Unlock premium features and get personalized financial insights powered by Laravel Livewire
+                    </p>
                 </div>
 
             </div>
@@ -1252,19 +1280,5 @@
         </main>
     </div>
 
-    <script>
-        const sidebar = document.getElementById('sidebar2');
-        const sidebarOpenBtn = document.getElementById('sidebar-open-btn');
-        const overlay = document.getElementById('overlay');
-        const closeSidebar = () => {
-            sidebar.classList.remove('translate-x-0');
-            sidebar.classList.add('-translate-x-full');
-            overlay.classList.add('hidden');
-        };
-        const openSidebar = () => {
-            sidebar.classList.remove('-translate-x-full');
-            sidebar.classList.add('translate-x-0');
-            overlay.classList.remove('hidden');
-        };
-    </script>
+  
 </div>

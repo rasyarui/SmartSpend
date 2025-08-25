@@ -133,9 +133,24 @@
     </div>
 
     <livewire:pages.dashboard />
+
     @livewireScripts
 
-
+   <script>
+        const sidebar = document.getElementById('sidebar2');
+        const sidebarOpenBtn = document.getElementById('sidebar-open-btn');
+        const overlay = document.getElementById('overlay');
+        const closeSidebar = () => {
+            sidebar.classList.remove('translate-x-0');
+            sidebar.classList.add('-translate-x-full');
+            overlay.classList.add('hidden');
+        };
+        const openSidebar = () => {
+            sidebar.classList.remove('-translate-x-full');
+            sidebar.classList.add('translate-x-0');
+            overlay.classList.remove('hidden');
+        };
+    </script>
 
     <script src="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindplus/elements@1" type="module"></script>

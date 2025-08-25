@@ -31,11 +31,12 @@ class CardTransaction extends Component
     public $actualIncome;
     public $actualBalance;
 
+    public $dateRange = '';
     protected $listeners = ['moneyUpdated' => 'loadFinancialData', 'filterByDate' => 'applyDateFilter'];
 
     public function render()
     {
-        
+
         $transactions = Transaction::with('category')
             ->forUser(Auth::id())
             ->orderBy('transaction_date', 'desc')
@@ -50,8 +51,7 @@ class CardTransaction extends Component
     #[On('moneyUpdated')]
     public function mount()
     {
-        $this->startDate = Carbon::now()->startOfMonth()->toDateString();
-        $this->endDate = Carbon::now()->endOfMonth()->toDateString();
+        $this->dateRange = now()->startOfMonth()->format('Y-m-d') . ' - ' . now()->endOfMonth()->format('Y-m-d');
         $this->loadFinancialData();
 
         $this->actualExpense = $this->totalExpense;
@@ -114,23 +114,32 @@ class CardTransaction extends Component
 
     public function loadFinancialData()
     {
-
-        if (Auth::check()) {
-            $userId = Auth::id();
-
-            $query = Transaction::forUser($userId);
-            // Apply date filter
-            if ($this->startDate && $this->endDate) {
-                $query->where('transaction_date', [$this->startDate, $this->endDate]);
-            }
-
-            $this->totalIncome = Transaction::forUser($userId)->income()->sum('amount');
-            $this->totalExpense = Transaction::forUser($userId)->expense()->sum('amount');
-            $this->balance = $this->totalIncome - $this->totalExpense;
-        } else {
+        if (!Auth::check()) {
             $this->totalIncome = 0;
             $this->totalExpense = 0;
             $this->balance = 0;
+            return;
         }
+
+        $userId = Auth::id();
+        $query = Transaction::forUser($userId);
+
+        // Filter by date range
+        if ($this->dateRange) {
+            [$start, $end] = explode(' - ', $this->dateRange);
+            $startDate = Carbon::parse($start)->startOfDay();
+            $endDate = Carbon::parse($end)->endOfDay();
+
+            $query->whereBetween('transaction_date', [$startDate, $endDate]);
+        }
+
+        $this->totalIncome = $query->clone()->income()->sum('amount');
+        $this->totalExpense = $query->clone()->expense()->sum('amount');
+        $this->balance = $this->totalIncome - $this->totalExpense;
+
+        // Update nilai untuk animasi
+        $this->actualIncome = $this->totalIncome;
+        $this->actualExpense = $this->totalExpense;
+        $this->actualBalance = $this->balance;
     }
 }

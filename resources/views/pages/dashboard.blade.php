@@ -14,6 +14,12 @@
     {{-- @vite('resources/js/app.js') --}}
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
 
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 
 
@@ -136,7 +142,8 @@
 
     @livewireScripts
 
-   <script>
+
+    <script>
         const sidebar = document.getElementById('sidebar2');
         const sidebarOpenBtn = document.getElementById('sidebar-open-btn');
         const overlay = document.getElementById('overlay');

@@ -23,7 +23,7 @@
 
                 <div class="flex flex-col sm:flex-row gap-2">
                     <!-- Time Range Selector -->
-                    <select wire:model="timeRange" wire:change="setTimeRange($event.target.value)"
+                    <select 
                         class="w-32 border border-white/20 bg-white/5 backdrop-blur-sm rounded-lg px-3 py-2 text-sm text-gray-700 dark:text-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-300">
                         <option value="daily">Daily</option>
                         <option value="weekly">Weekly</option>

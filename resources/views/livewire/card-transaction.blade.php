@@ -267,26 +267,24 @@
                     <p x-show="!(showBalance && showIncome && showExpense)">Tampilkan Semua Data</p>
                     <p x-show="(showBalance && showIncome && showExpense)">Sembunyikan Semua Data</p>
                 </button>
-                <button type="button" @click="open = !open"  x-cloak
-                    class="border glass border-gray-300 rounded-lg cursor-pointer px-3 py-2 flex items-center gap-2">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
-                        stroke="currentColor" aria-hidden="true">
-                        <title>Filter icon</title>
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2a1 1 0 01-.293.707L15 13.414V19a1 1 0 01-1.447.894l-4-2A1 1 0 019 17v-3.586L3.293 6.707A1 1 0 013 6V4z" />
+
+                <div type="button" x-cloak class="glass border rounded-lg px-3 py-2 cursor-pointer flex items-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                        class="lucide lucide-arrow-down-narrow-wide-icon lucide-arrow-down-narrow-wide h-6 w-6 ">
+                        <path d="m3 16 4 4 4-4" />
+                        <path d="M7 20V4" />
+                        <path d="M11 4h4" />
+                        <path d="M11 8h7" />
+                        <path d="M11 12h10" />
                     </svg>
-                    <span x-text="`${$wire.startDate} - ${$wire.endDate}`"></span>
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24"
-                        stroke="currentColor" aria-hidden="true">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
-                    </svg>
-                </button>
+                    <input type="text"
+                        class="search-input outline-none bg-transparent cursor-pointer font-medium text-center w-60"
+                        name="daterange" id="daterange" wire:model.defer="daterange" readonly />
+                </div>
             </div>
 
-
         </div>
-
-
 
         <!-- Wrapper dengan Alpine.js untuk animasi -->
 
@@ -435,7 +433,59 @@
 
         </div>
 
+        <script>
+            document.addEventListener('livewire:init', function() {
+                const input = $('input[name="daterange"]');
 
+                // Inisialisasi daterangepicker
+                input.daterangepicker({
+                    opens: 'left',
+                    alwaysShowCalendars: true,
+                    showCustomRangeLabel: false,
+                    ranges: {
+                        'Hari Ini': [moment(), moment()],
+                        'Kemarin': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+                        '7 Hari Terakhir': [moment().subtract(6, 'days'), moment()],
+                        '30 Hari Terakhir': [moment().subtract(29, 'days'), moment()],
+                        'Bulan Ini': [moment().startOf('month'), moment().endOf('month')],
+                        'Bulan Lalu': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1,
+                            'month').endOf('month')]
+                    },
+                    locale: {
+                        format: 'YYYY-MM-DD',
+                        separator: ' - ',
+                        applyLabel: "Terapkan",
+                        cancelLabel: "Batal",
+                        fromLabel: "Dari",
+                        toLabel: "Sampai",
+                        customRangeLabel: "Pilih Manual",
+                        daysOfWeek: ["Min", "Sen", "Sel", "Rab", "Kam", "Jum", "Sab"],
+                        monthNames: ["Jan", "Feb", "Mar", "Apr", "Mei", "Jun", "Jul", "Agu", "Sep", "Okt",
+                            "Nov", "Des"
+                        ]
+                    }
+                }, function(start, end, label) {
+                    // Format: "2024-01-01 - 2024-01-15"
+                    const range = start.format('YYYY-MM-DD') + ' - ' + end.format('YYYY-MM-DD');
+
+                    // Kirim ke Livewire
+                    @this.set('dateRange', range);
+
+                    // Trigger reload data
+                    @this.call('loadFinancialData');
+
+                    console.log("Rentang baru:", range);
+                });
+
+                // Set default value (opsional)
+                @this.$watch('dateRange', value => {
+                    if (value && input.val() !== value) {
+                        input.val(value).trigger('change');
+                    }
+                });
+            });
+        </script>
 
     </div>
+
 </div>

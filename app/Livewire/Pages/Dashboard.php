@@ -17,8 +17,11 @@ class Dashboard extends Component
 {
     use WithPagination;
     public $showModal = false;
+    public $showModalDelete = false;
     public $showCategoryModal = false;
     public $showCategoryDropdown = false;
+
+    public $deleteTransactionId = null;
 
     public $transactionType = 'income';
 
@@ -41,6 +44,25 @@ class Dashboard extends Component
     public $sortDirection = 'desc'; // Default direction
     public $hiddenColumns = [];
 
+
+
+    public function deleteTransaction()
+    {
+        $id = $this->deleteTransactionId;
+        $this->deleteTransactionId = null;
+        $transaction = Transaction::with('category')->where('user_id', Auth::id())->find($id);
+        if ($transaction) {
+            $transaction->delete();
+            sleep(5);
+            session()->flash('successD', 'Transaksi berhasil dihapus.');
+            $this->dispatch('moneyUpdated');
+            $this->showModalDelete = false;
+            // Opsional: refresh komponen lain
+        } else {
+            session()->flash('error', 'Transaksi tidak ditemukan.');
+        }
+    }
+
     public function render()
     {
         $transactionsQuery = Transaction::with('category')
@@ -53,11 +75,11 @@ class Dashboard extends Component
             $transactionsQuery->whereIn('type', $this->filter_types);
         }
 
-         if (!empty($this->filter_category)) {
-        $transactionsQuery->whereHas('category', function ($query) {
-            $query->whereIn('category', $this->filter_category);
-        });
-    }
+        if (!empty($this->filter_category)) {
+            $transactionsQuery->whereHas('category', function ($query) {
+                $query->whereIn('category', $this->filter_category);
+            });
+        }
         $transactions = $transactionsQuery->paginate(5);
 
         return view('livewire.pages.dashboard', [
@@ -68,11 +90,11 @@ class Dashboard extends Component
     }
 
     public function clearFilter()
-{
-    $this->filter_types = [];
-    $this->filter_category = [];
-    // Tidak perlu memanggil render() secara manual, Livewire otomatis merender ulang
-}
+    {
+        $this->filter_types = [];
+        $this->filter_category = [];
+        // Tidak perlu memanggil render() secara manual, Livewire otomatis merender ulang
+    }
     public function sortBy($field)
     {
         if ($this->sortField === $field) {
@@ -138,6 +160,22 @@ class Dashboard extends Component
     }
 
 
+    public function openModalDelete($id)
+    {
+        $transaction = Transaction::where('user_id', Auth::id())->find($id);
+
+        if (!$transaction) {
+            session()->flash('error', 'Transaksi tidak ditemukan.');
+            return;
+        }
+        $this->deleteTransactionId = $id;
+
+        $this->showModalDelete = true;
+    }
+    public function closeModalDelete()
+    {
+        $this->showModalDelete = false;
+    }
 
     public function openModal($type)
     {

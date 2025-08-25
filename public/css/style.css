@@ -97,6 +97,88 @@
   transform: scale(1.2); /* Memperbesar sedikit tanda ceklis */
 }
 
+.notification {
+    z-index: 999;
+    color: black;
+    top: 25px;
+    right: -90px;
+    position: fixed;
+    border-radius: 12px;
+    background-color: aliceblue;
+    font-size: 17px;
+    padding: 15px 35px 15px 12px;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.5);
+    border-left: 6px solid #7771ff;
+    overflow: hidden;
+    animation: notif 1s forwards;
+    transition: ease-in-out;
+    /* animation-direction: alternate-reverse; */
+}
+
+.notification .progressBar {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 3px;
+    width: 100%;
+    background-color: aliceblue;
+}
+.notification .progressBarLoading {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 3px;
+    width: 100%;
+    background-color: aliceblue;
+}
+
+.notification .progressBar::before {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgb(111, 104, 251);
+    animation: progress 2s linear forwards;
+    animation-delay: 1s;
+    border-radius: 10px;
+}
+.notification .progressBarLoading::before {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgb(111, 104, 251);
+    animation: progress 4s linear forwards;
+    animation-delay: 1s;
+    border-radius: 10px;
+}
+
+@keyframes notif {
+    100% {
+        right: 25px;
+    }
+}
+
+@keyframes progress {
+    100% {
+        right: 100%;
+    }
+}
+
+.notification .notification-content {
+    display: flex;
+    align-items: center;
+}
+
+.notification .notification-content .message {
+    margin-left: 10px;
+    font-weight: 500;
+
+}
 
 :root {
   --font-size: 14px;

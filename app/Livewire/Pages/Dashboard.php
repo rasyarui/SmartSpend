@@ -297,8 +297,8 @@ class Dashboard extends Component
             'category_id' => $this->category_id
         ]);
 
-        // session()->flash('message', 'Transaksi berhasil disimpan.');
         $this->dispatch('moneyUpdated');
+
 
         $this->closeModal();
 

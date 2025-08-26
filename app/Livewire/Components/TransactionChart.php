@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire;
+namespace App\Livewire\Components;
 
 use DateTime;
 use DatePeriod;
@@ -16,11 +16,12 @@ class TransactionChart extends Component
     public $income_data = [];
     public $expense_data = [];
 
-    protected $listeners = ['moneyUpdated' => 'loadFinancialData'];
+
+    protected $listeners = ['moneyUpdated' => 'loadChartData'];
 
     public function render()
     {
-        return view('livewire.transaction-chart', [
+        return view('livewire.components.transaction-chart', [
             'stats' => $this->stats
         ]);
     }
@@ -41,12 +42,22 @@ class TransactionChart extends Component
         ];
     }
 
-
     #[On('moneyUpdated')]
     public function mount()
     {
+        $this->reset('date_time', 'income_data', 'expense_data');
+        $this->loadChartData();
+        $this->dispatch('chartUpdate',[
+            'date_time' => $this->date_time,
+            'income_data' => $this->income_data,
+            'expense_data' => $this->expense_data
+        ]);
+    }
+
+    public function loadChartData()
+    {
         $now = now();
-        $date_from = $now->copy()->startOfMonth(); // 7 hari termasuk hari ini
+        $date_from = now()->subDays(6); // 7 hari termasuk hari ini
 
         $start = new DateTime($date_from);
         $end = new DateTime($now);
@@ -77,14 +88,9 @@ class TransactionChart extends Component
                 ->where('transaction_date', $dateStr)
                 ->sum('amount');
 
-            $netTotal = $dailyIncome - $dailyExpense;
-
-
 
             $this->income_data[] = (int) $dailyIncome;
             $this->expense_data[] = (int) $dailyExpense;
         }
     }
-
-    
 }

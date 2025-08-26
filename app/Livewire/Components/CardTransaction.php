@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire;
+namespace App\Livewire\Components;
 
 use Livewire\Component;
 use App\Models\Transaction;
@@ -43,7 +43,7 @@ class CardTransaction extends Component
             ->orderBy('created_at', 'desc')
             ->paginate(10);
 
-        return view('livewire.card-transaction', [
+        return view('livewire.components.card-transaction', [
             'transactions' => $transactions,
         ]);
     }

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire;
+namespace App\Livewire\Components;
 
 use Livewire\Component;
 use Illuminate\Http\Request;
@@ -12,7 +12,7 @@ class Navbar extends Component
 
     public function render()
     {
-        return view('livewire.navbar');
+        return view('livewire.components.navbar');
     }
 
     public function logout(Request $request)

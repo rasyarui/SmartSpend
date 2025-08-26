@@ -537,7 +537,7 @@
         <!-- Main Content -->
         <main class="min-h-screen w-full lg:ml-72">
             <!-- Header -->
-            <livewire:navbar />
+            <livewire:components.navbar/>
             @if (session()->has('successD'))
                 <div x-data="{ show: true }" x-init="setTimeout(() => show = false, 3000)" x-show="show">
                     <div class="notification" id="notif">
@@ -724,7 +724,7 @@
 
                 <!-- Summary section -->
                 <section class="px-5 py-8 max-w-8xl mx-auto w-full flex flex-col gap-6">
-                    <livewire:card-transaction />
+                    <livewire:components.card-transaction/>
                 </section>
 
                 {{-- Table --}}
@@ -1248,8 +1248,9 @@
                     </div>
                 </section>
 
+                {{-- Chart --}}
                 <section class="px-5">
-                    @livewire('transaction-chart')
+                    <livewire:components.transaction-chart/>
                 </section>
 
 

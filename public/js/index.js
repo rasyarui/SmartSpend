@@ -41,8 +41,6 @@ function animateCount(element, start, end, duration) {
     requestAnimationFrame(step); // Memulai animasi dengan requestAnimationFrame
 }
 
-
-
 document.addEventListener("DOMContentLoaded", function () {
     const dropdownButton = document.getElementById("dropdown-button");
     const dropdownMenu = document.getElementById("dropdown-menu");
@@ -72,6 +70,18 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 });
 
+const sidebar = document.getElementById("sidebar2");
+const sidebarOpenBtn = document.getElementById("sidebar-open-btn");
+const overlay = document.getElementById("overlay");
+const closeSidebar = () => {
+    sidebar.classList.remove("translate-x-0");
+    sidebar.classList.add("-translate-x-full");
+    overlay.classList.add("hidden");
+};
+const openSidebar = () => {
+    sidebar.classList.remove("-translate-x-full");
+    sidebar.classList.add("translate-x-0");
+    overlay.classList.remove("hidden");
+};
+
 // Register JS
-
-

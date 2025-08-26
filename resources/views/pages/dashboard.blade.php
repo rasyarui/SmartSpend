@@ -164,7 +164,7 @@
 
     <script src="/js/index.js"></script>
     <script src="/js/darkMode.js"></script>
-
+    @stack('scripts')
 
 </body>
 

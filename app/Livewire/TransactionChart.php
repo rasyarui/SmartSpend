@@ -46,7 +46,7 @@ class TransactionChart extends Component
     public function mount()
     {
         $now = now();
-        $date_from = now()->subDays(6); // 7 hari termasuk hari ini
+        $date_from = $now->copy()->startOfMonth(); // 7 hari termasuk hari ini
 
         $start = new DateTime($date_from);
         $end = new DateTime($now);
@@ -85,4 +85,6 @@ class TransactionChart extends Component
             $this->expense_data[] = (int) $dailyExpense;
         }
     }
+
+    
 }

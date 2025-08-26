@@ -280,7 +280,7 @@
                     </svg>
                     <input type="text"
                         class="search-input outline-none bg-transparent cursor-pointer font-medium text-center w-60"
-                        name="daterange" id="daterange" wire:model.defer="daterange" readonly />
+                        name="daterange" id="daterange" readonly />
                 </div>
             </div>
 
@@ -475,13 +475,6 @@
                     @this.call('loadFinancialData');
 
                     console.log("Rentang baru:", range);
-                });
-
-                // Set default value (opsional)
-                @this.$watch('dateRange', value => {
-                    if (value && input.val() !== value) {
-                        input.val(value).trigger('change');
-                    }
                 });
             });
         </script>

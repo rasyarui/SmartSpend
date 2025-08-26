@@ -29,6 +29,37 @@
                         <option value="weekly">Weekly</option>
                         <option value="monthly">Monthly</option>
                     </select>
+
+
+                    <div class="flex gap-1 p-1 bg-white/5 rounded-lg border border-white/10">
+                        <button wire:click="setChartType('area')"
+                            class="h-8 px-3 rounded transition-all duration-200 {{ $chartType === 'area' ? 'bg-gradient-to-r from-blue-500 to-purple-500 text-white' : 'text-gray-600 dark:text-gray-400 hover:bg-white/10' }}"
+                            type="button">
+                            <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path>
+                            </svg>
+                        </button>
+                        <button wire:click="setChartType('bar')"
+                            class="h-8 px-3 rounded transition-all duration-200 {{ $chartType === 'bar' ? 'bg-gradient-to-r from-blue-500 to-purple-500 text-white' : 'text-gray-600 dark:text-gray-400 hover:bg-white/10' }}"
+                            type="button">
+                            <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z">
+                                </path>
+                            </svg>
+                        </button>
+                        <button wire:click="setChartType('pie')"
+                            class="h-8 px-3 rounded transition-all duration-200 {{ $chartType === 'pie' ? 'bg-gradient-to-r from-blue-500 to-purple-500 text-white' : 'text-gray-600 dark:text-gray-400 hover:bg-white/10' }}"
+                            type="button">
+                            <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M11 3.055A9.001 9.001 0 1020.945 13H11V3.055z"></path>
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M20.488 9H15V3.512A9.025 9.025 0 0120.488 9z"></path>
+                            </svg>
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -74,95 +105,119 @@
 
 
     @push('scripts')
-    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
-    <script>
+        <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+        <script>
+           let chart;
+    const income_data = @json($income_data);
+    const expense_data = @json($expense_data);
+    const date_time = @json($date_time);
+    let currentChartType = @json($chartType); // Ambil dari Livewire
 
-        const income_data = @json($income_data);
-        const expense_data = @json($expense_data);
-        const date_time = @json($date_time);
-
-        function updateChart (income_data, expense_data, date_time) {
-            return  {
-                    series: [{
-                        name: 'Penghasilan',
-                        data: income_data,
-                    }, {
-                        name: 'Pengeluaran',
-                        data: expense_data,
-                    }],
-                    chart: {
-                        height: 350,
-                        type: 'area',
-                        background: 'transparent',
-                        fontFamily: 'Inter, ui-sans-serif, system-ui',
-                        toolbar: {
-                            show: false
-                        }
-                    },
-                    dataLabels: {
-                        enabled: true, // 🔥 Aktifkan dataLabels
-                        formatter: function(val) {
-                            // Format angka ke IDR, hanya tampilkan jika > 0
-                            if (val === 0) return ''; // Sembunyikan jika 0
-                            return new Intl.NumberFormat('id-ID', {
-                                style: 'currency',
-                                currency: 'IDR',
-                                minimumFractionDigits: 0
-                            }).format(val);
-                        },
-                        // Geser ke atas sedikit agar tidak menempel ke titik
-                    },
-                    stroke: {
-                        curve: 'smooth'
-                    },
-                    xaxis: {
-                        type: 'datetime',
-                        categories: date_time
-                    },
-                    yaxis: {
-                        title: {
-                            text: 'Amount (IDR)'
-                        }
-                    },
-                    grid: {
-                        borderColor: 'rgba(148, 163, 184, 0.2)',
-                        strokeDashArray: 3
-                    },
-                    tooltip: {
-                        x: {
-                            format: 'dd MMM yyyy '
-                        },
-                        y: {
-                            formatter: function(value) {
-                                return new Intl.NumberFormat('id-ID', {
-                                    style: 'currency',
-                                    currency: 'IDR',
-                                    minimumFractionDigits: 0
-                                }).format(value);
-                            }
-                        }
-                    },
-                    colors: ['#10b981', '#ef4444'], // hijau untuk income, merah untuk expense
-                };
-            
-        }
-
-        const chart = new ApexCharts(document.querySelector("#chart"), updateChart(income_data, expense_data, date_time));
-        chart.render();
-
-        Livewire.on('chartUpdate', (data) => {
-            chart.updateSeries([{
+    function createChartOptions(income_data, expense_data, date_time, type = 'area') {
+        // Default options
+        const options = {
+            series: [{
                 name: 'Penghasilan',
-                data: data[0].income_data,
+                data: income_data,
             }, {
                 name: 'Pengeluaran',
-                data: data[0].expense_data,
-            }
-        
-        ])
-        })
-    </script>
-@endpush
+                data: expense_data,
+            }],
+            chart: {
+                height: 350,
+                type: type, // 🔥 Gunakan parameter type
+                background: 'transparent',
+                fontFamily: 'Inter, ui-sans-serif, system-ui',
+                toolbar: {
+                    show: false
+                }
+            },
+            dataLabels: {
+                enabled: true,
+                formatter: function(val) {
+                    if (val === 0) return '';
+                    return new Intl.NumberFormat('id-ID', {
+                        style: 'currency',
+                        currency: 'IDR',
+                        minimumFractionDigits: 0
+                    }).format(val);
+                }
+            },
+            stroke: {
+                curve: 'smooth',
+                width: type === 'bar' ? 0 : 2 // Bar tidak butuh stroke
+            },
+            plotOptions: {
+                bar: {
+                    horizontal: false,
+                    columnWidth: '50%'
+                }
+            },
+            xaxis: {
+                type: 'datetime',
+                categories: date_time
+            },
+            yaxis: {
+                title: {
+                    text: 'Amount (IDR)'
+                }
+            },
+            grid: {
+                borderColor: 'rgba(148, 163, 184, 0.2)',
+                strokeDashArray: 3
+            },
+            tooltip: {
+                x: {
+                    format: 'dd MMM yyyy'
+                },
+                y: {
+                    formatter: function(value) {
+                        return new Intl.NumberFormat('id-ID', {
+                            style: 'currency',
+                            currency: 'IDR',
+                            minimumFractionDigits: 0
+                        }).format(value);
+                    }
+                }
+            },
+            colors: ['#10b981', '#ef4444'],
+        };
+
+        // Jika tipe bar, pastikan xaxis datetime tetap jalan
+        return options;
+    }
+
+    // Inisialisasi chart
+    document.addEventListener('DOMContentLoaded', function () {
+        chart = new ApexCharts(document.querySelector("#chart"), createChartOptions(income_data, expense_data, date_time, currentChartType));
+        chart.render();
+    });
+
+    // Dengarkan event dari Livewire
+    document.addEventListener('livewire:initialized', () => {
+        Livewire.on('updateChart', (data) => {
+            const newType = data[0].chartType || 'area';
+            const newIncome = data[0].income_data || [];
+            const newExpense = data[0].expense_data || [];
+
+            // Update tipe chart DAN data
+            chart.updateOptions({
+                chart: { type: newType },
+                stroke: { width: newType === 'bar' ? 0 : 2 },
+                xaxis: { categories: data[0].date_time } // penting: update kategori
+            });
+
+            chart.updateSeries([{
+                name: 'Penghasilan',
+                data: newIncome
+            }, {
+                name: 'Pengeluaran',
+                data: newExpense
+            }]);
+        });
+    });
+        </script>
+    @endpush
 
 
 </div>

@@ -15,6 +15,7 @@ class TransactionChart extends Component
     public $date_time = [];
     public $income_data = [];
     public $expense_data = [];
+    public $chartType = 'area';
 
 
     protected $listeners = ['moneyUpdated' => 'loadChartData'];
@@ -42,12 +43,23 @@ class TransactionChart extends Component
         ];
     }
 
+    public function setChartType($type)
+    {
+        $this->chartType = $type;
+        $this->dispatch('updateChart', [
+            'chartType' => $this->chartType,
+            'income_data' => $this->income_data,
+            'expense_data' => $this->expense_data,
+            'date_time' => $this->date_time
+        ]);
+    }
+
     #[On('moneyUpdated')]
     public function mount()
     {
         $this->reset('date_time', 'income_data', 'expense_data');
         $this->loadChartData();
-        $this->dispatch('chartUpdate',[
+        $this->dispatch('updateChart', [
             'date_time' => $this->date_time,
             'income_data' => $this->income_data,
             'expense_data' => $this->expense_data

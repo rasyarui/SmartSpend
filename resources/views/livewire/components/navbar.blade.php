@@ -1,10 +1,13 @@
 <div>
+    @php
+        $routeName = request()->route() ? request()->route()->getName() : '';
+    @endphp
     <header class="glass border-b border-border shadow-theme transition-all duration-300 ">
         <div class="container mx-auto px-1 py-6">
             <div class="flex justify-between items-center">
                 <div class="flex items-center gap-4 lg:hidden">
                     <div class="p-3 rounded-xl bg-gradient-to-br from-blue-500 to-purple-600 shadow-theme">
-                          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"
                             fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                             stroke-linejoin="round" class="lucide lucide-sparkles-icon lucide-sparkles">
                             <path
@@ -14,12 +17,12 @@
                             <circle cx="4" cy="20" r="2" />
                         </svg>
                     </div>
-                    <h1 class="text-3xl font-bold gradient-text">Dashboard</h1>
+                    <h1 class="text-3xl font-bold gradient-text capitalize">{{ $routeName }}</h1>
                 </div>
 
 
                 <div class="hidden lg:block">
-                    <h1 class="text-4xl font-bold gradient-text" id="page-title">Dashboard</h1>
+                    <h1 class="text-4xl font-bold gradient-text capitalize" id="page-title">{{ $routeName }}</h1>
                     <p class="text-md text-muted-foreground flex items-center gap-2 mt-2">
                         <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"
                             fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
@@ -47,7 +50,7 @@
 
                     <!-- Theme Toggle -->
                     <div class="relative">
-                        <button id="mode-menu-button"  x-cloak
+                        <button id="mode-menu-button" x-cloak
                             class="flex items-center gap-1 px-3 py-2 rounded-full glass border border-border text-xs transition-all cursor-pointer duration-300 hover:scale-105">
                             <div
                                 class="inline-flex justify-center px-1 py-1 text-sm font-medium cursor-pointer rounded-lg  transition-colors duration-1100">
@@ -75,7 +78,7 @@
 
                         <!-- Theme Dropdown -->
                         @teleport('body')
-                            <div id="mode-menu" 
+                            <div id="mode-menu"
                                 class="absolute right-32 top-22 mt-2 w-48 glass border border-border rounded-lg shadow-theme-lg hidden z-[99]">
                                 <div class="p-2">
                                     <div class="text-xs font-medium text-muted-foreground mb-2 px-2">Choose Theme
@@ -133,7 +136,7 @@
 
 
                     <!-- Account Dropdown -->
-                    <div class="relative" x-data="{ open: false }" @click.outside="open = false"  x-cloak>
+                    <div class="relative" x-data="{ open: false }" @click.outside="open = false" x-cloak>
                         <button @click="open = !open"
                             class="flex items-center px-3 py-3 rounded-full glass border border-border text-xs transition-all cursor-pointer duration-300 hover:scale-105">
                             Account

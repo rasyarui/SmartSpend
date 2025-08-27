@@ -29,7 +29,7 @@ Route::middleware('guest')->group(function () {
 
 });
 
-// Route::get('send-mail', [SendMail::class, 'index']);
+// Route::get('send-mail'," [SendMail::class, 'index']);
 
 // Route::get('verify-otp', OtpVerification::class)->name('otp.verify.form');
 
@@ -43,5 +43,8 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/dashboard', function () {
         return view('pages.dashboard');
-    });
+    })->name('dashboard');
+    Route::get('/transaction', function () {
+        return view('pages.transaction');
+    })->name('transaction');
 });

@@ -36,15 +36,11 @@ Route::middleware('guest')->group(function () {
 
 Route::middleware('auth')->group(function () {
 
-    Route::get('/', function () {
-        return view('pages.dashboard');
-    });
-
-
+   Route::redirect('/', 'dashboard')->name('dashboard'); // opsional: kasih nama
     Route::get('/dashboard', function () {
         return view('pages.dashboard');
     })->name('dashboard');
-    Route::get('/transaction', function () {
-        return view('pages.transaction');
-    })->name('transaction');
+    Route::get('/transaksi', function () {
+        return view('pages.transaksi');
+    })->name('transaksi');
 });

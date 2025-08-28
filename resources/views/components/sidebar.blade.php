@@ -51,7 +51,7 @@
             </div>
 
             <!-- Navigation Items -->
-            <div class="p-4 space-y-2">
+            <div class="p-4 space-y-2" wire:ignore>
                 <a href="/dashboard"
                     class="nav-item {{ request()->is('dashboard') ? 'active' : ''}} flex items-center gap-3 px-4 py-3 rounded-lg transition-all duration-300 hover:scale-105"
                     data-page="dashboard">
@@ -67,9 +67,9 @@
                     <span class="font-medium">Dashboard</span>
                 </a>
 
-                <a href="/transaction"
-                    class="nav-item {{ request()->is('transaction') ? 'active' : ''}} flex items-center gap-3 px-4 py-3 rounded-lg transition-all duration-300 hover:scale-105"
-                    data-page="transactions">
+                <a href="/transaksi"
+                    class="nav-item {{ request()->is('transaksi') ? 'active' : ''}} flex items-center gap-3 px-4 py-3 rounded-lg transition-all duration-300 hover:scale-105"
+                    data-page="transaksis">
                     <div class="p-2 rounded-lg bg-gradient-to-br from-green-500 to-blue-500">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
                             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"

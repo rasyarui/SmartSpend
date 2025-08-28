@@ -134,7 +134,7 @@
         </div>
     </div>
 
-    <livewire:pages.transaction />
+    <livewire:pages.transaksi />
 
 
     @livewireScripts

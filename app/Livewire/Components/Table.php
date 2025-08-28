@@ -5,8 +5,9 @@ namespace App\Livewire\Components;
 use Livewire\Component;
 use App\Models\Categories;
 use App\Models\Transaction;
-use Illuminate\Support\Facades\Auth;
+use Livewire\Attributes\On;
 use Livewire\WithPagination;
+use Illuminate\Support\Facades\Auth;
 
 
 
@@ -23,7 +24,7 @@ class Table extends Component
 
 
 
-
+    #[On('moneyUpdated')]
     public function render()
     {
         $transactionsQuery = Transaction::with('category')
@@ -47,6 +48,10 @@ class Table extends Component
             'transactions' => $transactions,
             'categories' => $this->categories
         ]);
+    }
+
+    public function mount(){
+        
     }
 
     public function getCategoriesProperty()

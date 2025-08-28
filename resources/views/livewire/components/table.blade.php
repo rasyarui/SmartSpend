@@ -103,7 +103,7 @@
                             x-cloak=""
                             class="origin-top-left glass absolute left-0 mt-2 w-40 rounded-md shadow-lg border border-gray-300 z-99">
                             <div class="flex flex-col gap-2 items-center p-2 rounded-sm">
-                                @foreach ($categories as $category)
+                                @forelse ($categories as $category)
                                     <button
                                         class="flex  hover:bg-gray-100 dark:hover:bg-[#94A3B81A] w-full gap-2 items-center p-1 rounded-md  cursor-pointer">
                                         <input id="category-{{ $category->category }}" wire:model.live="filter_category"
@@ -114,7 +114,9 @@
                                         <label for="category-{{ $category->category }}"
                                             class=" text-sm font-medium text-gray-900 rounded-sm dark:text-gray-300 cursor-pointer">{{ $category->category }}</label>
                                     </button>
-                                @endforeach
+                                    @empty
+                                    <p class="text-xs text-gray-400 text-nowrap py-1">Kategori tidak tersedia..</p>
+                                @endforelse
                                 <template
                                     x-if="typeof $wire.filter_category !== 'undefined' && $wire.filter_category.length > 0">
                                     <button @click="$wire.filter_category = []" value="clear" wire:click="clearFilter"

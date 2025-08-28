@@ -118,7 +118,7 @@
                         <label for="otp_code" class="sr-only">Kode OTP</label>
                         <input type="text" id="otp_code" wire:model.live="otp_code" maxlength="6"
                             pattern="[0-9]{6}"
-                            class="w-full px-4 py-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-center text-3xl tracking-widest font-bold {{ $isExpired ? 'bg-gray-100 cursor-not-allowed' : '' }}"
+                            class="w-full px-4 py-4 border text-black border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-center text-3xl tracking-widest font-bold {{ $isExpired ? 'bg-gray-100 cursor-not-allowed' : '' }}"
                             placeholder="000000" {{ $isExpired ? 'disabled' : '' }} autocomplete="one-time-code"
                             inputmode="numeric">
 

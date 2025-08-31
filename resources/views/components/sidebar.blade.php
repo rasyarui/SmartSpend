@@ -81,7 +81,7 @@
                     <span class="font-medium">Transaksi</span>
                 </a>
 
-                <a href=""
+                <a href="/tabunganku"
                     class="nav-item {{ request()->is('tabunganku') ? 'active' : ''}} flex items-center gap-3 px-4 py-3 rounded-lg transition-all duration-300 hover:scale-105"
                     data-page="savings">
                     <div class="p-2 rounded-lg bg-gradient-to-br from-purple-500 to-pink-500">

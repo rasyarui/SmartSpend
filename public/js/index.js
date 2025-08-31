@@ -1,24 +1,21 @@
 document.addEventListener("livewire:initialized", () => {
     const datepickerEl = document.getElementById("datepicker-actions");
 
-    datepickerEl.addEventListener("changeDate", (event) => {
-        const selectedDate = event.detail.date;
+    if (datepickerEl) {
+        datepickerEl.addEventListener("changeDate", (event) => {
+            const selectedDate = event.detail.date;
+            const formattedDate = new Date(
+                selectedDate.getTime() - selectedDate.getTimezoneOffset() * 60000
+            ).toISOString().split("T")[0];
 
-        // Format tanggal menjadi string "YYYY-MM-DD"
-        const formattedDate = new Date(
-            selectedDate.getTime() - selectedDate.getTimezoneOffset() * 60000
-        )
-            .toISOString()
-            .split("T")[0];
+            // Set nilai
+            datepickerEl.value = formattedDate;
 
-        if (window.Livewire) {
-            window.Livewire.find(
-                datepickerEl.closest("[wire\\:id]").getAttribute("wire:id")
-            ).set("transaction_date", formattedDate);
-        }
-    });
+            // 🔥 Trigger event input agar Livewire tahu
+            datepickerEl.dispatchEvent(new Event('input', { bubbles: true }));
+        });
+    }
 });
-
 function animateCount(element, start, end, duration) {
     // console.log(`animateCount called: start=${start}, end=${end}, element=${element.outerHTML}`); // Untuk debugging
     let current = start;

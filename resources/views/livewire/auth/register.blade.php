@@ -222,7 +222,7 @@
                                 </div>
                             </div>
                         </div>
-                        <button type="submit" id="register-btn" wire:ignore
+                        <button type="submit" id="register-btn"
                             class="w-full h-12 mb-5 cursor-pointer bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white border-0 shadow-theme hover:shadow-theme-lg transition-all duration-300 hover:scale-105  disabled:opacity-50  group relative overflow-hidden rounded-lg  disabled:pointer-events-none"
                             disabled>
                             <div class="flex items-center justify-center gap-3 relative z-10">
@@ -236,8 +236,8 @@
                                     </svg>
                                 </label>
                                 <span class="font-medium" id="submit-text" wire:loading.remove
-                                    wire:target="login">Create Account</span>
-                                <span class="font-medium" wire:loading wire:target="login">Memproses...</span>
+                                    wire:target="register">Create Account</span>
+                                <span class="font-medium" wire:loading wire:target="register">Memproses...</span>
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                     viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"
                                     stroke-linecap="round" stroke-linejoin="round"

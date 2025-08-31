@@ -11,6 +11,7 @@
 
 
         <main class="min-h-screen w-full lg:ml-72">
+            
             <livewire:components.navbar />
 
             <div class="px-5 py-5 space-y-6 pb-10">

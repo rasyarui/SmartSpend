@@ -43,4 +43,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/transaksi', function () {
         return view('pages.transaksi');
     })->name('transaksi');
+    Route::get('/tabunganku', function () {
+        return view('pages.tabunganku');
+    })->name('tabunganku');
 });

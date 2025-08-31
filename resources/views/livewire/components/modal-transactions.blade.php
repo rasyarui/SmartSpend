@@ -205,7 +205,7 @@
                                     Date</label>
                                 <div class="relative max-w-sm">
                                     <input id="datepicker-actions" datepicker datepicker-format="yyyy-mm-dd"
-                                        type="text" x-on:change="$wire.set('transaction_date', $el.value)"
+                                        type="text" wire:model="transaction_date"
                                         autocomplete="off" {{-- value="{{ \Carbon\Carbon::parse(date('Y-m-d'))->translatedFormat('l, d M Y') }}" --}}
                                         class="bg-transparent border border-border outline-none border-gray-300 text-gray-900 text-sm font-medium rounded-lg block w-full ps-10 p-2.5 dark:placeholder-white placeholder:text-gray-900 dark:text-white"
                                         placeholder="Select date">

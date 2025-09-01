@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('category');
             $table->integer('current_amount')->default(0);
             $table->date('deadline')->nullable();
-            $table->enum('priority', ['low', 'medium', 'high']); // penghasilan atau pengeluaran
+            $table->enum('priority', ['low', 'medium', 'high'])->default('low'); // penghasilan atau pengeluaran
             $table->timestamps();
         });
     }

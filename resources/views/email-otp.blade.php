@@ -76,7 +76,7 @@
         <div class="warning">
             <strong>Penting:</strong>
             <ul>
-                <li>Kode OTP ini akan kedaluwarsa dalam <strong>10 menit</strong></li>
+                <li>Kode OTP ini akan kedaluwarsa dalam <strong>2 menit</strong></li>
                 <li>Jangan berikan kode ini kepada siapa pun</li>
                 <li>Jika Anda tidak meminta kode ini, abaikan email ini</li>
             </ul>

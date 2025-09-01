@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Pages;
 
+use App\Models\SavingTransaction;
 use Livewire\Component;
 use App\Models\Tabungan;
 use Illuminate\Http\Request;
@@ -18,7 +19,7 @@ class Tabunganku extends Component
     public $amount = '';
 
 
-    public $name, $description, $target_amount, $deadline, $category, $priority;
+    public $name, $description, $target_amount, $deadline, $category, $priority = 'low';
     protected $listeners = ['refreshGoals' => '$refresh'];
 
     public function render()
@@ -32,23 +33,43 @@ class Tabunganku extends Component
             : null;
 
         $isProgressCount = $goals->where('isCompleted', false)->count();
+
         $completedCount = $goals->where('isCompleted', true)->count();
 
         return view('livewire.pages.tabunganku', compact('goals', 'isProgressCount', 'completedCount'), [
             'stats' => $this->stats,
-            'selectedGoal' => $goal
+            'allTransactions' => $this->allTransactions,
+            'selectedGoal' => $goal,
         ]);
     }
 
     public function getStatsProperty()
     {
+
+        $totalHistory = SavingTransaction::where('user_id', Auth::id())
+            ->with('tabungan') // agar bisa akses nama tabungan
+            ->latest()
+            ->get();
+        $totalTarget = Tabungan::where('user_id', Auth::id())->sum('target_amount');
+        $totalCurrent = Tabungan::where('user_id', Auth::id())->sum('current_amount');
+        $totalProgress = min(100, (int) (($totalCurrent / $totalTarget) * 100));
+
         return [
+            'total_history' => $totalHistory->count(),
+            'total_progress' => $totalProgress,
             'total_data' => Tabungan::where('user_id', Auth::id())->count(),
             'total_target' => Tabungan::where('user_id', Auth::id())->sum('target_amount'),
             'total_current' => Tabungan::where('user_id', Auth::id())->sum('current_amount'),
         ];
     }
 
+    public function getAllTransactionsProperty()
+    {
+        return SavingTransaction::where('user_id', Auth::id())
+            ->with('tabungan') // agar bisa akses nama tabungan
+            ->latest()
+            ->get();
+    }
     public function openModal()
     {
         $this->deadline = now()->format('Y-m-d');
@@ -72,6 +93,7 @@ class Tabunganku extends Component
         $this->showModalDelete = false;
         $this->showModalDeposit = false;
         $this->reset(['selectedGoalId', 'amount']);
+        $this->resetValidation();
     }
 
     protected $rules = [
@@ -97,7 +119,6 @@ class Tabunganku extends Component
 
         $this->validate();
 
-
         Tabungan::create([
             'user_id' => Auth::id(), // Menambahkan user_id
             'name' => $this->name,
@@ -109,6 +130,7 @@ class Tabunganku extends Component
         ]);
 
         $this->dispatch('moneyUpdated');
+        $this->reset();
         $this->closeModal();
     }
 
@@ -130,6 +152,13 @@ class Tabunganku extends Component
         $goal->current_amount += $this->amount;
         $goal->save();
 
+        SavingTransaction::create([
+            'tabungan_id' => $goal->id,
+            'user_id' => Auth::id(),
+            'type' => 'deposit',
+            'amount' => $this->amount
+        ]);
+
         $this->dispatch('depositSuccess', name: $goal->name, amount: $this->amount);
         $this->closeModal();
         $this->dispatch('refreshGoals');
@@ -144,11 +173,8 @@ class Tabunganku extends Component
 
         if ($goal) {
             $goal->delete();
-            sleep(5);
             session()->flash('successD', 'Transaksi berhasil dihapus.');
             $this->closeModal();
-
-            $this->dispatch('moneyUpdated');
             // Opsional: refresh komponen lain
         } else {
             session()->flash('error', 'Transaksi tidak ditemukan.');

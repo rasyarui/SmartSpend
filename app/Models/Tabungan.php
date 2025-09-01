@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Tabungan extends Model
 {
@@ -28,8 +28,8 @@ class Tabungan extends Model
         'current_amount' => 'decimal:2'
     ];
     protected $attributes = [
-    'current_amount' => 0,
-];
+        'current_amount' => 0,
+    ];
 
     public function getPriorityColorAttribute()
     {
@@ -56,7 +56,7 @@ class Tabungan extends Model
         if ($this->target_amount == 0) return 0;
         return min(100, (int) (($this->current_amount / $this->target_amount) * 100));
     }
-      public function getIsCompletedAttribute()
+    public function getIsCompletedAttribute()
     {
         return $this->current_amount >= $this->target_amount;
     }
@@ -64,7 +64,8 @@ class Tabungan extends Model
     {
         return ! $this->Completed;
     }
-   
+
+
 
     public function getDaysRemainingBadgeAttribute()
     {
@@ -115,10 +116,15 @@ class Tabungan extends Model
             'status' => $status,
         ];
     }
-   
+
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function savingTransactions()
+    {
+        return $this->hasMany(SavingTransaction::class);
     }
 
     public function scopeForUser($query, $userId)

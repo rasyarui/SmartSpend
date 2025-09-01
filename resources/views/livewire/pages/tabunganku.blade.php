@@ -1,7 +1,9 @@
 <div>
     <div class="flex h-screen">
+        {{-- Modal --}}
 
-        <div id="crud-modal" wire:click.self="closeModal" tabindex="-1" x-data="{ show: @entangle('showModal') }" x-show="show" x-cloak
+        {{-- Goal Modal --}}
+        <div id="goal-modal" wire:click.self="closeModal" tabindex="-1" x-data="{ show: @entangle('showModal') }" x-show="show" x-cloak
             x-transition:enter="ease-out duration-300" x-transition:enter-start="opacity-0"
             x-transition:enter-end="opacity-100" x-transition:leave="ease-in duration-200"
             x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0"
@@ -11,8 +13,7 @@
                 <div
                     class="glass border borde-border dark:border-gray-600 bg-gray-950/70 rounded-lg w-135 max-w-md transform transition-all duration-300 scale-95">
                     <!-- Modal header -->
-                    <div
-                        class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600 border-gray-200">
+                    <div class="flex items-center p-4 md:p-5 border-b rounded-t dark:border-gray-600 border-gray-200">
                         <div class="p-2 mr-3 rounded-lg bg-gradient-to-br from-purple-500 to-pink-600">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                                 fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
@@ -32,7 +33,7 @@
                         </div>
 
                         <button type="button"wire:click="closeModal"
-                            class="text-gray-400 bg-transparent cursor-pointer hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white">
+                            class="text-gray-400 bg-transparent absolute right-1 top-1 cursor-pointer hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:text-white">
                             <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
                                 viewBox="0 0 14 14">
                                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
@@ -80,8 +81,7 @@
                                     class="block mb-2 text-md font-bold text-gray-900 dark:text-white">Deadline</label>
                                 <div class="relative ">
                                     <input id="datepicker-actions" datepicker datepicker-format="yyyy-mm-dd"
-                                       wire:model="deadline" type="text" autocomplete="off"
-                                        {{-- value="{{ \Carbon\Carbon::parse(date('Y-m-d'))->translatedFormat('l, d M Y') }}" --}}
+                                        wire:model="deadline" type="text" autocomplete="off" {{-- value="{{ \Carbon\Carbon::parse(date('Y-m-d'))->translatedFormat('l, d M Y') }}" --}}
                                         class="glass border border-border outline-none border-gray-300 text-gray-900 text-sm font-medium rounded-lg block w-full ps-10 p-2.5 dark:placeholder-gray-500 placeholder:text-gray-900 dark:text-white"
                                         placeholder="Deadline date">
                                     @error('deadline')
@@ -119,11 +119,13 @@
                                 @error('description')
                                     <span class="text-red-500 text-sm">{{ $message }}</span>
                                 @enderror
-
                             </div>
-
                         </div>
-                        <div class="flex gap-2 pt-4">
+                        <div class="flex gap-2">
+                            <button type="button"wire:click="closeModal"
+                                class="glass bg-gray-950/70 cursor-pointer flex-1 px-4 py-2 rounded-lg border border-border hover:bg-muted/50  hover:text-purple-400">
+                                Cancel
+                            </button>
                             <button type="submit" wire:loading.attr="disabled"
                                 class="text-white inline-flex items-center cursor-pointer bg-green-500 hover:bg-green-600 font-medium rounded-lg text-md px-4 py-1 text-center">
                                 <div class="p-1 mr-1 rounded-lg" wire:loading.remove wire:target="createTabungan">
@@ -155,10 +157,6 @@
                                     </div>
                                 </span>
                             </button>
-                            <button type="button"wire:click="closeModal"
-                                class="glass bg-gray-950/70 cursor-pointer flex-1 px-4 py-2 rounded-lg border border-border hover:bg-muted/50  hover:text-purple-400">
-                                Cancel
-                            </button>
                         </div>
 
                     </form>
@@ -166,7 +164,7 @@
             </div>
         </div>
 
-
+        {{-- Deposit Modal --}}
         <div id="deposit-modal" wire:click.self="closeModal" tabindex="-1" x-data="{ show: @entangle('showModalDeposit') }" x-show="show"
             x-cloak x-transition:enter="ease-out duration-300" x-transition:enter-start="opacity-0"
             x-transition:enter-end="opacity-100" x-transition:leave="ease-in duration-200"
@@ -177,13 +175,12 @@
                 <div
                     class="glass border borde-border dark:border-gray-600 bg-gray-950/70 rounded-lg w-135 max-w-md transform transition-all duration-300 scale-95">
                     <!-- Modal header -->
-                    <div
-                        class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600 border-gray-200">
+                    <div class="flex items-center p-4 md:p-5 border-b rounded-t dark:border-gray-600 border-gray-200">
                         <div class="p-2 mr-3 rounded-lg bg-gradient-to-br from-purple-500 to-pink-600">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                 viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
                                 stroke-linecap="round" stroke-linejoin="round"
-                                class="lucide lucide-target-icon lucide-target">
+                                class="lucide lucide-target-icon lucide-target text-white">
                                 <circle cx="12" cy="12" r="10" />
                                 <circle cx="12" cy="12" r="6" />
                                 <circle cx="12" cy="12" r="2" />
@@ -201,7 +198,7 @@
                         </div>
 
                         <button type="button"wire:click="closeModal"
-                            class="text-gray-400 bg-transparent cursor-pointer hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white">
+                            class="text-gray-400 bg-transparent absolute right-1 top-1 cursor-pointer hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:text-white">
                             <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
                                 fill="none" viewBox="0 0 14 14">
                                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
@@ -218,30 +215,21 @@
                                     class="block mb-2 text-md font-bold text-gray-900 dark:text-white">Jumlah</label>
                                 <input type="number" name="amount" id="amount" wire:model="amount"
                                     class="glass border border-gray-300 outline-none text-gray-900 text-sm font-medium rounded-lg block w-full p-2.5 dark:border-gray-500 dark:placeholder-gray-500 dark:text-white "
-                                    placeholder="Rp 20.000.000">
+                                    placeholder="Rp 0">
                                 @error('amount')
                                     <span class="text-red-500 text-sm">{{ $message }}</span>
                                 @enderror
                             </div>
                         </div>
-                        <div class="flex gap-2 pt-4">
+                        <div class="flex gap-2 justify-end">
                             <button type="button"wire:click="closeModal"
-                                class="glass bg-gray-950/70 cursor-pointer flex-1 px-4 py-2 rounded-lg border border-border hover:bg-muted/50  hover:text-purple-400">
+                                class="glass bg-gray-950/70 cursor-pointer px-4 py-2 rounded-lg border border-border hover:bg-muted/50 hover:text-red-400">
                                 Cancel
                             </button>
                             <button type="submit" wire:loading.attr="disabled"
-                                class="text-white inline-flex items-center cursor-pointer bg-green-500 hover:bg-green-600 font-medium rounded-lg text-md px-4 py-1 text-center">
-                                <div class="p-1 mr-1 rounded-lg" wire:loading.remove wire:target="deposit">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19"
-                                        viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                                        stroke-linecap="round" stroke-linejoin="round"
-                                        class="lucide lucide-trending-up-icon lucide-trending-up">
-                                        <path d="M16 7h6v6" />
-                                        <path d="m22 7-8.5 8.5-5-5L2 17" />
-                                    </svg>
-                                </div>
+                                class="text-white items-center cursor-pointer bg-green-500 hover:bg-green-600 font-medium rounded-lg text-md px-4 py-2 text-center">
                                 <span wire:loading.remove wire:target="deposit">
-                                    Tambang Goals
+                                    Tambang Uang
                                 </span>
                                 <span wire:loading wire:target="deposit">
                                     <div role="status">
@@ -266,28 +254,33 @@
             </div>
         </div>
 
-
-        <div id="crud-modal" wire:click.self="closeModal" tabindex="-1" x-data="{ show: @entangle('showModalDelete') }" x-show="show"
-            x-cloak x-transition:enter="ease-out duration-300" x-transition:enter-start="opacity-0"
+        {{-- Delte Modal Goal --}}
+        <div id="delete-goal-modal" wire:click.self="closeModal" tabindex="-1" x-data="{ show: @entangle('showModalDelete') }"
+            x-show="show" x-cloak x-transition:enter="ease-out duration-300" x-transition:enter-start="opacity-0"
             x-transition:enter-end="opacity-100" x-transition:leave="ease-in duration-200"
-            x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0" wire:loading.remove
-            wire:target="deleteTransaction"
+            x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0"
             class="fixed inset-0 z-10 overflow-y-auto overflow-x-hidden flex justify-center items-center w-full  h-full md:inset-0 max-h-full bg-black/60">
             <div
                 class="glass border borde-border dark:border-gray-600 bg-gray-950/70 rounded-lg w-full max-w-md transform transition-all duration-300 scale-95 ">
                 <div
                     class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600 border-gray-200">
 
-                    <div class="flex flex-col">
-                        <h3 class="text-lg font-semibold text-gray-900 dark:text-white ">
-                            Apakah anda yakin ingin menghapus @if ($selectedGoal)
-                                Deposit to {{ $selectedGoal->name }}
+                    <div class="flex flex-col gap-2">
+                        <h3 class="font-semibold text-lg  dark:text-white ">Hapus Goal @if ($selectedGoal)
+                                {{ $selectedGoal->name }}
                             @endif
                         </h3>
+                        <p class="text-md  dark:text-white ">
+                            Apakah anda yakin ingin menghapus <strong class="capitalize">
+                                @if ($selectedGoal)
+                                    {{ $selectedGoal->name }}
+                                @endif
+                            </strong>
+                        </p>
                     </div>
 
-                    <button type="button"wire:click="closeModalDelete"
-                        class="text-gray-400 bg-transparent cursor-pointer hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white">
+                    <button type="button"wire:click="closeModal"
+                        class="text-gray-400 bg-transparent absolute right-1 top-1 cursor-pointer hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:text-white">
                         <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
                             viewBox="0 0 14 14">
                             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
@@ -298,6 +291,10 @@
                 </div>
 
                 <div class="flex gap-5 pt-4 py-5 w-fit mx-auto">
+                    <button type="button"wire:click="closeModal"
+                        class="glass bg-gray-950/70 cursor-pointer flex-1 px-4 py-2 rounded-lg border border-border hover:bg-muted/50  hover:text-purple-400">
+                        Cancel
+                    </button>
                     <button type="submit" wire:click="deleteTransaction" x-cloak
                         class="text-white inline-flex items-center cursor-pointer bg-gradient-to-r from-red-500 to-pink-500 border-0 shadow-lg font-medium rounded-lg text-md px-4 py-1 text-center">
                         <span>
@@ -305,13 +302,11 @@
                         </span>
 
                     </button>
-                    <button type="button"wire:click="closeModalDelete"
-                        class="glass bg-gray-950/70 cursor-pointer flex-1 px-4 py-2 rounded-lg border border-border hover:bg-muted/50  hover:text-purple-400">
-                        Cancel
-                    </button>
+
                 </div>
             </div>
         </div>
+        {{-- End Modal --}}
 
         <x-sidebar></x-sidebar>
 
@@ -386,7 +381,7 @@
                                         <path d="M22 4h-4" />
                                         <circle cx="4" cy="20" r="2" />
                                     </svg>
-                                    <span class="font-medium">Overall Progress</span>
+                                    <span class="font-medium">{{ $stats['total_progress'] }}% Overall Progress</span>
                                 </div>
                             </div>
                         </div>
@@ -446,7 +441,7 @@
                                 <div class="flex justify-between items-center">
                                     <span>Keseluruhan Proses</span>
                                     <div class="flex items-center gap-2">
-                                        <span class="text-sm text-gray-400">80%</span>
+                                        <span class="text-sm text-gray-400">{{ $stats['total_progress'] }}%</span>
                                     </div>
                                 </div>
                             </div>
@@ -596,10 +591,95 @@
 
                         @empty
                             <div
-                                class="text-center w-full card glass border hover-lift transition-all duration-300 group relative overflow-hidden p-5 rounded-2xl space-y-12 ">
+                                class="text-center absolute left-2/3 transform -translate-x-2/2 w-70 glass border hover-lift  p-5 rounded-2xl">
                                 Tidak ada goals.
                             </div>
                         @endforelse
+                    </div>
+                </section>
+
+                {{-- History Deposit --}}
+                <section class="px-5 space-y-10 max-w-8xl mx-auto w-full flex flex-col">
+                    <div class="glass border space-y-5 p-5 rounded-2xl">
+                        {{-- History Header --}}
+                        <div class="flex items-center gap-2">
+                            <div class="p-2 rounded-lg bg-gradient-to-br from-green-500 to-emerald-500">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                                    stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    class="lucide lucide-history-icon lucide-history h-5 w-5 text-white">
+                                    <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8" />
+                                    <path d="M3 3v5h5" />
+                                    <path d="M12 7v5l4 2" />
+                                </svg>
+                            </div>
+                            <span class="text-lg font-semibold">
+                            Deposit Terkini
+
+                            </span>
+                            <div class="ml-auto py-1 px-5 text-sm rounded-full bg-green-500/10 text-green-500 border-green-500/20">
+                                {{ $stats['total_history'] }} Transaksi Terkini
+                            </div>
+                        </div>
+
+                        <div class="space-y-3">
+                           @forelse($allTransactions as $history)
+                              <div
+                                class="flex items-center justify-between p-4 rounded-xl glass border hover:bg-muted/50 transition-all duration-300 hover:scale-[1.01]">
+                                <div class="items-center gap-4 flex">
+                                    <div class="p-2 rounded-lg bg-gradient-to-br from-green-500 to-emerald-500">
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                                            stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                            stroke-linejoin="round"
+                                            class="lucide lucide-coins-icon lucide-coins h-4 w-4 text-white">
+                                            <circle cx="8" cy="8" r="6" />
+                                            <path d="M18.09 10.37A6 6 0 1 1 10.34 18" />
+                                            <path d="M7 6h1v4" />
+                                            <path d="m16.71 13.88.7.71-2.82 2.82" />
+                                        </svg>
+                                    </div>
+                                    <div>
+                                        <p class="font-medium">
+                                            {{ $history->tabungan->name }}
+                                        </p>
+                                        <p class="text-sm text-gray-400 flex items-center gap-2">
+                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+                                                fill="none" stroke="currentColor" stroke-width="2"
+                                                stroke-linecap="round" stroke-linejoin="round"
+                                                class="lucide lucide-calendar-icon lucide-calendar h-3 w-3">
+                                                <path d="M8 2v4" />
+                                                <path d="M16 2v4" />
+                                                <rect width="18" height="18" x="3" y="4" rx="2" />
+                                                <path d="M3 10h18" />
+                                            </svg>
+                                            {{ $history->created_at->format('d/m/Y') }}
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <div class=" items-end flex flex-col gap-1">
+                                    <p class="font-semibold text-green-500 flex items-center gap-1">
+                                        <svg xmlns="http://www.w3.org/2000/svg" 
+                                            viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                            class="lucide lucide-arrow-up-icon lucide-arrow-up h-4 w-4">
+                                            <path d="m5 12 7-7 7 7" />
+                                            <path d="M12 19V5" />
+                                        </svg>
+                                       Rp {{ number_format($history->amount) }}
+                                    </p>
+                                    <div class="bg-green-500/10 text-center text-green-500 border-green-500/20 items-center w-fit px-3  rounded-full border">
+                                        <span class="font-medium text-sm">Deposit</span>
+                                    </div>
+                                </div>
+                            </div>
+                           @empty
+                                <div class="flex items-center justify-between p-4 rounded-xl glass border hover:bg-muted/50 transition-all duration-300 hover:scale-[1.01]">
+                                    Tidak ada history deposit.
+                                </div>
+                           @endforelse
+                          
+                        </div>
                     </div>
                 </section>
 

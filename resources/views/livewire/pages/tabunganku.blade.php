@@ -590,10 +590,14 @@
                             </div>
 
                         @empty
-                            <div
-                                class="text-center absolute left-2/3 transform -translate-x-2/2 w-70 glass border hover-lift  p-5 rounded-2xl">
-                                Tidak ada goals.
-                            </div>
+                              <div class="text-center text-gray-500 glass rounded-2xl py-5 col-span-full">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="w-12 h-12 mx-auto mb-4 opacity-50"
+                                        viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <circle cx="12" cy="12" r="10" />
+                                        <path d="M12 8v4M12 16h.01" />
+                                    </svg>
+                                    <p>Belum ada goal. Buat goal pertamamu!</p>
+                                </div>
                         @endforelse
                     </div>
                 </section>
@@ -614,74 +618,209 @@
                                 </svg>
                             </div>
                             <span class="text-lg font-semibold">
-                            Deposit Terkini
+                                Deposit Terkini
 
                             </span>
-                            <div class="ml-auto py-1 px-5 text-sm rounded-full bg-green-500/10 text-green-500 border-green-500/20">
+                            <div
+                                class="ml-auto py-1 px-5 text-sm rounded-full bg-green-500/10 text-green-500 border-green-500/20">
                                 {{ $stats['total_history'] }} Transaksi Terkini
                             </div>
                         </div>
 
                         <div class="space-y-3">
-                           @forelse($allTransactions as $history)
-                              <div
-                                class="flex items-center justify-between p-4 rounded-xl glass border hover:bg-muted/50 transition-all duration-300 hover:scale-[1.01]">
-                                <div class="items-center gap-4 flex">
-                                    <div class="p-2 rounded-lg bg-gradient-to-br from-green-500 to-emerald-500">
-                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
-                                            stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                            stroke-linejoin="round"
-                                            class="lucide lucide-coins-icon lucide-coins h-4 w-4 text-white">
-                                            <circle cx="8" cy="8" r="6" />
-                                            <path d="M18.09 10.37A6 6 0 1 1 10.34 18" />
-                                            <path d="M7 6h1v4" />
-                                            <path d="m16.71 13.88.7.71-2.82 2.82" />
-                                        </svg>
-                                    </div>
-                                    <div>
-                                        <p class="font-medium">
-                                            {{ $history->tabungan->name }}
-                                        </p>
-                                        <p class="text-sm text-gray-400 flex items-center gap-2">
+                            @forelse($allTransactions as $history)
+                                <div
+                                    class="flex items-center justify-between p-4 rounded-xl glass border hover:bg-muted/50 transition-all duration-300 hover:scale-[1.01]">
+                                    <div class="items-center gap-4 flex">
+                                        <div class="p-2 rounded-lg bg-gradient-to-br from-green-500 to-emerald-500">
                                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
                                                 fill="none" stroke="currentColor" stroke-width="2"
                                                 stroke-linecap="round" stroke-linejoin="round"
-                                                class="lucide lucide-calendar-icon lucide-calendar h-3 w-3">
-                                                <path d="M8 2v4" />
-                                                <path d="M16 2v4" />
-                                                <rect width="18" height="18" x="3" y="4" rx="2" />
-                                                <path d="M3 10h18" />
+                                                class="lucide lucide-coins-icon lucide-coins h-4 w-4 text-white">
+                                                <circle cx="8" cy="8" r="6" />
+                                                <path d="M18.09 10.37A6 6 0 1 1 10.34 18" />
+                                                <path d="M7 6h1v4" />
+                                                <path d="m16.71 13.88.7.71-2.82 2.82" />
                                             </svg>
-                                            {{ $history->created_at->format('d/m/Y') }}
+                                        </div>
+                                        <div>
+                                            <p class="font-medium">
+                                                {{ $history->tabungan->name }}
+                                            </p>
+                                            <p class="text-sm text-gray-400 flex items-center gap-2">
+                                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+                                                    fill="none" stroke="currentColor" stroke-width="2"
+                                                    stroke-linecap="round" stroke-linejoin="round"
+                                                    class="lucide lucide-calendar-icon lucide-calendar h-3 w-3">
+                                                    <path d="M8 2v4" />
+                                                    <path d="M16 2v4" />
+                                                    <rect width="18" height="18" x="3" y="4" rx="2" />
+                                                    <path d="M3 10h18" />
+                                                </svg>
+                                                {{ $history->created_at->format('d/m/Y') }}
+                                            </p>
+                                        </div>
+                                    </div>
+
+                                    <div class=" items-end flex flex-col gap-1">
+                                        <p class="font-semibold text-green-500 flex items-center gap-1">
+                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+                                                fill="none" stroke="currentColor" stroke-width="2"
+                                                stroke-linecap="round" stroke-linejoin="round"
+                                                class="lucide lucide-arrow-up-icon lucide-arrow-up h-4 w-4">
+                                                <path d="m5 12 7-7 7 7" />
+                                                <path d="M12 19V5" />
+                                            </svg>
+                                            Rp {{ number_format($history->amount) }}
+                                        </p>
+                                        <div
+                                            class="bg-green-500/10 text-center text-green-500 border-green-500/20 items-center w-fit px-3  rounded-full border">
+                                            <span class="font-medium text-sm">Deposit</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            @empty
+                                <div
+                                    class="flex items-center justify-between p-4 rounded-xl glass border hover:bg-muted/50 transition-all duration-300 hover:scale-[1.01]">
+                                    Tidak ada history deposit.
+                                </div>
+                            @endforelse
+
+                        </div>
+                    </div>
+                </section>
+
+                {{-- Ai Insight --}}
+                <section class="px-5 space-y-10 max-w-8xl mx-auto w-full flex flex-col">
+                    <div class="ai-insight glass rounded-2xl border border-gray-200/30 p-6 flex items-start gap-4">
+                        <div class="p-3 rounded-lg bg-gradient-to-br from-blue-500 to-purple-600">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                                stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" class="lucide lucide-sparkles-icon lucide-sparkles h-6 w-6">
+                                <path
+                                    d="M11.017 2.814a1 1 0 0 1 1.966 0l1.051 5.558a2 2 0 0 0 1.594 1.594l5.558 1.051a1 1 0 0 1 0 1.966l-5.558 1.051a2 2 0 0 0-1.594 1.594l-1.051 5.558a1 1 0 0 1-1.966 0l-1.051-5.558a2 2 0 0 0-1.594-1.594l-5.558-1.051a1 1 0 0 1 0-1.966l5.558-1.051a2 2 0 0 0 1.594-1.594z" />
+                                <path d="M20 2v4" />
+                                <path d="M22 4h-4" />
+                                <circle cx="4" cy="20" r="2" />
+                            </svg>
+                        </div>
+                        <div class="flex-1 space-y-3">
+                            <h3 class="text-lg font-semibold mb-2">AI Transaction Insights</h3>
+                            @if ($goals->isNotEmpty())
+                                <div
+                                    class="flex items-start gap-3 p-4 bg-blue-500/20 rounded-lg border border-blue-200/20">
+                                    <div class="p-2 rounded-lg bg-gradient-to-br from-blue-500/50 to-cyan-500 ">
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                                            stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                            stroke-linejoin="round"
+                                            class="lucide lucide-trending-up-icon lucide-trending-up h-4 w-4 text-blue-200">
+                                            <path d="M16 7h6v6" />
+                                            <path d="m22 7-8.5 8.5-5-5L2 17" />
+                                        </svg>
+                                    </div>
+                                    <div>
+                                        <h3 class="font-semibold text-blue-400">Overall Progress:
+                                            {{ $stats['total_progress'] }}%</h3>
+                                        <p class="text-sm text-white">
+                                            Kamu sudah mengumpulkan
+                                            <strong>Rp {{ number_format($stats['total_current']) }}</strong>
+                                            dari target total
+                                            <strong>Rp {{ number_format($stats['total_target']) }}</strong>.
+                                            @if ($stats['total_progress'] >= 80)
+                                                Luar biasa! Hampir selesai!
+                                            @elseif($stats['total_progress'] >= 50)
+                                                Pertahankan! Kamu di jalur yang benar.
+                                            @else
+                                                Ayo tambah setoran harian untuk percepat pencapaian.
+                                            @endif
                                         </p>
                                     </div>
                                 </div>
 
-                                <div class=" items-end flex flex-col gap-1">
-                                    <p class="font-semibold text-green-500 flex items-center gap-1">
-                                        <svg xmlns="http://www.w3.org/2000/svg" 
-                                            viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                                            class="lucide lucide-arrow-up-icon lucide-arrow-up h-4 w-4">
-                                            <path d="m5 12 7-7 7 7" />
-                                            <path d="M12 19V5" />
-                                        </svg>
-                                       Rp {{ number_format($history->amount) }}
-                                    </p>
-                                    <div class="bg-green-500/10 text-center text-green-500 border-green-500/20 items-center w-fit px-3  rounded-full border">
-                                        <span class="font-medium text-sm">Deposit</span>
+                                <!-- Insight 2: Prioritas Tinggi -->
+                                @php
+                                    $highPriorityGoal = $goals
+                                        ->where('priority', 'high')
+                                        ->where('isCompleted', false)
+                                        ->first();
+                                @endphp
+
+                                @if ($highPriorityGoal)
+                                    <div
+                                        class="flex items-start gap-3 p-4 bg-purple-500/20 rounded-lg border border-purple-500/50">
+                                        <div
+                                            class="p-2 rounded-lg bg-gradient-to-br from-purple-500/50 to-pink-500 text-purple-200">
+                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+                                                fill="none" stroke="currentColor" stroke-width="2"
+                                                stroke-linecap="round" stroke-linejoin="round"
+                                                class="lucide lucide-arrow-up-from-line-icon lucide-arrow-up-from-line h-4 w-4 ">
+                                                <path d="m18 9-6-6-6 6" />
+                                                <path d="M12 3v14" />
+                                                <path d="M5 21h14" />
+                                            </svg>
+                                        </div>
+                                        <div>
+                                            <h3 class="font-semibold text-purple-400">Prioritas Tinggi:
+                                                {{ $highPriorityGoal->name }}</h3>
+                                            <p class="text-sm text-white">
+                                                Ini adalah goal dengan prioritas <strong>Tinggi</strong>.
+                                                Fokuskan dulu pada goal ini sebelum menabung untuk yang lain.
+                                            </p>
+                                        </div>
                                     </div>
+                                @endif
+
+                                <!-- Insight 3: Rata-rata Setoran -->
+                                @php
+                                    $totalDeposits = $allTransactions->sum('amount');
+                                    $depositCount = $allTransactions->count();
+                                    $avgDeposit = $depositCount > 0 ? $totalDeposits / $depositCount : 0;
+                                @endphp
+
+                                @if ($depositCount > 0)
+                                    <div
+                                        class="flex items-start gap-3 p-4 bg-green-500/20 rounded-lg border border-green-500/50">
+                                        <div
+                                            class="p-2 rounded-lg bg-gradient-to-br from-green-500/50 to-emerald-500 text-green-200">
+                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+                                                fill="none" stroke="currentColor" stroke-width="2"
+                                                stroke-linecap="round" stroke-linejoin="round"
+                                                class="lucide lucide-hand-coins-icon lucide-hand-coins h-4 w-4">
+                                                <path d="M11 15h2a2 2 0 1 0 0-4h-3c-.6 0-1.1.2-1.4.6L3 17" />
+                                                <path
+                                                    d="m7 21 1.6-1.4c.3-.4.8-.6 1.4-.6h4c1.1 0 2.1-.4 2.8-1.2l4.6-4.4a2 2 0 0 0-2.75-2.91l-4.2 3.9" />
+                                                <path d="m2 16 6 6" />
+                                                <circle cx="16" cy="9" r="2.9" />
+                                                <circle cx="6" cy="5" r="3" />
+                                            </svg>
+                                        </div>
+                                        <div>
+                                            <h3 class="font-semibold text-green-400">Rata-rata Setoran: Rp
+                                                {{ number_format($avgDeposit) }}/kali</h3>
+                                            <p class="text-sm text-white">
+                                                Kamu sudah menyetor <strong>{{ $depositCount }} kali</strong> dengan
+                                                total
+                                                <strong>Rp {{ number_format($totalDeposits) }}</strong>.
+                                                Pertahankan semangat menabungmu!
+                                            </p>
+                                        </div>
+                                    </div>
+                                @endif
+                            @else
+                                <div class="text-center py-6 text-gray-500">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="w-12 h-12 mx-auto mb-4 opacity-50"
+                                        viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <circle cx="12" cy="12" r="10" />
+                                        <path d="M12 8v4M12 16h.01" />
+                                    </svg>
+                                    <p>Belum ada data tabungan. Buat goal pertamamu untuk membuka AI Insight!</p>
                                 </div>
-                            </div>
-                           @empty
-                                <div class="flex items-center justify-between p-4 rounded-xl glass border hover:bg-muted/50 transition-all duration-300 hover:scale-[1.01]">
-                                    Tidak ada history deposit.
-                                </div>
-                           @endforelse
-                          
+                            @endif
                         </div>
+
                     </div>
                 </section>
+
 
             </div>
         </main>

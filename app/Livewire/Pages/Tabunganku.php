@@ -36,7 +36,7 @@ class Tabunganku extends Component
 
         $completedCount = $goals->where('isCompleted', true)->count();
 
-        return view('livewire.pages.tabunganku', compact('goals', 'isProgressCount', 'completedCount'), [
+        return view('livewire.pages.tabunganku', compact('goals', 'isProgressCount', 'completedCount',), [
             'stats' => $this->stats,
             'allTransactions' => $this->allTransactions,
             'selectedGoal' => $goal,
@@ -52,7 +52,9 @@ class Tabunganku extends Component
             ->get();
         $totalTarget = Tabungan::where('user_id', Auth::id())->sum('target_amount');
         $totalCurrent = Tabungan::where('user_id', Auth::id())->sum('current_amount');
-        $totalProgress = min(100, (int) (($totalCurrent / $totalTarget) * 100));
+        $totalProgress = $totalTarget > 0
+            ? min(100, (int) (($totalCurrent / $totalTarget) * 100))
+            : 0;
 
         return [
             'total_history' => $totalHistory->count(),

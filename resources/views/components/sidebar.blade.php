@@ -82,7 +82,7 @@
                 </a>
 
                 <a href="/tabunganku"
-                    class="nav-item {{ request()->is('tabunganku') ? 'active' : ''}} flex items-center gap-3 px-4 py-3 rounded-lg transition-all duration-300 hover:scale-105"
+                    class="nav-item {{ request()->is('tabunganku') ? 'active' : ''}} flex items-center gap-3 px-4 py-3 rounded-lg transition-all duration-300 hover:scale-105 "
                     data-page="savings">
                     <div class="p-2 rounded-lg bg-gradient-to-br from-purple-500 to-pink-500">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
@@ -94,7 +94,7 @@
                             <path d="M2 8v1a2 2 0 0 0 2 2h1" />
                         </svg>
                     </div>
-                    <span class="font-medium">Tabunganku</span>
+                    <span class="font-medium ">Tabunganku</span>
                 </a>
 
                 <a href=""

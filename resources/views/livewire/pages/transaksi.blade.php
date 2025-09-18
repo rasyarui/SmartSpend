@@ -5,11 +5,7 @@
 
     <div class="flex h-screen">
         @livewire('components.modal-transactions')
-
-
         <x-sidebar></x-sidebar>
-
-
         <main class="min-h-screen w-full lg:ml-72">
             
             <livewire:components.navbar />
@@ -25,7 +21,6 @@
                             <p class="text-[15px] text-gray-500 dark:text-gray-400 ">
                                 Track and manage all your financial transactions</p>
                         </div>
-
                         <div class="flex items-center gap-4">
                             <button type="button" wire:click="openModalIncome"
                                 class="bg-gradient-to-br gap-3 w-full text-center justify-center from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700 shadow-theme-lg hover:shadow-xl transition-all duration-300 hover:scale-105 group relative cursor-pointer  text-white font-semibold px-5 py-2 rounded-lg flex items-center">

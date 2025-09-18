@@ -46,4 +46,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/tabunganku', function () {
         return view('pages.tabunganku');
     })->name('tabunganku');
+    Route::get('/kelola', function () {
+        return view('pages.kelola');
+    })->name('kelola');
 });

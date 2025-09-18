@@ -97,8 +97,8 @@
                     <span class="font-medium ">Tabunganku</span>
                 </a>
 
-                <a href=""
-                    class="nav-item {{ request()->is('dashboard') ? 'kelola' : ''}} flex items-center gap-3 px-4 py-3 rounded-lg transition-all duration-300 hover:scale-105"
+                <a href="/kelola"
+                    class="nav-item {{ request()->is('kelola') ? 'active' : ''}} flex items-center gap-3 px-4 py-3 rounded-lg transition-all duration-300 hover:scale-105"
                     data-page="settings">
                     <div class="p-2 rounded-lg bg-gradient-to-br from-yellow-500 to-orange-500">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
